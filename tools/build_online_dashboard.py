@@ -3,6 +3,7 @@
 
 import csv
 import json
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -14,12 +15,21 @@ def load_jobs():
     with open(TRACKER_CSV, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for r in reader:
+            raw_method = r.get("طريقة التقديم (Application Method)", "").strip()
+            # Normalize method names to match user exact terminology: ايزي ابلاي / ايميل / بوابة خارجية
+            if "إيميل" in raw_method or "ايميل" in raw_method or "email" in raw_method.lower():
+                norm_method = "✉️ ايميل مباشر (Email - آلي)"
+            elif "بوابة خارجية" in raw_method or "ats" in raw_method.lower():
+                norm_method = "🌐 بوابة خارجية (ATS - آلي)"
+            else:
+                norm_method = "⚡ ايزي ابلاي (Easy Apply - يدوي)"
+
             items.append({
                 "id": r.get("ID", "").strip(),
-                "added_time": r.get("وقت وتاريخ الإضافة (Added Time)", r.get("التاريخ (Date)", "")).strip(),
+                "added_time": r.get("وقت وتاريخ الإضافة (Added Time)", r.get("التاريخ (Date)", "2026-11-08 03:25 ص")).strip(),
                 "company": r.get("اسم الشركة (Company)", "").strip(),
                 "title": r.get("المسمى الوظيفي (Job Title)", "").strip(),
-                "method": r.get("طريقة التقديم (Application Method)", "تقديم سهل (Easy Apply - يدوي)").strip(),
+                "method": norm_method,
                 "platform": r.get("المنصة / المصدر (Platform)", "").strip(),
                 "city": r.get("المدينة (City)", "").strip(),
                 "url": r.get("رابط الوظيفة (Job URL)", "").strip(),
@@ -43,16 +53,22 @@ def build_html(jobs):
     closed_count = sum(1 for j in jobs if "مغلقة" in j["status"])
     total_count = len(jobs)
 
-    # Application Method Counts
-    email_count = sum(1 for j in jobs if "إيميل مباشر" in j["method"])
+    # Method Counts
+    email_count = sum(1 for j in jobs if "ايميل" in j["method"])
     ats_count = sum(1 for j in jobs if "بوابة خارجية" in j["method"])
-    easy_count = sum(1 for j in jobs if "تقديم سهل" in j["method"])
+    easy_count = sum(1 for j in jobs if "ايزي ابلاي" in j["method"])
+
+    riyadh_tz = timezone(timedelta(hours=3))
+    now_str = datetime.now(riyadh_tz).strftime("%Y-%m-%d %I:%M %p").replace("AM", "ص").replace("PM", "م")
 
     html_content = f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>لوحة التقديم الآلي والتتبع التنفيذي | حسن سرحان</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +105,7 @@ def build_html(jobs):
     }}
 
     .container {{
-      max-width: 1440px;
+      max-width: 1460px;
       margin: 0 auto;
     }}
 
@@ -98,8 +114,8 @@ def build_html(jobs):
       background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
       border: 1px solid #312e81;
       border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 24px;
+      padding: 22px 28px;
+      margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -109,7 +125,7 @@ def build_html(jobs):
     }}
 
     .profile-info h1 {{
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 800;
       color: #ffffff;
       display: flex;
@@ -140,7 +156,7 @@ def build_html(jobs):
     }}
 
     .profile-meta {{
-      font-size: 14px;
+      font-size: 13.5px;
       color: #cbd5e1;
       margin-top: 6px;
       display: flex;
@@ -254,61 +270,115 @@ def build_html(jobs):
       color: var(--text-muted);
     }}
 
-    /* Methods Bar (Channels Breakdown) */
-    .methods-banner {{
-      background: #131b2e;
+    /* Dedicated Application Channels Section */
+    .channels-card {{
+      background: #101626;
       border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 14px 20px;
+      border-radius: 14px;
+      padding: 18px 22px;
       margin-bottom: 20px;
+    }}
+
+    .channels-header-row {{
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }}
+
+    .channels-title {{
+      font-size: 14px;
+      font-weight: 800;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .channels-sync-time {{
+      font-size: 12px;
+      color: #94a3b8;
+      background: #0b0f19;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #1e293b;
+    }}
+
+    .channels-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 14px;
     }}
 
-    .methods-title {{
-      font-size: 13px;
-      font-weight: 700;
-      color: #94a3b8;
+    .channel-box {{
+      background: #141d33;
+      border-radius: 12px;
+      padding: 14px 16px;
       display: flex;
-      align-items: center;
-      gap: 8px;
-    }}
-
-    .methods-tags {{
-      display: flex;
-      flex-wrap: wrap;
+      align-items: flex-start;
       gap: 12px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
     }}
 
-    .method-summary-pill {{
-      font-size: 13px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 8px;
-      display: inline-flex;
+    .channel-box:hover {{
+      transform: translateY(-2px);
+    }}
+
+    .ch-easy {{
+      border-color: rgba(245, 158, 11, 0.35);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, #141d33 100%);
+    }}
+
+    .ch-email {{
+      border-color: rgba(139, 92, 246, 0.35);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, #141d33 100%);
+    }}
+
+    .ch-ats {{
+      border-color: rgba(6, 182, 212, 0.35);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, #141d33 100%);
+    }}
+
+    .ch-icon {{
+      font-size: 24px;
+      line-height: 1;
+      padding-top: 2px;
+    }}
+
+    .ch-info {{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }}
+
+    .ch-name {{
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
     }}
 
-    .msp-email {{
-      background: rgba(139, 92, 246, 0.15);
-      color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, 0.3);
+    .ch-easy .ch-name {{ color: #fcd34d; }}
+    .ch-email .ch-name {{ color: #c4b5fd; }}
+    .ch-ats .ch-name {{ color: #67e8f9; }}
+
+    .ch-count {{
+      font-size: 13px;
+      font-weight: 900;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
     }}
 
-    .msp-ats {{
-      background: rgba(6, 182, 212, 0.15);
-      color: #67e8f9;
-      border: 1px solid rgba(6, 182, 212, 0.3);
-    }}
-
-    .msp-easy {{
-      background: rgba(245, 158, 11, 0.15);
-      color: #fcd34d;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+    .ch-desc {{
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.5;
     }}
 
     /* Controls Bar */
@@ -372,10 +442,10 @@ def build_html(jobs):
     }}
 
     .filter-label {{
-      font-size: 12px;
-      font-weight: 700;
-      color: #94a3b8;
-      margin-left: 4px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #cbd5e1;
+      min-width: 120px;
     }}
 
     .filter-pills {{
@@ -448,10 +518,15 @@ def build_html(jobs):
       background: #0f172a;
       color: #94a3b8;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 14px 16px;
       border-bottom: 1px solid #1e293b;
       white-space: nowrap;
+    }}
+
+    th.th-highlight {{
+      color: #38bdf8;
+      background: #131d33;
     }}
 
     td {{
@@ -485,48 +560,62 @@ def build_html(jobs):
       max-width: 280px;
     }}
 
-    /* Method Badges */
+    /* Method Badges (ايزي ابلاي / ايميل / بوابة خارجية) */
     .badge-method {{
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 800;
-      padding: 5px 10px;
-      border-radius: 7px;
+      padding: 6px 12px;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }}
 
     .method-email {{
-      background: rgba(139, 92, 246, 0.18);
+      background: rgba(139, 92, 246, 0.22);
       color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, 0.35);
+      border: 1px solid rgba(139, 92, 246, 0.45);
     }}
 
     .method-ats {{
-      background: rgba(6, 182, 212, 0.18);
+      background: rgba(6, 182, 212, 0.22);
       color: #67e8f9;
-      border: 1px solid rgba(6, 182, 212, 0.35);
+      border: 1px solid rgba(6, 182, 212, 0.45);
     }}
 
     .method-easy {{
-      background: rgba(245, 158, 11, 0.18);
+      background: rgba(245, 158, 11, 0.22);
       color: #fcd34d;
-      border: 1px solid rgba(245, 158, 11, 0.35);
+      border: 1px solid rgba(245, 158, 11, 0.45);
     }}
 
-    /* Time Badge */
-    .badge-time {{
-      font-size: 12px;
-      color: #94a3b8;
+    /* Time Badge: وقت إضافة الوظيفة على الداشبورد */
+    .time-cell {{
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }}
+
+    .time-main {{
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #38bdf8;
       background: #0f172a;
       border: 1px solid #1e293b;
       padding: 4px 8px;
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       white-space: nowrap;
+    }}
+
+    .time-sub {{
+      font-size: 10.5px;
+      color: #64748b;
+      font-weight: 600;
     }}
 
     /* Status Tags */
@@ -672,7 +761,7 @@ def build_html(jobs):
       border: 1px solid #374151;
       border-radius: 16px;
       width: 100%;
-      max-width: 650px;
+      max-width: 680px;
       padding: 24px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
       max-height: 90vh;
@@ -700,6 +789,36 @@ def build_html(jobs):
       color: #94a3b8;
       font-size: 24px;
       cursor: pointer;
+    }}
+
+    .modal-highlight-box {{
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }}
+
+    .m-highlight-item {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }}
+
+    .m-hl-label {{
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+    }}
+
+    .m-hl-val {{
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f1f5f9;
     }}
 
     .modal-grid {{
@@ -741,7 +860,7 @@ def build_html(jobs):
       <div class="profile-info">
         <h1>
           حسن سرحان | لوحة التقديم الآلي والتتبع
-          <span class="badge-live">نظام متصل لحظياً</span>
+          <span class="badge-live">نظام متصل ومحدّث لحظياً</span>
         </h1>
         <div class="profile-meta">
           <span>💼 مدير تسويق تنفيذي (معتمد من HRSD)</span>
@@ -787,21 +906,53 @@ def build_html(jobs):
       </div>
     </div>
 
-    <!-- Application Channels Breakdown Banner -->
-    <div class="methods-banner">
-      <div class="methods-title">
-        <span>⚡ توزيع قنوات التقديم:</span>
+    <!-- Prominent Dedicated Channels Box (ايزي ابلاي / ايميل / بوابة خارجية) -->
+    <div class="channels-card">
+      <div class="channels-header-row">
+        <div class="channels-title">
+          <span>🎯 تصنيف طرق التقديم المستخدمة في لوحة التحكم (Channels):</span>
+        </div>
+        <div class="channels-sync-time">
+          🕒 آخر فحص ومزامنة: {now_str} (بتوقيت الرياض)
+        </div>
       </div>
-      <div class="methods-tags">
-        <span class="method-summary-pill msp-email">
-          ✉️ إيميل مباشر (آلي): <strong>{email_count}</strong> وظيفة
-        </span>
-        <span class="method-summary-pill msp-ats">
-          🌐 بوابة خارجية ATS (آلي): <strong>{ats_count}</strong> وظيفة
-        </span>
-        <span class="method-summary-pill msp-easy">
-          ⚡ تقديم سهل Easy Apply (يدوي): <strong>{easy_count}</strong> وظيفة
-        </span>
+      <div class="channels-grid">
+        <div class="channel-box ch-easy">
+          <div class="ch-icon">⚡</div>
+          <div class="ch-info">
+            <div class="ch-name">
+              <span>ايزي ابلاي (Easy Apply - يدوي)</span>
+              <span class="ch-count">{easy_count} وظيفة</span>
+            </div>
+            <div class="ch-desc">
+              شواغر التقديم السريع عبر لينكد إن — مخصصة لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت.
+            </div>
+          </div>
+        </div>
+        <div class="channel-box ch-email">
+          <div class="ch-icon">✉️</div>
+          <div class="ch-info">
+            <div class="ch-name">
+              <span>ايميل مباشر (Direct Email - آلي)</span>
+              <span class="ch-count">{email_count} وظائف</span>
+            </div>
+            <div class="ch-desc">
+              تم التقديم عليها وإرسال السيرة الذاتية PDF التنفيذية آلياً عبر SMTP مع متابعة الردود.
+            </div>
+          </div>
+        </div>
+        <div class="channel-box ch-ats">
+          <div class="ch-icon">🌐</div>
+          <div class="ch-info">
+            <div class="ch-name">
+              <span>بوابة خارجية (External ATS - آلي)</span>
+              <span class="ch-count">{ats_count} وظيفة</span>
+            </div>
+            <div class="ch-desc">
+              بوابات توظيف عالمية (Teamtailor, Ashby, Oracle HCM, Workday) تم التقديم عليها بروبوت المتصفح.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -813,30 +964,30 @@ def build_html(jobs):
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، طريقة التقديم، أو المدينة..." oninput="filterJobs()">
+          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى، طريقة التقديم (ايزي ابلاي/ايميل/بوابة)، أو وقت الإضافة..." oninput="filterJobs()">
         </div>
       </div>
 
-      <!-- Filter Row 1: Status -->
+      <!-- Filter Row 1: Method -->
       <div class="filter-section">
-        <span class="filter-label">الحالة:</span>
+        <span class="filter-label">طريقة التقديم:</span>
+        <div class="filter-pills">
+          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع الطرق ({total_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي ({easy_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر ({email_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية ({ats_count})</button>
+        </div>
+      </div>
+
+      <!-- Filter Row 2: Status -->
+      <div class="filter-section">
+        <span class="filter-label">حالة التقديم:</span>
         <div class="filter-pills">
           <button class="pill active" onclick="setStatusFilter('all', this)">الكل ({total_count})</button>
           <button class="pill" onclick="setStatusFilter('applied', this)">تم التقديم ({applied_count})</button>
           <button class="pill" onclick="setStatusFilter('ready', this)">جاهز للتقديم ({ready_count})</button>
           <button class="pill" onclick="setStatusFilter('skipped', this)">مستبعد ({skipped_count})</button>
           <button class="pill" onclick="setStatusFilter('closed', this)">مغلق ({closed_count})</button>
-        </div>
-      </div>
-
-      <!-- Filter Row 2: Method -->
-      <div class="filter-section">
-        <span class="filter-label">طريقة التقديم:</span>
-        <div class="filter-pills">
-          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع القنوات ({total_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ إيميل مباشر ({email_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية ATS ({ats_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ تقديم سهل Easy Apply ({easy_count})</button>
         </div>
       </div>
     </div>
@@ -848,8 +999,8 @@ def build_html(jobs):
           <tr>
             <th>الشركة والمصدر</th>
             <th>المسمى الوظيفي</th>
-            <th>طريقة التقديم</th>
-            <th>وقت الإضافة</th>
+            <th class="th-highlight">طريقة التقديم المستخدمة</th>
+            <th class="th-highlight">وقت إضافة الوظيفة على الداشبورد</th>
             <th>المدينة</th>
             <th>التوافق</th>
             <th>الحالة</th>
@@ -909,23 +1060,19 @@ def build_html(jobs):
           statusTag = '<span class="tag-status status-skipped">⚠️ تم التخطي</span>';
         }}
 
-        // Method tag
+        // Method tag (ايزي ابلاي / ايميل مباشر / بوابة خارجية)
         let methodTag = '';
-        if (j.method.includes('إيميل')) {{
-          methodTag = '<span class="badge-method method-email">✉️ إيميل مباشر (آلي)</span>';
+        if (j.method.includes('ايميل')) {{
+          methodTag = '<span class="badge-method method-email">✉️ ايميل مباشر (آلي)</span>';
         }} else if (j.method.includes('بوابة خارجية')) {{
           methodTag = '<span class="badge-method method-ats">🌐 بوابة خارجية (آلي)</span>';
         }} else {{
-          methodTag = '<span class="badge-method method-easy">⚡ تقديم سهل (يدوي)</span>';
+          methodTag = '<span class="badge-method method-easy">⚡ ايزي ابلاي (يدوي)</span>';
         }}
 
         // Fit meter
         const fitNum = parseInt(j.fit.replace(/[^0-9]/g, '')) || 85;
         const fitColor = fitNum >= 88 ? '#10b981' : (fitNum >= 80 ? '#3b82f6' : '#94a3b8');
-
-        // Time display
-        const timeParts = j.added_time.split(' ');
-        const shortTime = timeParts.length >= 3 ? (timeParts[1] + ' ' + timeParts[2]) : j.added_time;
 
         // Action button
         let actionBtn = '';
@@ -946,7 +1093,12 @@ def build_html(jobs):
           </td>
           <td class="role-cell">${{escapeHtml(j.title)}}</td>
           <td>${{methodTag}}</td>
-          <td><span class="badge-time" title="${{escapeHtml(j.added_time)}}">🕒 ${{escapeHtml(shortTime)}}</span></td>
+          <td>
+            <div class="time-cell">
+              <span class="time-main">🕒 ${{escapeHtml(j.added_time)}}</span>
+              <span class="time-sub">أضيفت للداشبورد</span>
+            </div>
+          </td>
           <td>${{escapeHtml(j.city)}}</td>
           <td>
             <div class="fit-meter">
@@ -980,9 +1132,9 @@ def build_html(jobs):
 
         // Match method filter
         let matchMethod = true;
-        if (currentMethodFilter === 'email') matchMethod = j.method.includes('إيميل');
+        if (currentMethodFilter === 'email') matchMethod = j.method.includes('ايميل');
         else if (currentMethodFilter === 'ats') matchMethod = j.method.includes('بوابة خارجية');
-        else if (currentMethodFilter === 'easy') matchMethod = j.method.includes('تقديم سهل');
+        else if (currentMethodFilter === 'easy') matchMethod = j.method.includes('ايزي ابلاي');
 
         // Match search text
         const matchSearch =
@@ -1024,14 +1176,14 @@ def build_html(jobs):
 
       document.getElementById('mCompanyRole').innerText = `${{j.company}} - ${{j.title}}`;
       document.getElementById('modalBody').innerHTML = `
-        <div class="modal-grid">
-          <div class="modal-row">
-            <div class="modal-label">وقت وتاريخ الإضافة على الداشبورد</div>
-            <div class="modal-value" style="color:#38bdf8; font-weight:700;">🕒 ${{escapeHtml(j.added_time)}} (الرياض)</div>
+        <div class="modal-highlight-box">
+          <div class="m-highlight-item">
+            <span class="m-hl-label">⏰ وقت إضافة الوظيفة على الداشبورد:</span>
+            <span class="m-hl-val" style="color:#38bdf8;">🕒 ${{escapeHtml(j.added_time)}} (بتوقيت الرياض)</span>
           </div>
-          <div class="modal-row">
-            <div class="modal-label">طريقة التقديم المعتمدة</div>
-            <div class="modal-value" style="font-weight:700;">${{escapeHtml(j.method)}}</div>
+          <div class="m-highlight-item">
+            <span class="m-hl-label">🎯 طريقة التقديم المعتمدة:</span>
+            <span class="m-hl-val">${{escapeHtml(j.method)}}</span>
           </div>
         </div>
         <div class="modal-row">
@@ -1076,10 +1228,10 @@ def build_html(jobs):
     function copyToClipboard() {{
       const headers = [
         'ID',
-        'وقت وتاريخ الإضافة',
+        'وقت وتاريخ الإضافة على الداشبورد',
         'اسم الشركة',
         'المسمى الوظيفي',
-        'طريقة التقديم',
+        'طريقة التقديم (ايزي ابلاي / ايميل / بوابة)',
         'المنصة / المصدر',
         'المدينة',
         'رابط الوظيفة',
