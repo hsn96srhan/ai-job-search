@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and bundle the executive online dashboard for GitHub Pages."""
+"""Build and bundle the executive online dashboard for GitHub Pages with manual application tracking."""
 
 import csv
 import json
@@ -100,122 +100,160 @@ def build_html(jobs):
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
-      min-height: 100vh;
       padding: 24px 16px;
     }}
 
     .container {{
-      max-width: 1460px;
+      max-width: 1440px;
       margin: 0 auto;
     }}
 
-    /* Top Header */
+    /* Header */
     .header {{
       background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
       border: 1px solid #312e81;
       border-radius: 16px;
-      padding: 22px 28px;
-      margin-bottom: 20px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
     }}
 
     .profile-info h1 {{
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 6px;
     }}
 
     .badge-live {{
       font-size: 12px;
       font-weight: 700;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 4px 10px;
-      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 3px 10px;
+      border-radius: 9999px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }}
 
     .badge-live::before {{
-      content: "";
-      width: 8px;
-      height: 8px;
-      background-color: #10b981;
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #10b981;
       border-radius: 50%;
+      display: inline-block;
       box-shadow: 0 0 8px #10b981;
     }}
 
     .profile-meta {{
-      font-size: 13.5px;
-      color: #cbd5e1;
-      margin-top: 6px;
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
+      font-size: 13.5px;
+      color: var(--text-muted);
     }}
 
     .profile-meta span {{
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 6px;
     }}
 
     .header-actions {{
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
     }}
 
     .btn {{
       font-family: var(--font);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       padding: 10px 18px;
       border-radius: 10px;
-      border: none;
+      text-decoration: none;
       cursor: pointer;
+      border: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      text-decoration: none;
       transition: all 0.2s ease;
     }}
 
     .btn-primary {{
-      background: #2563eb;
+      background: #3b82f6;
       color: #ffffff;
     }}
-    .btn-primary:hover {{ background: #1d4ed8; transform: translateY(-1px); }}
+    .btn-primary:hover {{ background: #2563eb; transform: translateY(-1px); }}
 
     .btn-success {{
-      background: #059669;
+      background: #10b981;
       color: #ffffff;
     }}
-    .btn-success:hover {{ background: #047857; transform: translateY(-1px); }}
+    .btn-success:hover {{ background: #059669; transform: translateY(-1px); }}
 
     .btn-secondary {{
       background: #1f2937;
       color: #e5e7eb;
       border: 1px solid #374151;
     }}
-    .btn-secondary:hover {{ background: #374151; }}
+    .btn-secondary:hover {{ background: #374151; transform: translateY(-1px); }}
 
-    /* KPI Grid */
+    .btn-sync-manual {{
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }}
+    .btn-sync-manual:hover {{
+      background: #10b981;
+      color: #0b0f19;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+      transform: translateY(-1px);
+    }}
+
+    .pulse-badge {{
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-green 1.6s infinite;
+    }}
+
+    @keyframes pulse-green {{
+      0% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }}
+      70% {{ transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }}
+      100% {{ transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }}
+    }}
+
+    /* KPI Summary Cards */
     .kpi-grid {{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }}
 
     .kpi-card {{
@@ -223,187 +261,102 @@ def build_html(jobs):
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 18px 20px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
     }}
-
-    .kpi-card:hover {{
-      transform: translateY(-2px);
-    }}
-
-    .kpi-card::before {{
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 4px;
-    }}
-
-    .kpi-total::before {{ background: #6366f1; }}
-    .kpi-applied::before {{ background: var(--accent-green); }}
-    .kpi-ready::before {{ background: var(--accent-blue); }}
-    .kpi-skipped::before {{ background: #64748b; }}
 
     .kpi-label {{
       font-size: 13px;
-      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      font-weight: 600;
     }}
 
     .kpi-number {{
-      font-size: 30px;
-      font-weight: 900;
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
       line-height: 1.1;
-      margin-bottom: 4px;
     }}
-
-    .kpi-total .kpi-number {{ color: #a5b4fc; }}
-    .kpi-applied .kpi-number {{ color: #34d399; }}
-    .kpi-ready .kpi-number {{ color: #60a5fa; }}
-    .kpi-skipped .kpi-number {{ color: #94a3b8; }}
 
     .kpi-subtext {{
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 11.5px;
+      color: #6b7280;
     }}
 
-    /* Dedicated Application Channels Section */
-    .channels-card {{
-      background: #101626;
-      border: 1px solid #1e293b;
+    .kpi-total {{ border-color: rgba(99, 102, 241, 0.3); }}
+    .kpi-total .kpi-number {{ color: #818cf8; }}
+
+    .kpi-applied {{ border-color: rgba(16, 185, 129, 0.3); }}
+    .kpi-applied .kpi-number {{ color: #34d399; }}
+
+    .kpi-ready {{ border-color: rgba(59, 130, 246, 0.3); }}
+    .kpi-ready .kpi-number {{ color: #60a5fa; }}
+
+    .kpi-skipped {{ border-color: rgba(245, 158, 11, 0.3); }}
+    .kpi-skipped .kpi-number {{ color: #fbbf24; }}
+
+    /* Methods Bar */
+    .methods-card {{
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
-    }}
-
-    .channels-header-row {{
+      padding: 16px 20px;
+      margin-bottom: 24px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 16px;
     }}
 
-    .channels-title {{
+    .methods-title {{
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
       color: #f1f5f9;
       display: flex;
       align-items: center;
       gap: 8px;
     }}
 
-    .channels-sync-time {{
-      font-size: 12px;
-      color: #94a3b8;
-      background: #0b0f19;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid #1e293b;
-    }}
-
-    .channels-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-    }}
-
-    .channel-box {{
-      background: #141d33;
-      border-radius: 12px;
-      padding: 14px 16px;
+    .methods-badges {{
       display: flex;
-      align-items: flex-start;
+      flex-wrap: wrap;
       gap: 12px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
     }}
 
-    .channel-box:hover {{
-      transform: translateY(-2px);
-    }}
-
-    .ch-easy {{
-      border-color: rgba(245, 158, 11, 0.35);
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, #141d33 100%);
-    }}
-
-    .ch-email {{
-      border-color: rgba(139, 92, 246, 0.35);
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, #141d33 100%);
-    }}
-
-    .ch-ats {{
-      border-color: rgba(6, 182, 212, 0.35);
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, #141d33 100%);
-    }}
-
-    .ch-icon {{
-      font-size: 24px;
-      line-height: 1;
-      padding-top: 2px;
-    }}
-
-    .ch-info {{
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }}
-
-    .ch-name {{
-      font-size: 14px;
-      font-weight: 800;
-      display: flex;
-      justify-content: space-between;
+    .badge-method {{
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      display: inline-flex;
       align-items: center;
+      gap: 6px;
     }}
 
-    .ch-easy .ch-name {{ color: #fcd34d; }}
-    .ch-email .ch-name {{ color: #c4b5fd; }}
-    .ch-ats .ch-name {{ color: #67e8f9; }}
-
-    .ch-count {{
-      font-size: 13px;
-      font-weight: 900;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 2px 8px;
-      border-radius: 6px;
-    }}
-
-    .ch-desc {{
-      font-size: 12px;
-      color: #94a3b8;
-      line-height: 1.5;
-    }}
+    .method-email {{ background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }}
+    .method-ats {{ background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }}
+    .method-easy {{ background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }}
 
     /* Controls Bar */
-    .controls-bar {{
+    .controls-card {{
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 16px 20px;
       margin-bottom: 20px;
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }}
-
-    .controls-top {{
-      display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 16px;
     }}
 
     .search-box {{
       flex: 1;
-      min-width: 280px;
+      min-width: 260px;
       position: relative;
     }}
 
@@ -411,41 +364,26 @@ def build_html(jobs):
       width: 100%;
       font-family: var(--font);
       background: #0f172a;
-      border: 1px solid #334155;
+      border: 1px solid #1e293b;
       border-radius: 10px;
-      padding: 10px 16px 10px 40px;
+      padding: 10px 14px 10px 38px;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border 0.15s ease;
     }}
 
     .search-box input:focus {{
       border-color: #3b82f6;
     }}
 
-    .search-box svg {{
+    .search-icon {{
       position: absolute;
-      left: 14px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: #64748b;
-      width: 18px;
-      height: 18px;
-    }}
-
-    .filter-section {{
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-    }}
-
-    .filter-label {{
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #cbd5e1;
-      min-width: 120px;
+      font-size: 14px;
     }}
 
     .filter-pills {{
@@ -457,46 +395,44 @@ def build_html(jobs):
     .pill {{
       font-family: var(--font);
       font-size: 12px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 8px;
+      font-weight: 600;
+      background: #1e293b;
+      color: #94a3b8;
       border: 1px solid #334155;
-      background: #0f172a;
-      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 20px;
       cursor: pointer;
       transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }}
 
     .pill:hover {{
-      background: #1e293b;
+      background: #334155;
+      color: #ffffff;
     }}
 
     .pill.active {{
-      background: #2563eb;
+      background: #3b82f6;
       color: #ffffff;
-      border-color: #2563eb;
+      border-color: #3b82f6;
     }}
 
-    .pill-method.active-email {{
-      background: #7c3aed !important;
-      border-color: #7c3aed !important;
-      color: #ffffff !important;
+    .pill-method {{
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.15s ease;
     }}
 
-    .pill-method.active-ats {{
-      background: #0891b2 !important;
-      border-color: #0891b2 !important;
-      color: #ffffff !important;
-    }}
-
-    .pill-method.active-easy {{
-      background: #d97706 !important;
-      border-color: #d97706 !important;
-      color: #ffffff !important;
-    }}
+    .pill-method:hover {{ background: #334155; color: #fff; }}
+    .pill-method.active-email {{ background: #2563eb; color: #fff; border-color: #2563eb; }}
+    .pill-method.active-ats {{ background: #7c3aed; color: #fff; border-color: #7c3aed; }}
+    .pill-method.active-easy {{ background: #d97706; color: #fff; border-color: #d97706; }}
 
     /* Table Container */
     .table-container {{
@@ -510,88 +446,46 @@ def build_html(jobs):
     table {{
       width: 100%;
       border-collapse: collapse;
-      text-align: right;
       font-size: 13.5px;
+      text-align: right;
     }}
 
-    th {{
+    thead th {{
       background: #0f172a;
       color: #94a3b8;
-      font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       padding: 14px 16px;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid var(--card-border);
       white-space: nowrap;
     }}
 
-    th.th-highlight {{
-      color: #38bdf8;
-      background: #131d33;
-    }}
-
-    td {{
+    tbody td {{
       padding: 14px 16px;
       border-bottom: 1px solid #1f2937;
       vertical-align: middle;
     }}
 
-    tr:last-child td {{
-      border-bottom: none;
-    }}
-
-    tr:hover td {{
-      background-color: rgba(30, 41, 59, 0.45);
+    tbody tr:hover {{
+      background: #1e293b;
     }}
 
     .company-cell strong {{
-      color: #ffffff;
-      font-size: 14.5px;
+      color: #f1f5f9;
       display: block;
+      font-size: 14px;
     }}
 
     .company-cell span {{
       color: #64748b;
-      font-size: 12px;
+      font-size: 11.5px;
     }}
 
     .role-cell {{
       font-weight: 600;
       color: #e2e8f0;
-      max-width: 280px;
+      max-width: 240px;
     }}
 
-    /* Method Badges (ايزي ابلاي / ايميل / بوابة خارجية) */
-    .badge-method {{
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }}
-
-    .method-email {{
-      background: rgba(139, 92, 246, 0.22);
-      color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, 0.45);
-    }}
-
-    .method-ats {{
-      background: rgba(6, 182, 212, 0.22);
-      color: #67e8f9;
-      border: 1px solid rgba(6, 182, 212, 0.45);
-    }}
-
-    .method-easy {{
-      background: rgba(245, 158, 11, 0.22);
-      color: #fcd34d;
-      border: 1px solid rgba(245, 158, 11, 0.45);
-    }}
-
-    /* Time Badge: وقت إضافة الوظيفة على الداشبورد */
     .time-cell {{
       display: flex;
       flex-direction: column;
@@ -599,57 +493,14 @@ def build_html(jobs):
     }}
 
     .time-main {{
-      font-size: 12.5px;
       font-weight: 700;
       color: #38bdf8;
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      padding: 4px 8px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      font-size: 12.5px;
     }}
 
     .time-sub {{
-      font-size: 10.5px;
-      color: #64748b;
-      font-weight: 600;
-    }}
-
-    /* Status Tags */
-    .tag-status {{
       font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      white-space: nowrap;
-    }}
-
-    .status-applied {{
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }}
-
-    .status-ready {{
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }}
-
-    .status-skipped {{
-      background: rgba(148, 163, 184, 0.15);
-      color: #94a3b8;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-    }}
-
-    .status-closed {{
-      background: rgba(244, 63, 94, 0.15);
-      color: #fb7185;
-      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #64748b;
     }}
 
     .fit-meter {{
@@ -660,20 +511,37 @@ def build_html(jobs):
     }}
 
     .fit-bar {{
-      width: 60px;
+      width: 50px;
       height: 6px;
       background: #1e293b;
-      border-radius: 3px;
+      border-radius: 9999px;
       overflow: hidden;
     }}
 
     .fit-fill {{
       height: 100%;
-      border-radius: 3px;
+      border-radius: 9999px;
     }}
+
+    .tag-status {{
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      display: inline-block;
+      white-space: nowrap;
+    }}
+
+    .status-applied {{ background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }}
+    .status-ready {{ background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }}
+    .status-skipped {{ background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }}
+    .status-closed {{ background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }}
 
     .action-cell {{
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }}
 
     .btn-apply {{
@@ -702,6 +570,53 @@ def build_html(jobs):
       gap: 4px;
     }}
 
+    .btn-mark-manual {{
+      font-family: var(--font);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }}
+
+    .btn-mark-manual:hover {{
+      background: #10b981;
+      color: #0b0f19;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }}
+
+    .btn-done-manual {{
+      font-family: var(--font);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      border: 1px solid #10b981;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }}
+
+    .btn-done-manual:hover {{
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }}
+
     .btn-view {{
       font-family: var(--font);
       font-size: 12px;
@@ -712,7 +627,6 @@ def build_html(jobs):
       color: #cbd5e1;
       border: 1px solid #334155;
       cursor: pointer;
-      margin-left: 6px;
     }}
 
     .btn-view:hover {{
@@ -750,8 +664,8 @@ def build_html(jobs):
       background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(4px);
       display: none;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       z-index: 999;
       padding: 16px;
     }}
@@ -772,31 +686,32 @@ def build_html(jobs):
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       border-bottom: 1px solid #1f2937;
       padding-bottom: 14px;
     }}
 
-    .modal-title {{
+    .modal-header h3 {{
       font-size: 18px;
-      font-weight: 800;
       color: #ffffff;
+      font-weight: 800;
     }}
 
     .modal-close {{
       background: none;
       border: none;
       color: #94a3b8;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
+      padding: 4px;
     }}
 
     .modal-highlight-box {{
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
+      background: #1e1b4b;
+      border: 1px solid #4338ca;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -819,6 +734,14 @@ def build_html(jobs):
       font-size: 13.5px;
       font-weight: 800;
       color: #f1f5f9;
+    }}
+
+    .modal-manual-action-card {{
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
     }}
 
     .modal-grid {{
@@ -870,6 +793,10 @@ def build_html(jobs):
         </div>
       </div>
       <div class="header-actions">
+        <button class="btn btn-sync-manual" onclick="openSyncModal()" id="btnSyncManual">
+          <span class="pulse-badge"></span>
+          🔄 مزامنة تقديمي اليدوي (<span id="manualAppliedCount">0</span>)
+        </button>
         <button class="btn btn-success" onclick="copyToClipboard()">
           📋 نسخ للشيت (Cmd+V)
         </button>
@@ -900,111 +827,58 @@ def build_html(jobs):
         <div class="kpi-subtext">فرص مؤهلة ومطابقة لكافة معاييرك التنفيذية</div>
       </div>
       <div class="kpi-card kpi-skipped">
-        <div class="kpi-label">مستبعد / مغلق من جهة العمل</div>
+        <div class="kpi-label">مستبعد / مغلق</div>
         <div class="kpi-number" id="kpi-skipped">{skipped_count + closed_count}</div>
-        <div class="kpi-subtext">شروط غير مطابقة أو شواغر أغلقت التقديم</div>
+        <div class="kpi-subtext">فرص مغلقة من الشركة أو استبعدت لعدم مطابقة الشروط</div>
       </div>
     </div>
 
-    <!-- Prominent Dedicated Channels Box (ايزي ابلاي / ايميل / بوابة خارجية) -->
-    <div class="channels-card">
-      <div class="channels-header-row">
-        <div class="channels-title">
-          <span>🎯 تصنيف طرق التقديم المستخدمة في لوحة التحكم (Channels):</span>
-        </div>
-        <div class="channels-sync-time">
-          🕒 آخر فحص ومزامنة: {now_str} (بتوقيت الرياض)
-        </div>
+    <!-- Application Methods Breakdown -->
+    <div class="methods-card">
+      <div class="methods-title">
+        <span>⚙️ قنوات وطرق التقديم المعتمدة في النظام:</span>
       </div>
-      <div class="channels-grid">
-        <div class="channel-box ch-easy">
-          <div class="ch-icon">⚡</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>ايزي ابلاي (Easy Apply - يدوي)</span>
-              <span class="ch-count">{easy_count} وظيفة</span>
-            </div>
-            <div class="ch-desc">
-              شواغر التقديم السريع عبر لينكد إن — مخصصة لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت.
-            </div>
-          </div>
-        </div>
-        <div class="channel-box ch-email">
-          <div class="ch-icon">✉️</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>ايميل مباشر (Direct Email - آلي)</span>
-              <span class="ch-count">{email_count} وظائف</span>
-            </div>
-            <div class="ch-desc">
-              تم التقديم عليها وإرسال السيرة الذاتية PDF التنفيذية آلياً عبر SMTP مع متابعة الردود.
-            </div>
-          </div>
-        </div>
-        <div class="channel-box ch-ats">
-          <div class="ch-icon">🌐</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>بوابة خارجية (External ATS - آلي)</span>
-              <span class="ch-count">{ats_count} وظيفة</span>
-            </div>
-            <div class="ch-desc">
-              بوابات توظيف عالمية (Teamtailor, Ashby, Oracle HCM, Workday) تم التقديم عليها بروبوت المتصفح.
-            </div>
-          </div>
-        </div>
+      <div class="methods-badges">
+        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong>{easy_count}</strong></span>
+        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong>{email_count}</strong></span>
+        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong>{ats_count}</strong></span>
       </div>
     </div>
 
-    <!-- Controls & Multi-Filters -->
-    <div class="controls-bar">
-      <div class="controls-top">
-        <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى، طريقة التقديم (ايزي ابلاي/ايميل/بوابة)، أو وقت الإضافة..." oninput="filterJobs()">
-        </div>
+    <!-- Controls Bar -->
+    <div class="controls-card">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو طريقة التقديم..." oninput="filterJobs()">
+        <span class="search-icon">🔍</span>
       </div>
-
-      <!-- Filter Row 1: Method -->
-      <div class="filter-section">
-        <span class="filter-label">طريقة التقديم:</span>
-        <div class="filter-pills">
-          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع الطرق ({total_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي ({easy_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر ({email_count})</button>
-          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية ({ats_count})</button>
-        </div>
+      <div class="filter-pills">
+        <button class="pill active" onclick="setStatusFilter('all', this)">الكل ({total_count})</button>
+        <button class="pill" onclick="setStatusFilter('applied', this)">✓ تم التقديم ({applied_count})</button>
+        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم ({ready_count})</button>
+        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد ({skipped_count})</button>
+        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة ({closed_count})</button>
       </div>
-
-      <!-- Filter Row 2: Status -->
-      <div class="filter-section">
-        <span class="filter-label">حالة التقديم:</span>
-        <div class="filter-pills">
-          <button class="pill active" onclick="setStatusFilter('all', this)">الكل ({total_count})</button>
-          <button class="pill" onclick="setStatusFilter('applied', this)">تم التقديم ({applied_count})</button>
-          <button class="pill" onclick="setStatusFilter('ready', this)">جاهز للتقديم ({ready_count})</button>
-          <button class="pill" onclick="setStatusFilter('skipped', this)">مستبعد ({skipped_count})</button>
-          <button class="pill" onclick="setStatusFilter('closed', this)">مغلق ({closed_count})</button>
-        </div>
+      <div class="filter-pills" style="margin-right: 8px;">
+        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات</button>
+        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي</button>
+        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر</button>
+        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية</button>
       </div>
     </div>
 
-    <!-- Table -->
+    <!-- Table Container -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>الشركة والمصدر</th>
+            <th>الشركة والمنصة</th>
             <th>المسمى الوظيفي</th>
-            <th class="th-highlight">طريقة التقديم المستخدمة</th>
-            <th class="th-highlight">وقت إضافة الوظيفة على الداشبورد</th>
+            <th>طريقة التقديم</th>
+            <th>وقت وتاريخ الإضافة</th>
             <th>المدينة</th>
-            <th>التوافق</th>
+            <th>نسبة التوافق</th>
             <th>الحالة</th>
-            <th>الإجراء</th>
+            <th>الإجراء المباشر</th>
           </tr>
         </thead>
         <tbody id="jobsTableBody">
@@ -1015,26 +889,119 @@ def build_html(jobs):
 
   </div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast">
-    <span>✓ تم نسخ كافة بيانات الشيت الـ 15 عموداً إلى الحافظة بنجاح! يمكنك لصقها الآن (Cmd+V).</span>
-  </div>
-
   <!-- Details Modal -->
-  <div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
+  <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card">
       <div class="modal-header">
-        <div class="modal-title" id="mCompanyRole">تفاصيل الشاغر</div>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3 id="mCompanyRole">تفاصيل الشاغر</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
       </div>
       <div id="modalBody"></div>
     </div>
+  </div>
+
+  <!-- Manual Application Sync Modal -->
+  <div class="modal-overlay" id="syncModalOverlay" onclick="if(event.target===this) closeSyncModal()">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div>
+          <h3>🔄 مزامنة التقديم اليدوي مع المنظومة وقوقل شيت</h3>
+          <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">الوظائف التي قمت بتقديمها بنفسك يدوياً وترغب بتسجيلها في ملف التتبع والجدولة</p>
+        </div>
+        <button class="modal-close" onclick="closeSyncModal()">×</button>
+      </div>
+      <div id="syncModalBody" style="padding: 18px 0;"></div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #1e293b; padding-top: 16px; flex-wrap: wrap;">
+        <button class="btn btn-secondary" onclick="closeSyncModal()">إغلاق</button>
+        <button class="btn btn-success" onclick="copySyncCommand()">📋 نسخ أمر التحديث (Terminal)</button>
+        <button class="btn btn-primary" onclick="syncWithLocalServer()">⚡ مزامنة فورية الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span>✓ تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)</span>
   </div>
 
   <script>
     const allJobs = {jobs_json};
     let currentStatusFilter = 'all';
     let currentMethodFilter = 'all';
+
+    function showToast(msg) {{
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    }}
+
+    function updateCountsAndUI() {{
+      const appliedCount = allJobs.filter(j => j.status.includes('تم التقديم')).length;
+      const readyCount = allJobs.filter(j => j.status.includes('جاهز')).length;
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      const manualCount = Object.keys(manualStore).length;
+
+      const kpiApplied = document.getElementById('kpi-applied');
+      if (kpiApplied) kpiApplied.innerText = appliedCount;
+
+      const kpiReady = document.getElementById('kpi-ready');
+      if (kpiReady) kpiReady.innerText = readyCount;
+
+      const manualBadge = document.getElementById('manualAppliedCount');
+      if (manualBadge) manualBadge.innerText = manualCount;
+    }}
+
+    function initManualApplied() {{
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      allJobs.forEach(j => {{
+        if (!j.originalStatus) j.originalStatus = j.status;
+        if (manualStore[j.id]) {{
+          j.manual = true;
+          j.status = 'تم التقديم (يدوي)';
+        }}
+      }});
+      updateCountsAndUI();
+    }}
+
+    function toggleManualApply(jobId) {{
+      const j = allJobs.find(x => x.id === jobId);
+      if (!j) return;
+
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      const isCurrentlyManual = !!manualStore[jobId];
+
+      if (isCurrentlyManual) {{
+        delete manualStore[jobId];
+        j.manual = false;
+        j.status = j.originalStatus || 'جاهز للتقديم';
+        showToast('↩ تم التراجع عن تسجيل التقديم اليدوي لـ ' + j.company);
+      }} else {{
+        manualStore[jobId] = {{
+          id: j.id,
+          company: j.company,
+          title: j.title,
+          time: new Date().toLocaleTimeString('ar-SA', {{ hour: '2-digit', minute: '2-digit' }}),
+          date: new Date().toLocaleDateString('ar-SA')
+        }};
+        j.manual = true;
+        if (!j.originalStatus) j.originalStatus = j.status;
+        j.status = 'تم التقديم (يدوي)';
+        showToast('🎉 تم تسجيل تقديمك اليدوي بنجاح على ' + j.company + '!');
+
+        // Attempt background live sync to local server if running
+        fetch(`http://127.0.0.1:5050/api/mark_applied?id=${{jobId}}`, {{ mode: 'cors' }})
+          .then(r => r.json())
+          .then(data => {{
+            if (data.success) console.log('✓ تم التحديث التلقائي في ملف التتبع وقوقل شيت:', data);
+          }})
+          .catch(() => {{}});
+      }}
+
+      localStorage.setItem('manual_applied_jobs', JSON.stringify(manualStore));
+      updateCountsAndUI();
+      filterJobs();
+    }}
 
     function renderTable(jobs) {{
       const tbody = document.getElementById('jobsTableBody');
@@ -1051,7 +1018,7 @@ def build_html(jobs):
         // Status tag
         let statusTag = '';
         if (j.status.includes('تم التقديم')) {{
-          statusTag = '<span class="tag-status status-applied">✓ تم التقديم</span>';
+          statusTag = j.manual ? '<span class="tag-status status-applied">✓ تم التقديم (يدوياً)</span>' : '<span class="tag-status status-applied">✓ تم التقديم</span>';
         }} else if (j.status.includes('جاهز')) {{
           statusTag = '<span class="tag-status status-ready">🚀 جاهز للتقديم</span>';
         }} else if (j.status.includes('مغلقة')) {{
@@ -1077,13 +1044,17 @@ def build_html(jobs):
         // Action button
         let actionBtn = '';
         if (j.status.includes('تم التقديم')) {{
-          actionBtn = '<span class="btn-done">✓ تم إرسال الطلب</span>';
+          if (j.manual) {{
+            actionBtn = `<button class="btn-done-manual" onclick="toggleManualApply('${{j.id}}')" title="اضغط للتراجع أو تعديل التقديم اليدوي">✓ قدّمت يدوياً</button>`;
+          }} else {{
+            actionBtn = '<span class="btn-done">✓ تم إرسال الطلب</span>';
+          }}
         }} else if (j.status.includes('مغلقة')) {{
           actionBtn = '<span style="color:#fb7185; font-size:12px; font-weight:700;">مغلقة من الشركة</span>';
         }} else if (j.status.includes('تم التخطي')) {{
-          actionBtn = '<span style="color:#64748b; font-size:12px;">مستبعد من التقديم</span>';
+          actionBtn = `<span style="color:#64748b; font-size:12px;">مستبعد</span> <button class="btn-mark-manual" onclick="toggleManualApply('${{j.id}}')" title="إذا قدمت عليها يدوياً اضغط هنا">✅ قدّمت</button>`;
         }} else {{
-          actionBtn = `<a href="${{j.url}}" target="_blank" class="btn-apply">قدّم الآن ↗</a>`;
+          actionBtn = `<a href="${{j.url}}" target="_blank" class="btn-apply">قدّم الآن ↗</a> <button class="btn-mark-manual" onclick="toggleManualApply('${{j.id}}')" title="اضغط هنا لتسجيل أنك قدمت بنفسك على هذه الوظيفة">✅ قدّمت أنا</button>`;
         }}
 
         // Parse date and time cleanly
@@ -1179,8 +1150,26 @@ def build_html(jobs):
       const j = allJobs.find(x => x.id === jobId);
       if (!j) return;
 
+      const isManual = !!j.manual;
+      const isApplied = j.status.includes('تم التقديم');
+
       document.getElementById('mCompanyRole').innerText = `${{j.company}} - ${{j.title}}`;
       document.getElementById('modalBody').innerHTML = `
+        <div class="modal-manual-action-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div>
+              <h4 style="font-size:14px; font-weight:800; color:#10b981; margin-bottom:4px;">
+                ${{isApplied ? '✓ هذه الوظيفة مسجلة كـ "تم التقديم"' : 'هل قدمت على هذه الوظيفة يدوياً؟'}}
+              </h4>
+              <p style="font-size:12px; color:#94a3b8;">
+                ${{isManual ? 'تم تسجيل تقديمك اليدوي وحفظه في المنظومة وقاعدة البيانات.' : 'إذا قمت بالتقديم بنفسك على موقع الشركة أو عبر لينكدإن، اضغط الزر لإعلام المنظومة وتحديث الإحصائيات.'}}
+              </p>
+            </div>
+            <button class="${{isManual ? 'btn-done-manual' : 'btn-mark-manual'}}" style="font-size:12.5px; padding:8px 16px;" onclick="toggleManualApply('${{j.id}}'); openDetails('${{j.id}}');">
+              ${{isManual ? '↩ إلغاء التحديد كـ "تم التقديم يدوياً"' : '✅ تأكيد أنني قدمت يدوياً'}}
+            </button>
+          </div>
+        </div>
         <div class="modal-highlight-box">
           <div class="m-highlight-item">
             <span class="m-hl-label">⏰ وقت إضافة الوظيفة على الداشبورد:</span>
@@ -1226,8 +1215,97 @@ def build_html(jobs):
       document.getElementById('modalOverlay').style.display = 'flex';
     }}
 
-    function closeModal(e) {{
+    function closeModal() {{
       document.getElementById('modalOverlay').style.display = 'none';
+    }}
+
+    function openSyncModal() {{
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      const keys = Object.keys(manualStore);
+      const modalBody = document.getElementById('syncModalBody');
+
+      if (keys.length === 0) {{
+        modalBody.innerHTML = `
+          <div style="text-align:center; padding:30px 10px; color:#94a3b8;">
+            <div style="font-size:36px; margin-bottom:12px;">📝</div>
+            <h4 style="color:#f1f5f9; margin-bottom:6px;">لم تقم بتسجيل أي تقديم يدوي بعد</h4>
+            <p style="font-size:13px;">عندما تقدم يدوياً على أي وظيفة اضغط على زر <strong>✅ قدّمت أنا</strong> في الجدول أو التفاصيل لتظهر هنا.</p>
+          </div>
+        `;
+      }} else {{
+        let listHtml = `
+          <div style="margin-bottom:14px; color:#cbd5e1; font-size:13.5px;">
+            لديك <strong>${{keys.length}}</strong> وظائف قمت بتسجيل التقديم عليها يدوياً:
+          </div>
+          <div style="max-height:220px; overflow-y:auto; border:1px solid #1e293b; border-radius:8px; padding:10px; background:#0b0f19; margin-bottom:16px;">
+        `;
+        keys.forEach(k => {{
+          const item = manualStore[k];
+          listHtml += `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 6px; border-bottom:1px solid #1e293b; font-size:13px;">
+              <div>
+                <strong style="color:#38bdf8;">${{k}}</strong> - <span style="color:#f1f5f9;">${{escapeHtml(item.company)}}</span>
+                <div style="color:#64748b; font-size:11.5px;">${{escapeHtml(item.title)}}</div>
+              </div>
+              <span style="color:#34d399; font-size:12px; font-weight:700;">✓ قُدمت يدوياً</span>
+            </div>
+          `;
+        }});
+        listHtml += `</div>
+          <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:8px; padding:12px; font-size:12.5px; color:#93c5fd; line-height:1.6;">
+            💡 <strong>خيارات المزامنة:</strong>
+            <br>1. <strong>مزامنة فورية الآن:</strong> يتصل بالخادم المحلي لتحديث ملف التتبع وشيت قوقل مباشرة.
+            <br>2. <strong>نسخ أمر التحديث:</strong> لتشغيل الأمر في الطرفية يدوياً بضغطة زر.
+          </div>
+        `;
+        modalBody.innerHTML = listHtml;
+      }}
+
+      document.getElementById('syncModalOverlay').style.display = 'flex';
+    }}
+
+    function closeSyncModal() {{
+      document.getElementById('syncModalOverlay').style.display = 'none';
+    }}
+
+    function copySyncCommand() {{
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      const keys = Object.keys(manualStore);
+      if (keys.length === 0) {{
+        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للنسخ');
+        return;
+      }}
+      const cmd = `python3 tools/sync_manual_applied.py ${{keys.join(' ')}}`;
+      navigator.clipboard.writeText(cmd).then(() => {{
+        showToast('📋 تم نسخ أمر المزامنة! الصقه في Terminal للتحديث المباشر.');
+      }});
+    }}
+
+    function syncWithLocalServer() {{
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
+      const keys = Object.keys(manualStore);
+      if (keys.length === 0) {{
+        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للمزامنة');
+        return;
+      }}
+
+      showToast('⏳ جارٍ الاتصال بخادم المزامنة المحلي...');
+      let completed = 0;
+      let failed = 0;
+
+      Promise.all(keys.map(k =>
+        fetch(`http://127.0.0.1:5050/api/mark_applied?id=${{k}}`, {{ mode: 'cors' }})
+          .then(r => r.json())
+          .then(data => {{ if (data.success) completed++; else failed++; }})
+          .catch(() => failed++)
+      )).then(() => {{
+        if (completed > 0) {{
+          showToast(`🎉 تمت المزامنة بنجاح! تم تحديث ${{completed}} وظائف في قوقل شيت.`);
+          closeSyncModal();
+        }} else {{
+          showToast('⚠️ تعذر الوصول للخادم المحلي. استخدم خيار نسخ أمر Terminal.');
+        }}
+      }});
     }}
 
     function copyToClipboard() {{
@@ -1271,9 +1349,7 @@ def build_html(jobs):
       }});
 
       navigator.clipboard.writeText(tsvRows.join('\\n')).then(() => {{
-        const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3500);
+        showToast('📋 تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)');
       }});
     }}
 
@@ -1287,7 +1363,8 @@ def build_html(jobs):
         .replace(/'/g, "&#039;");
     }}
 
-    // Initial render
+    // Initial render with localStorage hydration
+    initManualApplied();
     renderTable(allJobs);
   </script>
 </body>
