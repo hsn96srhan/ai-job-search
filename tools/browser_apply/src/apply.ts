@@ -74,6 +74,8 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
 
     // 3. External Career Site Apply Buttons (LinkedIn Arabic & English)
     const externalApplySelectors = [
+      'button.top-card-layout__cta--primary',
+      'a.top-card-layout__cta--primary',
       'button:has-text("التقدم")',
       'a:has-text("التقدم")',
       'button:has-text("Apply on company website")',
@@ -258,7 +260,12 @@ async function main() {
       const content = fs.readFileSync(csvPath, "utf-8");
       const lines = content.split("\n");
       for (const line of lines) {
-        if (line.includes("جاهز للتقديم") && line.includes("http")) {
+        // Target ONLY External ATS jobs that are ready, leave Easy Apply for manual candidate submission
+        if (
+          line.includes("جاهز للتقديم") &&
+          (line.includes("بوابة خارجية") || line.includes("External ATS")) &&
+          line.includes("http")
+        ) {
           const match = line.match(/https?:\/\/[^\s",]+/);
           if (match) {
             const cleanUrl = match[0].trim();
