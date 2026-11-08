@@ -35,15 +35,21 @@ export async function autofillCommonFields(page: Page): Promise<{ filledCount: n
         continue;
       }
 
-      // OTP / Verification Code (e.g. Oracle HCM / Hilton / Corporate Verification)
-      if (descriptor.includes("verification") || descriptor.includes("passcode") || descriptor.includes("رمز التحقق") || descriptor.includes("otp") || descriptor.includes("code")) {
+      // OTP / Verification Code (e.g. Oracle HCM / Hilton / Workday / Corporate Verification)
+      if (descriptor.includes("verification") || descriptor.includes("passcode") || descriptor.includes("رمز التحقق") || descriptor.includes("otp") || descriptor.includes("code") || descriptor.includes("كود")) {
         // Try to fetch latest OTP from candidate's Gmail inbox via IMAP
         const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
-        const otpScript = path.resolve(repoRoot, "tools/fetch_hilton_otp.py");
+        const otpScript = path.resolve(repoRoot, "tools/fetch_email_verification.py");
         if (fs.existsSync(otpScript)) {
           try {
             const { execSync } = await import("child_process");
-            const otpCode = execSync(`python3 "${otpScript}"`, { encoding: "utf-8" }).trim();
+            // Retry a few times with short delay in case email is just arriving
+            let otpCode = "";
+            for (let attempt = 0; attempt < 3; attempt++) {
+              otpCode = execSync(`python3 "${otpScript}" --otp`, { encoding: "utf-8" }).trim();
+              if (otpCode && /^\d{4,8}$/.test(otpCode)) break;
+              await page.waitForTimeout(2000);
+            }
             if (otpCode && /^\d{4,8}$/.test(otpCode)) {
               await input.fill(otpCode);
               filledCount++;

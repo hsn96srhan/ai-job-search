@@ -145,6 +145,37 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
         break;
       }
 
+      // Check if the portal requires clicking an email verification link
+      if (
+        pageText.toLowerCase().includes("verify your email") ||
+        pageText.toLowerCase().includes("activation link") ||
+        pageText.toLowerCase().includes("confirm your email") ||
+        pageText.toLowerCase().includes("تم إرسال رابط التفعيل") ||
+        pageText.toLowerCase().includes("تحقق من بريدك")
+      ) {
+        console.log("📧 تم رصد رسالة تأكيد بالبريد، جارٍ فحص صندوق الوارد (IMAP) لجلب رابط التفعيل...");
+        const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
+        const verifyScript = path.resolve(repoRoot, "tools/fetch_email_verification.py");
+        if (fs.existsSync(verifyScript)) {
+          try {
+            const { execSync } = await import("child_process");
+            await activePage.waitForTimeout(4000);
+            const link = execSync(`python3 "${verifyScript}" --link`, { encoding: "utf-8" }).trim();
+            if (link && link.startsWith("http")) {
+              console.log(`🔗 تم استلام رابط التفعيل بنجاح: ${link}`);
+              const verifyTab = await activePage.context().newPage();
+              await verifyTab.goto(link, { waitUntil: "domcontentloaded", timeout: 20000 });
+              console.log("✓ تم تفعيل الحساب وتأكيد البريد بنجاح.");
+              await activePage.waitForTimeout(3000);
+              await verifyTab.close().catch(() => {});
+              await activePage.reload().catch(() => {});
+            }
+          } catch (e) {
+            console.warn("تنبيه رابط التفعيل:", e);
+          }
+        }
+      }
+
       // Try to click Next / Submit
       const clicked = await clickPrimarySubmitOrNext(activePage);
       if (!clicked) {
