@@ -850,7 +850,7 @@
           <span>🎯 تصنيف طرق التقديم المستخدمة في لوحة التحكم (Channels):</span>
         </div>
         <div class="channels-sync-time">
-          🕒 آخر فحص ومزامنة: 2026-11-08 04:06 ص (بتوقيت الرياض)
+          🕒 آخر فحص ومزامنة: 2026-11-08 04:07 ص (بتوقيت الرياض)
         </div>
       </div>
       <div class="channels-grid">
@@ -1023,6 +1023,11 @@
           actionBtn = `<a href="${j.url}" target="_blank" class="btn-apply">قدّم الآن ↗</a>`;
         }
 
+        // Parse date and time cleanly
+        const timeParts = j.added_time.split(' ');
+        const datePart = timeParts[0] || '2026-11-08';
+        const timePart = timeParts.slice(1).join(' ') || j.added_time;
+
         tr.innerHTML = `
           <td class="company-cell">
             <strong>${escapeHtml(j.company)}</strong>
@@ -1032,8 +1037,8 @@
           <td>${methodTag}</td>
           <td>
             <div class="time-cell">
-              <span class="time-main">🕒 ${escapeHtml(j.added_time)}</span>
-              <span class="time-sub">أضيفت للداشبورد</span>
+              <span class="time-main">🕒 ${escapeHtml(timePart)}</span>
+              <span class="time-sub">📅 ${escapeHtml(datePart)} (أضيفت للداشبورد)</span>
             </div>
           </td>
           <td>${escapeHtml(j.city)}</td>

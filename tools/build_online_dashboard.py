@@ -1086,6 +1086,11 @@ def build_html(jobs):
           actionBtn = `<a href="${{j.url}}" target="_blank" class="btn-apply">قدّم الآن ↗</a>`;
         }}
 
+        // Parse date and time cleanly
+        const timeParts = j.added_time.split(' ');
+        const datePart = timeParts[0] || '2026-11-08';
+        const timePart = timeParts.slice(1).join(' ') || j.added_time;
+
         tr.innerHTML = `
           <td class="company-cell">
             <strong>${{escapeHtml(j.company)}}</strong>
@@ -1095,8 +1100,8 @@ def build_html(jobs):
           <td>${{methodTag}}</td>
           <td>
             <div class="time-cell">
-              <span class="time-main">🕒 ${{escapeHtml(j.added_time)}}</span>
-              <span class="time-sub">أضيفت للداشبورد</span>
+              <span class="time-main">🕒 ${{escapeHtml(timePart)}}</span>
+              <span class="time-sub">📅 ${{escapeHtml(datePart)}} (أضيفت للداشبورد)</span>
             </div>
           </td>
           <td>${{escapeHtml(j.city)}}</td>
