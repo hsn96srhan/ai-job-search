@@ -1,6 +1,7 @@
 import type { Page } from "playwright";
 import { candidateProfile } from "./profile.js";
 import fs from "fs";
+import path from "path";
 
 export async function autofillCommonFields(page: Page): Promise<{ filledCount: number; filesUploaded: number }> {
   let filledCount = 0;
@@ -26,11 +27,31 @@ export async function autofillCommonFields(page: Page): Promise<{ filledCount: n
       const val = await input.inputValue().catch(() => "");
       if (val && val.length > 0) continue;
 
-      // Password / Confirm Password (for ATS account creation e.g. Workday/Taleo/Greenhouse)
+      // Password / Confirm Password (for ATS account creation e.g. Workday/Taleo/Greenhouse/Oracle HCM)
       if (type === "password" || descriptor.includes("password") || descriptor.includes("كلمة المرور") || descriptor.includes("السر")) {
         await input.fill(candidateProfile.defaultAccountPassword);
         filledCount++;
+        console.log(`   ✓ تم إدخال كلمة مرور الحساب الآمنة تلقائياً.`);
         continue;
+      }
+
+      // OTP / Verification Code (e.g. Oracle HCM / Hilton / Corporate Verification)
+      if (descriptor.includes("verification") || descriptor.includes("passcode") || descriptor.includes("رمز التحقق") || descriptor.includes("otp") || descriptor.includes("code")) {
+        // Try to fetch latest OTP from candidate's Gmail inbox via IMAP
+        const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
+        const otpScript = path.resolve(repoRoot, "tools/fetch_hilton_otp.py");
+        if (fs.existsSync(otpScript)) {
+          try {
+            const { execSync } = await import("child_process");
+            const otpCode = execSync(`python3 "${otpScript}"`, { encoding: "utf-8" }).trim();
+            if (otpCode && /^\d{4,8}$/.test(otpCode)) {
+              await input.fill(otpCode);
+              filledCount++;
+              console.log(`   ✓ تم استلام وإدخال رمز التحقق الأمني (OTP) تلقائياً من البريد: ${otpCode}`);
+              continue;
+            }
+          } catch {}
+        }
       }
 
       // Email

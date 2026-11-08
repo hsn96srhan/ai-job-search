@@ -46,28 +46,47 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
       await waitForUserCaptchaResolution(page);
     }
 
-    // 2. Check for LinkedIn Easy Apply (Skip auto-apply, leave as 'جاهز للتقديم' for manual submission)
-    const easyApplyBtn = await page.$(
-      'button:has-text("Easy Apply"), .jobs-apply-button--top-card:has-text("Easy Apply"), button[aria-label*="Easy Apply"]'
-    );
-    if (easyApplyBtn && (await easyApplyBtn.isVisible().catch(() => false))) {
-      console.log(`ℹ️ [استبعاد آلي] الوظيفة (${url}) تعتمد التقديم السريع عبر لينكدإن (Easy Apply).`);
-      console.log(`📌 توجيه المرشح الصارم: وظائف Easy Apply تُترك بحالة "جاهز للتقديم" ليقدم عليها يدوياً.`);
-      return false; // Leave as 'جاهز للتقديم'
+    // 2. Check for LinkedIn Easy Apply (Strict User Rule: Never auto-submit Easy Apply, leave for candidate manual submit)
+    const easyApplySelectors = [
+      'button:has-text("Easy Apply")',
+      'button:has-text("التقديم السريع")',
+      'button:has-text("التقديم بسهولة")',
+      'button[aria-label*="Easy Apply"]',
+      'button[aria-label*="التقديم السريع"]',
+      '.jobs-apply-button--top-card:has-text("Easy Apply")',
+      '.jobs-apply-button--top-card:has-text("التقديم السريع")',
+    ];
+
+    let isEasyApply = false;
+    for (const sel of easyApplySelectors) {
+      const el = await page.$(sel);
+      if (el && (await el.isVisible().catch(() => false))) {
+        isEasyApply = true;
+        break;
+      }
     }
 
-    // 3. External Career Site Apply Buttons
+    if (isEasyApply) {
+      console.log(`ℹ️ [استبعاد آلي للتقديم السريع] الشاغر (${url}) يعتمد Easy Apply (التقديم السريع عبر لينكدإن).`);
+      console.log(`📌 توجيه المرشح الصارم: يتم إبقاؤه بحالة 'جاهز للتقديم' للتقديم اليدوي السريع من قِبل المرشح.`);
+      return false; // strictly skip auto-apply, keep as ready
+    }
+
+    // 3. External Career Site Apply Buttons (LinkedIn Arabic & English)
     const externalApplySelectors = [
-      'a:has-text("Apply on company website")',
+      'button:has-text("التقدم")',
+      'a:has-text("التقدم")',
       'button:has-text("Apply on company website")',
+      'a:has-text("Apply on company website")',
+      'button:has-text("قدّم على موقع الشركة")',
       'a:has-text("قدّم على موقع الشركة")',
       '.jobs-apply-button',
-      'a:has-text("Apply now")',
       'button:has-text("Apply now")',
-      'a:has-text("Apply")',
+      'a:has-text("Apply now")',
       'button:has-text("Apply")',
-      'a:has-text("قدّم الآن")',
+      'a:has-text("Apply")',
       'button:has-text("قدّم الآن")',
+      'a:has-text("قدّم الآن")',
       'button:has-text("تقديم")',
       'a:has-text("تقديم")',
     ];
@@ -145,7 +164,8 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
 }
 
 async function updateTrackerStatus(targetUrl: string) {
-  const csvPath = path.resolve(process.cwd(), "saudi_jobs_google_sheets_tracker.csv");
+  const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
+  const csvPath = path.resolve(repoRoot, "saudi_jobs_google_sheets_tracker.csv");
   if (!fs.existsSync(csvPath)) return;
 
   try {
@@ -201,19 +221,19 @@ async function main() {
       await updateTrackerStatus(options.url);
     }
   } else if (options.all) {
-    const csvPath = path.resolve(process.cwd(), "saudi_jobs_google_sheets_tracker.csv");
+    const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
+    const csvPath = path.resolve(repoRoot, "saudi_jobs_google_sheets_tracker.csv");
     if (fs.existsSync(csvPath)) {
       const content = fs.readFileSync(csvPath, "utf-8");
       const lines = content.split("\n");
       for (const line of lines) {
         if (line.includes("جاهز للتقديم") && line.includes("http")) {
-          const parts = line.split(",");
-          // Find the URL part
-          const urlPart = parts.find((p) => p.startsWith("http"));
-          if (urlPart) {
-            const success = await applyToUrl(page, urlPart.trim());
+          const match = line.match(/https?:\/\/[^\s",]+/);
+          if (match) {
+            const cleanUrl = match[0].trim();
+            const success = await applyToUrl(page, cleanUrl);
             if (success) {
-              await updateTrackerStatus(urlPart.trim());
+              await updateTrackerStatus(cleanUrl);
             }
             await page.waitForTimeout(3000);
           }
