@@ -353,6 +353,46 @@
       border-color: #3b82f6;
     }
 
+    .pill.active-applied {
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+    }
+
+    .pill.active-manual {
+      background: #059669;
+      color: #ffffff;
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    .pill.active-auto {
+      background: #4f46e5;
+      color: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    }
+
+    .pill.active-ready {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+    }
+
+    .pill.active-skipped {
+      background: #475569;
+      color: #ffffff;
+      border-color: #64748b;
+    }
+
+    .pill.active-closed {
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #f43f5e;
+    }
+
     .pill-method {
       font-family: var(--font);
       font-size: 12px;
@@ -776,9 +816,9 @@
         <span>⚙️ قنوات وطرق التقديم المعتمدة في النظام:</span>
       </div>
       <div class="methods-badges">
-        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong>30</strong></span>
-        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong>6</strong></span>
-        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong>17</strong></span>
+        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong id="methodsCountEasy">30</strong></span>
+        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong id="methodsCountEmail">6</strong></span>
+        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong id="methodsCountAts">17</strong></span>
       </div>
     </div>
 
@@ -788,18 +828,20 @@
         <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو طريقة التقديم..." oninput="filterJobs()">
         <span class="search-icon">🔍</span>
       </div>
-      <div class="filter-pills">
-        <button class="pill active" onclick="setStatusFilter('all', this)">الكل (53)</button>
-        <button class="pill" onclick="setStatusFilter('applied', this)">✓ تم التقديم (44)</button>
-        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم (6)</button>
-        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (2)</button>
-        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (1)</button>
+      <div class="filter-pills" id="statusFilterPills">
+        <button class="pill active" onclick="setStatusFilter('all', this)">الكل (<span id="pillCountAll">53</span>)</button>
+        <button class="pill" onclick="setStatusFilter('applied', this)">✓ إجمالي التقديم (<span id="pillCountApplied">44</span>)</button>
+        <button class="pill" onclick="setStatusFilter('manual', this)">👤 قدّمت يدوياً (<span id="pillCountManual">35</span>)</button>
+        <button class="pill" onclick="setStatusFilter('auto', this)">🤖 تقديم آلي بالمنظومة (<span id="pillCountAuto">9</span>)</button>
+        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم (<span id="pillCountReady">6</span>)</button>
+        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (<span id="pillCountSkipped">2</span>)</button>
+        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (<span id="pillCountClosed">1</span>)</button>
       </div>
-      <div class="filter-pills" style="margin-right: 8px;">
-        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات</button>
-        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي</button>
-        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر</button>
-        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية</button>
+      <div class="filter-pills" id="methodFilterPills" style="margin-right: 8px;">
+        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات (<span id="pillCountMethodAll">53</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي (<span id="pillCountMethodEasy">30</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر (<span id="pillCountMethodEmail">6</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية (<span id="pillCountMethodAts">17</span>)</button>
       </div>
     </div>
 
@@ -874,19 +916,63 @@
     }
 
     function updateCountsAndUI() {
-      const appliedCount = allJobs.filter(j => j.status.includes('تم التقديم')).length;
-      const readyCount = allJobs.filter(j => j.status.includes('جاهز')).length;
+      const total = allJobs.length;
+      const appliedJobs = allJobs.filter(j => j.status.includes('تم التقديم'));
+      const manualJobs = allJobs.filter(j => j.status.includes('يدوي') || j.manual === true);
+      const autoJobs = allJobs.filter(j => j.status.includes('تم التقديم') && !j.status.includes('يدوي') && !j.manual);
+      const readyJobs = allJobs.filter(j => j.status.includes('جاهز'));
+      const skippedJobs = allJobs.filter(j => j.status.includes('تم التخطي'));
+      const closedJobs = allJobs.filter(j => j.status.includes('مغلقة'));
+
+      const easyJobs = allJobs.filter(j => j.method.includes('ايزي ابلاي'));
+      const emailJobs = allJobs.filter(j => j.method.includes('ايميل'));
+      const atsJobs = allJobs.filter(j => j.method.includes('بوابة خارجية'));
+
       const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
-      const manualCount = Object.keys(manualStore).length;
+      const manualStoreCount = Object.keys(manualStore).length;
+
+      // Update KPI cards
+      const kpiTotal = document.getElementById('kpi-total');
+      if (kpiTotal) kpiTotal.innerText = total;
 
       const kpiApplied = document.getElementById('kpi-applied');
-      if (kpiApplied) kpiApplied.innerText = appliedCount;
+      if (kpiApplied) kpiApplied.innerText = appliedJobs.length;
 
       const kpiReady = document.getElementById('kpi-ready');
-      if (kpiReady) kpiReady.innerText = readyCount;
+      if (kpiReady) kpiReady.innerText = readyJobs.length;
 
+      const kpiSkipped = document.getElementById('kpi-skipped');
+      if (kpiSkipped) kpiSkipped.innerText = skippedJobs.length + closedJobs.length;
+
+      // Update Header Sync badge
       const manualBadge = document.getElementById('manualAppliedCount');
-      if (manualBadge) manualBadge.innerText = manualCount;
+      if (manualBadge) manualBadge.innerText = manualStoreCount;
+
+      // Safe DOM updater helper
+      const setEl = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = val;
+      };
+
+      // Update Status filter pill spans
+      setEl('pillCountAll', total);
+      setEl('pillCountApplied', appliedJobs.length);
+      setEl('pillCountManual', manualJobs.length);
+      setEl('pillCountAuto', autoJobs.length);
+      setEl('pillCountReady', readyJobs.length);
+      setEl('pillCountSkipped', skippedJobs.length);
+      setEl('pillCountClosed', closedJobs.length);
+
+      // Update Method filter pill spans
+      setEl('pillCountMethodAll', total);
+      setEl('pillCountMethodEasy', easyJobs.length);
+      setEl('pillCountMethodEmail', emailJobs.length);
+      setEl('pillCountMethodAts', atsJobs.length);
+
+      // Update Methods Breakdown card badges
+      setEl('methodsCountEasy', easyJobs.length);
+      setEl('methodsCountEmail', emailJobs.length);
+      setEl('methodsCountAts', atsJobs.length);
     }
 
     function initManualApplied() {
@@ -896,6 +982,8 @@
         if (manualStore[j.id]) {
           j.manual = true;
           j.status = 'تم التقديم (يدوي)';
+        } else if (j.status.includes('يدوي')) {
+          j.manual = true;
         }
       });
       updateCountsAndUI();
@@ -1038,10 +1126,19 @@
       const filtered = allJobs.filter(j => {
         // Match status filter
         let matchStatus = true;
-        if (currentStatusFilter === 'applied') matchStatus = j.status.includes('تم التقديم');
-        else if (currentStatusFilter === 'ready') matchStatus = j.status.includes('جاهز');
-        else if (currentStatusFilter === 'skipped') matchStatus = j.status.includes('تم التخطي');
-        else if (currentStatusFilter === 'closed') matchStatus = j.status.includes('مغلقة');
+        if (currentStatusFilter === 'applied') {
+          matchStatus = j.status.includes('تم التقديم');
+        } else if (currentStatusFilter === 'manual') {
+          matchStatus = j.status.includes('يدوي') || j.manual === true;
+        } else if (currentStatusFilter === 'auto') {
+          matchStatus = j.status.includes('تم التقديم') && !j.status.includes('يدوي') && !j.manual;
+        } else if (currentStatusFilter === 'ready') {
+          matchStatus = j.status.includes('جاهز');
+        } else if (currentStatusFilter === 'skipped') {
+          matchStatus = j.status.includes('تم التخطي');
+        } else if (currentStatusFilter === 'closed') {
+          matchStatus = j.status.includes('مغلقة');
+        }
 
         // Match method filter
         let matchMethod = true;
@@ -1066,8 +1163,16 @@
 
     function setStatusFilter(type, btn) {
       currentStatusFilter = type;
-      btn.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.parentElement.querySelectorAll('.pill').forEach(p => {
+        p.classList.remove('active', 'active-applied', 'active-manual', 'active-auto', 'active-ready', 'active-skipped', 'active-closed');
+      });
       btn.classList.add('active');
+      if (type === 'applied') btn.classList.add('active-applied');
+      else if (type === 'manual') btn.classList.add('active-manual');
+      else if (type === 'auto') btn.classList.add('active-auto');
+      else if (type === 'ready') btn.classList.add('active-ready');
+      else if (type === 'skipped') btn.classList.add('active-skipped');
+      else if (type === 'closed') btn.classList.add('active-closed');
       filterJobs();
     }
 
@@ -1302,7 +1407,7 @@
 
     // Initial render with localStorage hydration
     initManualApplied();
-    renderTable(allJobs);
+    filterJobs();
   </script>
 </body>
 </html>
