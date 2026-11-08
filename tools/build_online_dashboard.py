@@ -12,26 +12,25 @@ TRACKER_CSV = REPO_ROOT / "saudi_jobs_google_sheets_tracker.csv"
 def load_jobs():
     items = []
     with open(TRACKER_CSV, "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        header = next(reader)
+        reader = csv.DictReader(f)
         for r in reader:
-            if len(r) >= 14:
-                items.append({
-                    "id": r[0].strip(),
-                    "date": r[1].strip(),
-                    "company": r[2].strip(),
-                    "title": r[3].strip(),
-                    "platform": r[4].strip(),
-                    "city": r[5].strip(),
-                    "url": r[6].strip(),
-                    "fit": r[7].strip(),
-                    "status": r[8].strip(),
-                    "contact": r[9].strip(),
-                    "salary": r[10].strip(),
-                    "cv": r[11].strip(),
-                    "followup": r[12].strip(),
-                    "notes": r[13].strip()
-                })
+            items.append({
+                "id": r.get("ID", "").strip(),
+                "added_time": r.get("وقت وتاريخ الإضافة (Added Time)", r.get("التاريخ (Date)", "")).strip(),
+                "company": r.get("اسم الشركة (Company)", "").strip(),
+                "title": r.get("المسمى الوظيفي (Job Title)", "").strip(),
+                "method": r.get("طريقة التقديم (Application Method)", "تقديم سهل (Easy Apply - يدوي)").strip(),
+                "platform": r.get("المنصة / المصدر (Platform)", "").strip(),
+                "city": r.get("المدينة (City)", "").strip(),
+                "url": r.get("رابط الوظيفة (Job URL)", "").strip(),
+                "fit": r.get("نسبة التوافق (Fit Score %)", "").strip(),
+                "status": r.get("حالة التقديم (Status)", "").strip(),
+                "contact": r.get("مسؤول التوظيف / جهة الاتصال (Contact)", "").strip(),
+                "salary": r.get("الراتب المستهدف (Salary)", "").strip(),
+                "cv": r.get("نسخة السيرة الذاتية (CV File)", "").strip(),
+                "followup": r.get("تاريخ المتابعة (Next Follow-up)", "").strip(),
+                "notes": r.get("ملاحظات وتأكيد التقديم (Notes)", "").strip()
+            })
     return items
 
 
@@ -39,10 +38,15 @@ def build_html(jobs):
     jobs_json = json.dumps(jobs, ensure_ascii=False)
 
     applied_count = sum(1 for j in jobs if "تم التقديم" in j["status"])
-    ready_count = sum(1 for j in jobs if "جاهز للتقديم" in j["status"])
+    ready_count = sum(1 for j in jobs if "جاهز" in j["status"])
     skipped_count = sum(1 for j in jobs if "تم التخطي" in j["status"])
     closed_count = sum(1 for j in jobs if "مغلقة" in j["status"])
     total_count = len(jobs)
+
+    # Application Method Counts
+    email_count = sum(1 for j in jobs if "إيميل مباشر" in j["method"])
+    ats_count = sum(1 for j in jobs if "بوابة خارجية" in j["method"])
+    easy_count = sum(1 for j in jobs if "تقديم سهل" in j["method"])
 
     html_content = f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -65,6 +69,7 @@ def build_html(jobs):
       --accent-purple: #8b5cf6;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
+      --accent-cyan: #06b6d4;
       --font: 'Cairo', system-ui, -apple-system, sans-serif;
     }}
 
@@ -84,7 +89,7 @@ def build_html(jobs):
     }}
 
     .container {{
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
     }}
 
@@ -192,16 +197,16 @@ def build_html(jobs):
     /* KPI Grid */
     .kpi-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }}
 
     .kpi-card {{
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 20px;
+      padding: 18px 20px;
       position: relative;
       overflow: hidden;
       transition: transform 0.2s ease;
@@ -229,11 +234,11 @@ def build_html(jobs):
       font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }}
 
     .kpi-number {{
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 900;
       line-height: 1.1;
       margin-bottom: 4px;
@@ -249,6 +254,63 @@ def build_html(jobs):
       color: var(--text-muted);
     }}
 
+    /* Methods Bar (Channels Breakdown) */
+    .methods-banner {{
+      background: #131b2e;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }}
+
+    .methods-title {{
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .methods-tags {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }}
+
+    .method-summary-pill {{
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .msp-email {{
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }}
+
+    .msp-ats {{
+      background: rgba(6, 182, 212, 0.15);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }}
+
+    .msp-easy {{
+      background: rgba(245, 158, 11, 0.15);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }}
+
     /* Controls Bar */
     .controls-bar {{
       background: var(--card-bg);
@@ -256,6 +318,12 @@ def build_html(jobs):
       border-radius: 14px;
       padding: 16px 20px;
       margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }}
+
+    .controls-top {{
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -296,6 +364,20 @@ def build_html(jobs):
       height: 18px;
     }}
 
+    .filter-section {{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }}
+
+    .filter-label {{
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-left: 4px;
+    }}
+
     .filter-pills {{
       display: flex;
       flex-wrap: wrap;
@@ -313,6 +395,9 @@ def build_html(jobs):
       color: #cbd5e1;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }}
 
     .pill:hover {{
@@ -323,6 +408,24 @@ def build_html(jobs):
       background: #2563eb;
       color: #ffffff;
       border-color: #2563eb;
+    }}
+
+    .pill-method.active-email {{
+      background: #7c3aed !important;
+      border-color: #7c3aed !important;
+      color: #ffffff !important;
+    }}
+
+    .pill-method.active-ats {{
+      background: #0891b2 !important;
+      border-color: #0891b2 !important;
+      color: #ffffff !important;
+    }}
+
+    .pill-method.active-easy {{
+      background: #d97706 !important;
+      border-color: #d97706 !important;
+      color: #ffffff !important;
     }}
 
     /* Table Container */
@@ -338,7 +441,7 @@ def build_html(jobs):
       width: 100%;
       border-collapse: collapse;
       text-align: right;
-      font-size: 14px;
+      font-size: 13.5px;
     }}
 
     th {{
@@ -346,13 +449,13 @@ def build_html(jobs):
       color: #94a3b8;
       font-size: 12px;
       font-weight: 700;
-      padding: 14px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid #1e293b;
       white-space: nowrap;
     }}
 
     td {{
-      padding: 14px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid #1f2937;
       vertical-align: middle;
     }}
@@ -362,12 +465,12 @@ def build_html(jobs):
     }}
 
     tr:hover td {{
-      background-color: rgba(30, 41, 59, 0.5);
+      background-color: rgba(30, 41, 59, 0.45);
     }}
 
     .company-cell strong {{
       color: #ffffff;
-      font-size: 15px;
+      font-size: 14.5px;
       display: block;
     }}
 
@@ -379,9 +482,54 @@ def build_html(jobs):
     .role-cell {{
       font-weight: 600;
       color: #e2e8f0;
-      max-width: 320px;
+      max-width: 280px;
     }}
 
+    /* Method Badges */
+    .badge-method {{
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }}
+
+    .method-email {{
+      background: rgba(139, 92, 246, 0.18);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }}
+
+    .method-ats {{
+      background: rgba(6, 182, 212, 0.18);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.35);
+    }}
+
+    .method-easy {{
+      background: rgba(245, 158, 11, 0.18);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }}
+
+    /* Time Badge */
+    .badge-time {{
+      font-size: 12px;
+      color: #94a3b8;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }}
+
+    /* Status Tags */
     .tag-status {{
       font-size: 11px;
       font-weight: 800;
@@ -418,12 +566,12 @@ def build_html(jobs):
     .fit-meter {{
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
     }}
 
     .fit-bar {{
-      width: 70px;
+      width: 60px;
       height: 6px;
       background: #1e293b;
       border-radius: 3px;
@@ -443,7 +591,7 @@ def build_html(jobs):
       font-family: var(--font);
       font-size: 12px;
       font-weight: 700;
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       background: #2563eb;
       color: #ffffff;
@@ -475,7 +623,7 @@ def build_html(jobs):
       color: #cbd5e1;
       border: 1px solid #334155;
       cursor: pointer;
-      margin-right: 6px;
+      margin-left: 6px;
     }}
 
     .btn-view:hover {{
@@ -510,7 +658,7 @@ def build_html(jobs):
     .modal-overlay {{
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
@@ -524,7 +672,7 @@ def build_html(jobs):
       border: 1px solid #374151;
       border-radius: 16px;
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       padding: 24px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
       max-height: 90vh;
@@ -552,6 +700,13 @@ def build_html(jobs):
       color: #94a3b8;
       font-size: 24px;
       cursor: pointer;
+    }}
+
+    .modal-grid {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
     }}
 
     .modal-row {{
@@ -632,21 +787,57 @@ def build_html(jobs):
       </div>
     </div>
 
-    <!-- Controls & Filters -->
-    <div class="controls-bar">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو المدينة..." oninput="filterJobs()">
+    <!-- Application Channels Breakdown Banner -->
+    <div class="methods-banner">
+      <div class="methods-title">
+        <span>⚡ توزيع قنوات التقديم:</span>
       </div>
-      <div class="filter-pills">
-        <button class="pill active" onclick="setFilter('all', this)">الكل ({total_count})</button>
-        <button class="pill" onclick="setFilter('applied', this)">تم التقديم ({applied_count})</button>
-        <button class="pill" onclick="setFilter('ready', this)">جاهز للتقديم ({ready_count})</button>
-        <button class="pill" onclick="setFilter('skipped', this)">مستبعد ({skipped_count})</button>
-        <button class="pill" onclick="setFilter('closed', this)">مغلق ({closed_count})</button>
+      <div class="methods-tags">
+        <span class="method-summary-pill msp-email">
+          ✉️ إيميل مباشر (آلي): <strong>{email_count}</strong> وظيفة
+        </span>
+        <span class="method-summary-pill msp-ats">
+          🌐 بوابة خارجية ATS (آلي): <strong>{ats_count}</strong> وظيفة
+        </span>
+        <span class="method-summary-pill msp-easy">
+          ⚡ تقديم سهل Easy Apply (يدوي): <strong>{easy_count}</strong> وظيفة
+        </span>
+      </div>
+    </div>
+
+    <!-- Controls & Multi-Filters -->
+    <div class="controls-bar">
+      <div class="controls-top">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، طريقة التقديم، أو المدينة..." oninput="filterJobs()">
+        </div>
+      </div>
+
+      <!-- Filter Row 1: Status -->
+      <div class="filter-section">
+        <span class="filter-label">الحالة:</span>
+        <div class="filter-pills">
+          <button class="pill active" onclick="setStatusFilter('all', this)">الكل ({total_count})</button>
+          <button class="pill" onclick="setStatusFilter('applied', this)">تم التقديم ({applied_count})</button>
+          <button class="pill" onclick="setStatusFilter('ready', this)">جاهز للتقديم ({ready_count})</button>
+          <button class="pill" onclick="setStatusFilter('skipped', this)">مستبعد ({skipped_count})</button>
+          <button class="pill" onclick="setStatusFilter('closed', this)">مغلق ({closed_count})</button>
+        </div>
+      </div>
+
+      <!-- Filter Row 2: Method -->
+      <div class="filter-section">
+        <span class="filter-label">طريقة التقديم:</span>
+        <div class="filter-pills">
+          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع القنوات ({total_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ إيميل مباشر ({email_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية ATS ({ats_count})</button>
+          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ تقديم سهل Easy Apply ({easy_count})</button>
+        </div>
       </div>
     </div>
 
@@ -655,12 +846,14 @@ def build_html(jobs):
       <table>
         <thead>
           <tr>
-            <th>الشركة</th>
+            <th>الشركة والمصدر</th>
             <th>المسمى الوظيفي</th>
+            <th>طريقة التقديم</th>
+            <th>وقت الإضافة</th>
             <th>المدينة</th>
-            <th>نسبة التوافق</th>
-            <th>حالة التقديم</th>
-            <th>الإجراء المباشر</th>
+            <th>التوافق</th>
+            <th>الحالة</th>
+            <th>الإجراء</th>
           </tr>
         </thead>
         <tbody id="jobsTableBody">
@@ -673,7 +866,7 @@ def build_html(jobs):
 
   <!-- Toast -->
   <div id="toast" class="toast">
-    <span>✓ تم نسخ بيانات الشيت إلى الحافظة بنجاح! يمكنك الآن لصقها (Cmd+V).</span>
+    <span>✓ تم نسخ كافة بيانات الشيت الـ 15 عموداً إلى الحافظة بنجاح! يمكنك لصقها الآن (Cmd+V).</span>
   </div>
 
   <!-- Details Modal -->
@@ -689,14 +882,15 @@ def build_html(jobs):
 
   <script>
     const allJobs = {jobs_json};
-    let currentFilter = 'all';
+    let currentStatusFilter = 'all';
+    let currentMethodFilter = 'all';
 
     function renderTable(jobs) {{
       const tbody = document.getElementById('jobsTableBody');
       tbody.innerHTML = '';
 
       if (jobs.length === 0) {{
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:#94a3b8;">لا توجد شواغر مطابقة لمعايير البحث الحالية</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:35px; color:#94a3b8;">لا توجد شواغر مطابقة لمعايير البحث والتصفية المختارة</td></tr>';
         return;
       }}
 
@@ -715,9 +909,23 @@ def build_html(jobs):
           statusTag = '<span class="tag-status status-skipped">⚠️ تم التخطي</span>';
         }}
 
+        // Method tag
+        let methodTag = '';
+        if (j.method.includes('إيميل')) {{
+          methodTag = '<span class="badge-method method-email">✉️ إيميل مباشر (آلي)</span>';
+        }} else if (j.method.includes('بوابة خارجية')) {{
+          methodTag = '<span class="badge-method method-ats">🌐 بوابة خارجية (آلي)</span>';
+        }} else {{
+          methodTag = '<span class="badge-method method-easy">⚡ تقديم سهل (يدوي)</span>';
+        }}
+
         // Fit meter
         const fitNum = parseInt(j.fit.replace(/[^0-9]/g, '')) || 85;
         const fitColor = fitNum >= 88 ? '#10b981' : (fitNum >= 80 ? '#3b82f6' : '#94a3b8');
+
+        // Time display
+        const timeParts = j.added_time.split(' ');
+        const shortTime = timeParts.length >= 3 ? (timeParts[1] + ' ' + timeParts[2]) : j.added_time;
 
         // Action button
         let actionBtn = '';
@@ -737,6 +945,8 @@ def build_html(jobs):
             <span>${{escapeHtml(j.platform)}}</span>
           </td>
           <td class="role-cell">${{escapeHtml(j.title)}}</td>
+          <td>${{methodTag}}</td>
+          <td><span class="badge-time" title="${{escapeHtml(j.added_time)}}">🕒 ${{escapeHtml(shortTime)}}</span></td>
           <td>${{escapeHtml(j.city)}}</td>
           <td>
             <div class="fit-meter">
@@ -762,29 +972,49 @@ def build_html(jobs):
 
       const filtered = allJobs.filter(j => {{
         // Match status filter
-        let matchFilter = true;
-        if (currentFilter === 'applied') matchFilter = j.status.includes('تم التقديم');
-        else if (currentFilter === 'ready') matchFilter = j.status.includes('جاهز');
-        else if (currentFilter === 'skipped') matchFilter = j.status.includes('تم التخطي');
-        else if (currentFilter === 'closed') matchFilter = j.status.includes('مغلقة');
+        let matchStatus = true;
+        if (currentStatusFilter === 'applied') matchStatus = j.status.includes('تم التقديم');
+        else if (currentStatusFilter === 'ready') matchStatus = j.status.includes('جاهز');
+        else if (currentStatusFilter === 'skipped') matchStatus = j.status.includes('تم التخطي');
+        else if (currentStatusFilter === 'closed') matchStatus = j.status.includes('مغلقة');
+
+        // Match method filter
+        let matchMethod = true;
+        if (currentMethodFilter === 'email') matchMethod = j.method.includes('إيميل');
+        else if (currentMethodFilter === 'ats') matchMethod = j.method.includes('بوابة خارجية');
+        else if (currentMethodFilter === 'easy') matchMethod = j.method.includes('تقديم سهل');
 
         // Match search text
         const matchSearch =
           !query ||
           j.company.toLowerCase().includes(query) ||
           j.title.toLowerCase().includes(query) ||
-          j.city.toLowerCase().includes(query);
+          j.city.toLowerCase().includes(query) ||
+          j.method.toLowerCase().includes(query) ||
+          j.added_time.toLowerCase().includes(query);
 
-        return matchFilter && matchSearch;
+        return matchStatus && matchMethod && matchSearch;
       }});
 
       renderTable(filtered);
     }}
 
-    function setFilter(type, btn) {{
-      currentFilter = type;
-      document.querySelectorAll('.filter-pills .pill').forEach(p => p.classList.remove('active'));
+    function setStatusFilter(type, btn) {{
+      currentStatusFilter = type;
+      btn.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
+      filterJobs();
+    }}
+
+    function setMethodFilter(type, btn) {{
+      currentMethodFilter = type;
+      btn.parentElement.querySelectorAll('.pill-method').forEach(p => {{
+        p.classList.remove('active', 'active-email', 'active-ats', 'active-easy');
+      }});
+      btn.classList.add('active');
+      if (type === 'email') btn.classList.add('active-email');
+      else if (type === 'ats') btn.classList.add('active-ats');
+      else if (type === 'easy') btn.classList.add('active-easy');
       filterJobs();
     }}
 
@@ -794,29 +1024,45 @@ def build_html(jobs):
 
       document.getElementById('mCompanyRole').innerText = `${{j.company}} - ${{j.title}}`;
       document.getElementById('modalBody').innerHTML = `
+        <div class="modal-grid">
+          <div class="modal-row">
+            <div class="modal-label">وقت وتاريخ الإضافة على الداشبورد</div>
+            <div class="modal-value" style="color:#38bdf8; font-weight:700;">🕒 ${{escapeHtml(j.added_time)}} (الرياض)</div>
+          </div>
+          <div class="modal-row">
+            <div class="modal-label">طريقة التقديم المعتمدة</div>
+            <div class="modal-value" style="font-weight:700;">${{escapeHtml(j.method)}}</div>
+          </div>
+        </div>
         <div class="modal-row">
           <div class="modal-label">الشركة والمسمى الوظيفي</div>
           <div class="modal-value">${{escapeHtml(j.company)}} | ${{escapeHtml(j.title)}}</div>
         </div>
-        <div class="modal-row">
-          <div class="modal-label">المدينة ونمط العمل</div>
-          <div class="modal-value">${{escapeHtml(j.city)}}</div>
+        <div class="modal-grid">
+          <div class="modal-row">
+            <div class="modal-label">المدينة ونمط العمل</div>
+            <div class="modal-value">${{escapeHtml(j.city)}}</div>
+          </div>
+          <div class="modal-row">
+            <div class="modal-label">حالة التقديم الحالية</div>
+            <div class="modal-value"><strong>${{escapeHtml(j.status)}}</strong></div>
+          </div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">حالة التقديم الحالية</div>
-          <div class="modal-value"><strong>${{escapeHtml(j.status)}}</strong></div>
+          <div class="modal-label">مسؤول التوظيف / جهة الاتصال</div>
+          <div class="modal-value">${{escapeHtml(j.contact)}}</div>
         </div>
         <div class="modal-row">
           <div class="modal-label">الراتب المستهدف</div>
           <div class="modal-value">${{escapeHtml(j.salary)}}</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">ملاحظات وإثبات التقديم</div>
-          <div class="modal-value">${{escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعاييرك.')}}</div>
+          <div class="modal-label">ملاحظات وتأكيد التقديم الفعلي</div>
+          <div class="modal-value" style="line-height:1.7;">${{escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعايير حسن سرحان.')}}</div>
         </div>
         <div class="modal-row">
           <div class="modal-label">رابط التقديم المباشر</div>
-          <div class="modal-value"><a href="${{j.url}}" target="_blank" style="color:#60a5fa;">${{j.url}}</a></div>
+          <div class="modal-value"><a href="${{j.url}}" target="_blank" style="color:#60a5fa; word-break:break-all;">${{j.url}}</a></div>
         </div>
       `;
 
@@ -828,12 +1074,42 @@ def build_html(jobs):
     }}
 
     function copyToClipboard() {{
-      const headers = ['ID', 'التاريخ', 'اسم الشركة', 'المسمى الوظيفي', 'المنصة', 'المدينة', 'الرابط', 'التوافق', 'الحالة', 'جهة الاتصال', 'الراتب', 'السيرة الذاتية', 'المتابعة', 'الملاحظات'];
+      const headers = [
+        'ID',
+        'وقت وتاريخ الإضافة',
+        'اسم الشركة',
+        'المسمى الوظيفي',
+        'طريقة التقديم',
+        'المنصة / المصدر',
+        'المدينة',
+        'رابط الوظيفة',
+        'نسبة التوافق',
+        'حالة التقديم',
+        'جهة الاتصال',
+        'الراتب المستهدف',
+        'نسخة السيرة الذاتية',
+        'تاريخ المتابعة',
+        'ملاحظات وتأكيد التقديم'
+      ];
       const tsvRows = [headers.join('\\t')];
 
       allJobs.forEach(j => {{
         tsvRows.push([
-          j.id, j.date, j.company, j.title, j.platform, j.city, j.url, j.fit, j.status, j.contact, j.salary, j.cv, j.followup, j.notes
+          j.id,
+          j.added_time,
+          j.company,
+          j.title,
+          j.method,
+          j.platform,
+          j.city,
+          j.url,
+          j.fit,
+          j.status,
+          j.contact,
+          j.salary,
+          j.cv,
+          j.followup,
+          j.notes
         ].map(val => (val || '').replace(/\\t/g, ' ').replace(/\\n/g, ' ')).join('\\t'));
       }});
 
@@ -884,4 +1160,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

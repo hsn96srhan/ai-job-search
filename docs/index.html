@@ -19,6 +19,7 @@
       --accent-purple: #8b5cf6;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
+      --accent-cyan: #06b6d4;
       --font: 'Cairo', system-ui, -apple-system, sans-serif;
     }
 
@@ -38,7 +39,7 @@
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
     }
 
@@ -146,16 +147,16 @@
     /* KPI Grid */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .kpi-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 20px;
+      padding: 18px 20px;
       position: relative;
       overflow: hidden;
       transition: transform 0.2s ease;
@@ -183,11 +184,11 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .kpi-number {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 900;
       line-height: 1.1;
       margin-bottom: 4px;
@@ -203,6 +204,63 @@
       color: var(--text-muted);
     }
 
+    /* Methods Bar (Channels Breakdown) */
+    .methods-banner {
+      background: #131b2e;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .methods-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .methods-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .method-summary-pill {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .msp-email {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .msp-ats {
+      background: rgba(6, 182, 212, 0.15);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .msp-easy {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
     /* Controls Bar */
     .controls-bar {
       background: var(--card-bg);
@@ -210,6 +268,12 @@
       border-radius: 14px;
       padding: 16px 20px;
       margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .controls-top {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -250,6 +314,20 @@
       height: 18px;
     }
 
+    .filter-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-left: 4px;
+    }
+
     .filter-pills {
       display: flex;
       flex-wrap: wrap;
@@ -267,6 +345,9 @@
       color: #cbd5e1;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .pill:hover {
@@ -277,6 +358,24 @@
       background: #2563eb;
       color: #ffffff;
       border-color: #2563eb;
+    }
+
+    .pill-method.active-email {
+      background: #7c3aed !important;
+      border-color: #7c3aed !important;
+      color: #ffffff !important;
+    }
+
+    .pill-method.active-ats {
+      background: #0891b2 !important;
+      border-color: #0891b2 !important;
+      color: #ffffff !important;
+    }
+
+    .pill-method.active-easy {
+      background: #d97706 !important;
+      border-color: #d97706 !important;
+      color: #ffffff !important;
     }
 
     /* Table Container */
@@ -292,7 +391,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: right;
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     th {
@@ -300,13 +399,13 @@
       color: #94a3b8;
       font-size: 12px;
       font-weight: 700;
-      padding: 14px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid #1e293b;
       white-space: nowrap;
     }
 
     td {
-      padding: 14px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid #1f2937;
       vertical-align: middle;
     }
@@ -316,12 +415,12 @@
     }
 
     tr:hover td {
-      background-color: rgba(30, 41, 59, 0.5);
+      background-color: rgba(30, 41, 59, 0.45);
     }
 
     .company-cell strong {
       color: #ffffff;
-      font-size: 15px;
+      font-size: 14.5px;
       display: block;
     }
 
@@ -333,9 +432,54 @@
     .role-cell {
       font-weight: 600;
       color: #e2e8f0;
-      max-width: 320px;
+      max-width: 280px;
     }
 
+    /* Method Badges */
+    .badge-method {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .method-email {
+      background: rgba(139, 92, 246, 0.18);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .method-ats {
+      background: rgba(6, 182, 212, 0.18);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.35);
+    }
+
+    .method-easy {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    /* Time Badge */
+    .badge-time {
+      font-size: 12px;
+      color: #94a3b8;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    /* Status Tags */
     .tag-status {
       font-size: 11px;
       font-weight: 800;
@@ -372,12 +516,12 @@
     .fit-meter {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
     }
 
     .fit-bar {
-      width: 70px;
+      width: 60px;
       height: 6px;
       background: #1e293b;
       border-radius: 3px;
@@ -397,7 +541,7 @@
       font-family: var(--font);
       font-size: 12px;
       font-weight: 700;
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       background: #2563eb;
       color: #ffffff;
@@ -429,7 +573,7 @@
       color: #cbd5e1;
       border: 1px solid #334155;
       cursor: pointer;
-      margin-right: 6px;
+      margin-left: 6px;
     }
 
     .btn-view:hover {
@@ -464,7 +608,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
@@ -478,7 +622,7 @@
       border: 1px solid #374151;
       border-radius: 16px;
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       padding: 24px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
       max-height: 90vh;
@@ -506,6 +650,13 @@
       color: #94a3b8;
       font-size: 24px;
       cursor: pointer;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .modal-row {
@@ -586,21 +737,57 @@
       </div>
     </div>
 
-    <!-- Controls & Filters -->
-    <div class="controls-bar">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو المدينة..." oninput="filterJobs()">
+    <!-- Application Channels Breakdown Banner -->
+    <div class="methods-banner">
+      <div class="methods-title">
+        <span>⚡ توزيع قنوات التقديم:</span>
       </div>
-      <div class="filter-pills">
-        <button class="pill active" onclick="setFilter('all', this)">الكل (59)</button>
-        <button class="pill" onclick="setFilter('applied', this)">تم التقديم (10)</button>
-        <button class="pill" onclick="setFilter('ready', this)">جاهز للتقديم (44)</button>
-        <button class="pill" onclick="setFilter('skipped', this)">مستبعد (4)</button>
-        <button class="pill" onclick="setFilter('closed', this)">مغلق (1)</button>
+      <div class="methods-tags">
+        <span class="method-summary-pill msp-email">
+          ✉️ إيميل مباشر (آلي): <strong>7</strong> وظيفة
+        </span>
+        <span class="method-summary-pill msp-ats">
+          🌐 بوابة خارجية ATS (آلي): <strong>22</strong> وظيفة
+        </span>
+        <span class="method-summary-pill msp-easy">
+          ⚡ تقديم سهل Easy Apply (يدوي): <strong>30</strong> وظيفة
+        </span>
+      </div>
+    </div>
+
+    <!-- Controls & Multi-Filters -->
+    <div class="controls-bar">
+      <div class="controls-top">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، طريقة التقديم، أو المدينة..." oninput="filterJobs()">
+        </div>
+      </div>
+
+      <!-- Filter Row 1: Status -->
+      <div class="filter-section">
+        <span class="filter-label">الحالة:</span>
+        <div class="filter-pills">
+          <button class="pill active" onclick="setStatusFilter('all', this)">الكل (59)</button>
+          <button class="pill" onclick="setStatusFilter('applied', this)">تم التقديم (10)</button>
+          <button class="pill" onclick="setStatusFilter('ready', this)">جاهز للتقديم (44)</button>
+          <button class="pill" onclick="setStatusFilter('skipped', this)">مستبعد (4)</button>
+          <button class="pill" onclick="setStatusFilter('closed', this)">مغلق (1)</button>
+        </div>
+      </div>
+
+      <!-- Filter Row 2: Method -->
+      <div class="filter-section">
+        <span class="filter-label">طريقة التقديم:</span>
+        <div class="filter-pills">
+          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع القنوات (59)</button>
+          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ إيميل مباشر (7)</button>
+          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية ATS (22)</button>
+          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ تقديم سهل Easy Apply (30)</button>
+        </div>
       </div>
     </div>
 
@@ -609,12 +796,14 @@
       <table>
         <thead>
           <tr>
-            <th>الشركة</th>
+            <th>الشركة والمصدر</th>
             <th>المسمى الوظيفي</th>
+            <th>طريقة التقديم</th>
+            <th>وقت الإضافة</th>
             <th>المدينة</th>
-            <th>نسبة التوافق</th>
-            <th>حالة التقديم</th>
-            <th>الإجراء المباشر</th>
+            <th>التوافق</th>
+            <th>الحالة</th>
+            <th>الإجراء</th>
           </tr>
         </thead>
         <tbody id="jobsTableBody">
@@ -627,7 +816,7 @@
 
   <!-- Toast -->
   <div id="toast" class="toast">
-    <span>✓ تم نسخ بيانات الشيت إلى الحافظة بنجاح! يمكنك الآن لصقها (Cmd+V).</span>
+    <span>✓ تم نسخ كافة بيانات الشيت الـ 15 عموداً إلى الحافظة بنجاح! يمكنك لصقها الآن (Cmd+V).</span>
   </div>
 
   <!-- Details Modal -->
@@ -642,15 +831,16 @@
   </div>
 
   <script>
-    const allJobs = [{"id": "SA-001", "date": "2026-11-08", "company": "Elfaleh Sports House (بيت الفالح للرياضة)", "title": "Marketing Manager (Reporting to CEO)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485828406", "fit": "95%", "status": "جاهز للتقديم", "contact": "CEO Office", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Elfaleh_Marketing_Manager.tex", "followup": "2026-11-10", "notes": "التبعية المباشرة للـ CEO - قيادة فريق التسويق وإدارة الميزانيات وتوسيع المبيعات وحملات الأداء ومواءمة معارض التجزئة مع المتجر الإلكتروني"}, {"id": "SA-002", "date": "2026-11-08", "company": "HungerStation | هنقرستيشن (Delivery Hero)", "title": "HSM Performance Senior Manager", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4461605346", "fit": "88%", "status": "جاهز للتقديم", "contact": "Talent Acquisition Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_HungerStation_Performance.tex", "followup": "2026-11-11", "notes": "إدارة أداء السوق وتحليل نمو واكتساب واحتفاظ العملاء ونمذجة الربحية والتسعير وتنسيق الفرق المشتركة ومراجعات MBRs"}, {"id": "SA-003", "date": "2026-11-08", "company": "Sharaf DG (شرف دي جي)", "title": "Assistant Manager - Online Business and Marketing", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4487767939", "fit": "94%", "status": "تم التقديم", "contact": "Country Manager / HR", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_SharafDG_Online_Marketing.tex", "followup": "2026-11-11", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق CV حسن سرحان وتأكيد الرد الآلي"}, {"id": "SA-004", "date": "2026-11-08", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "Executive Search Qiddiya", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Qiddiya_Residential_Marketing.tex", "followup": "2026-11-12", "notes": "قيادة استراتيجية طرح وإطلاق المشاريع السكنية الفاخرة بالقدية وحملات التسويق المتكاملة ودعم مبيعات كبار المستثمرين"}, {"id": "SA-005", "date": "2026-11-08", "company": "Savills Middle East", "title": "Senior Marketing Executive (KAFD)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh - KAFD)", "url": "https://www.linkedin.com/jobs/view/4487263154", "fit": "90%", "status": "جاهز للتقديم", "contact": "KSA Leadership Savills", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Savills_Senior_Marketing.tex", "followup": "2026-11-12", "notes": "إدارة الحضور التسويقي والعلاقات الإعلامية والفعاليات في مركز الملك عبدالله المالي KAFD والمواءمة الثقافية بالعربية"}, {"id": "SA-006", "date": "2026-11-08", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4484380298", "fit": "86%", "status": "جاهز للتقديم", "contact": "Talent Team Setup.sa", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "هندسة أنظمة النمو الرقمي وبناء مسارات الاستحواذ وأتمتة مسارات بايثون واستخدام أدوات الذكاء الاصطناعي لتسريع المبيعات"}, {"id": "SA-007", "date": "2026-11-08", "company": "Qureos / Client", "title": "Marketing Manager (Food & Beverage)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4483694611", "fit": "87%", "status": "جاهز للتقديم", "contact": "Qureos Recruitment", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "قيادة استراتيجيات التسويق المتكاملة لقطاع الأغذية والمشروبات وإدارة ميزانيات الإعلانات وتحليل العائد على الاستثمار ROI"}, {"id": "SA-008", "date": "2026-11-08", "company": "Red Sea Global (شركة البحر الأحمر الدولية)", "title": "Associate Director - Residential Marketing", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4482280905", "fit": "84%", "status": "جاهز للتقديم", "contact": "RSG Talent Acquisition", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-14", "notes": "استراتيجيات تسويق الأصول السكنية الفاخرة للمستثمرين الدوليين وحملات إطلاق الأصول الكبرى"}, {"id": "SA-009", "date": "2026-11-08", "company": "شركة سحاب الجنوب العقارية", "title": "مدير التسويق والمبيعات العقاري", "platform": "LinkedIn / Email Direct", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4486641246", "fit": "80%", "status": "تم التقديم", "contact": "sscc-ksa@hotmail.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-15", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP مع السيرة الذاتية المعتمدة والتأكيد على اعتماد HRSD بالرياض"}, {"id": "SA-010", "date": "2026-11-08", "company": "شركة تجارية بجدة (Jeddah Commercial Co)", "title": "Marketing Coordinator (حضوري بجدة)", "platform": "LinkedIn Saudi Arabia", "city": "جدة (Jeddah)", "url": "https://www.linkedin.com/jobs/view/example-jeddah", "fit": "65%", "status": "تم التخطي", "contact": "HR Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "—", "followup": "—", "notes": "تم التخطي: دوام حضوري خارج الرياض (جدة) ونسبة التوافق 65% أقل من 80% والراتب دون الحد الأدنى 10"}, {"id": "SA-011", "date": "2026-11-08", "company": "Mnzil | منزل", "title": "Marketing Associate", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-associate-at-mnzil-%D9%85%D9%86%D8%B2%D9%84-4483255202", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-013", "date": "2026-11-08", "company": "RAM Systems Company", "title": "Marketing Specialist", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-ram-systems-company-4442831617", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-015", "date": "2026-11-08", "company": "IHG Hotels & Resorts", "title": "Marketing Executive", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-ihg-hotels-resorts-4438013067", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-017", "date": "2026-11-08", "company": "Qureos", "title": "Marketing Director", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-director-at-qureos-4479925987", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-019", "date": "2026-11-08", "company": "OHC | العمر القابضة", "title": "Marketing & Digital Marketing Specialist", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-digital-marketing-specialist-at-ohc-%D8%A7%D9%84%D8%B9%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%A8%D8%B6%D8%A9-4484029270", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-021", "date": "2026-11-08", "company": "JODAYN | جودين", "title": "Marketing Manager", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-jodayn-%D8%AC%D9%88%D8%AF%D9%8A%D9%86-4466769201", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-023", "date": "2026-11-08", "company": "Qureos", "title": "Marketing Manager (Food & Beverage)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-food-beverage-at-qureos-4483694611", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-025", "date": "2026-11-08", "company": "UXBERT Labs", "title": "Marketing Manager", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-uxbert-labs-4425494997", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-027", "date": "2026-11-08", "company": "Rentokil Initial", "title": "Marketing Coordinator", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-coordinator-at-rentokil-initial-4419842160", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-029", "date": "2026-11-08", "company": "أسفار لتأجير السيارات", "title": "مدير تسويق", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://www.linkedin.com/jobs/view/4479005887", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-031", "date": "2026-11-08", "company": "Hilton", "title": "Assistant Marketing Manager", "platform": "Portal / Easy Apply", "city": "عن بعد", "url": "https://sa.linkedin.com/jobs/view/assistant-marketing-manager-at-hilton-4485328665", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم استلام رمز التحقق OTP آلياً من البريد والدخول لبوابة Oracle HCM لطلب التقديم"}, {"id": "SA-033", "date": "2026-11-08", "company": "Red Sea Global", "title": "Manager - Marketing (B2B)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-marketing-b2b-at-red-sea-global-4485058908", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-059", "date": "2026-11-08", "company": "webook.com", "title": "Director of Marketing & Brand", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-marketing-brand-at-webook-com-4438652564", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Urban Ridge Supplies", "title": "Founding Head of Marketing & Enrollment Growth", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/founding-head-of-marketing-enrollment-growth-at-urban-ridge-supplies-4430828768", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Calo Inc.", "title": "Commercial Director (KSA)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-ksa-at-calo-inc-4448269583", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "qlub", "title": "Growth Marketing Director", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-director-at-qlub-4478737545", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر بوابة Ashby الرسمية مع إرفاق السيرة الذاتية وتحديد الراتب 2700 USD ورابط لينكدإن"}, {"id": "SA-059", "date": "2026-11-08", "company": "AstraZeneca", "title": "Franchise Head - R&I", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/franchise-head-r-i-at-astrazeneca-4486059547", "fit": "92%", "status": "مغلقة من جهة العمل", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم فحص بوابة Eightfold التابعة لأسترازينيكا رسمياً وتبين إغلاق استقبال الطلبات (لم يعد قبول الطلبات)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Red Sea Global", "title": "Associate Director - Residential Marketing", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/associate-director-residential-marketing-at-red-sea-global-4482280905", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "IHG Hotels & Resorts", "title": "Director of Sales & Marketing", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-sales-marketing-at-ihg-hotels-resorts-4272153246", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Publicis Groupe Middle East", "title": "Business Director - Strategy & Insights", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/business-director-strategy-insights-at-publicis-groupe-middle-east-4483634300", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "IHG Hotels & Resorts", "title": "Commercial Director", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-at-ihg-hotels-resorts-4476040193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Urban Ridge Supplies", "title": "Marketing Manager (F&B Retail, Specialty Coffee)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-f-b-retail-specialty-coffee-at-urban-ridge-supplies-4430847696", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Qureos", "title": "Marketing Manager - Roastery / Coffee", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-roastery-coffee-at-qureos-4469987157", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Novotel Hotels", "title": "Marketing Manager - Saudi Only", "platform": "Policy Filter", "city": "Riyadh Region", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-saudi-only-at-novotel-hotels-4481103087", "fit": "60%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: الشاغر يشترط الجنسية السعودية فقط (Candidate is Egyptian)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Elfaleh Sports House", "title": "Marketing Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-elfaleh-sports-house-4485828406", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Hilton", "title": "Marketing Communications Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-communications-manager-at-hilton-4487254587", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-residential-marketing-at-qiddiya-%D8%A7%D9%84%D9%82%D8%AF%D9%8A%D8%A9-4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "dentsu", "title": "Performance Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4322076341", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "NICE ONE | نايس ون", "title": "Senior Paid Marketing Specialist", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-paid-marketing-specialist-at-nice-one-%D9%86%D8%A7%D9%8A%D8%B3-%D9%88%D9%86-4454261359", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Mars SA", "title": "Growth Marketing Lead", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-lead-at-mars-sa-4461905560", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف info@mars.sa (Mars Ventures) مع إرفاق السيرة الذاتية الرسمية"}, {"id": "SA-059", "date": "2026-11-08", "company": "Futu Holdings Limited", "title": "Growth & Market Specialist", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-market-specialist-at-futu-holdings-limited-4473629284", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "dentsu", "title": "Senior Performance Executive", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-performance-executive-at-dentsu-4322166193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "OmniOps", "title": "Digital Marketing Specialist", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-omniops-4462224700", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth Specialist), (full-time, on-site, Riyadh)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-hacking-specialist-digital-growth-specialist-full-time-on-site-riyadh-at-setup-sa-4484380298", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Corebridge Financial", "title": "Digital Media Buyer - Corebridge Direct", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-media-buyer-corebridge-direct-at-corebridge-financial-4486066294", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي (TalentandInclusion@corebridgefinancial.com) بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-059", "date": "2026-11-08", "company": "Sharaf DG", "title": "Assistant Manager - Online Business and Marketing", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/assistant-manager-online-business-and-marketing-at-sharaf-dg-4487767939", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق CV حسن سرحان وتأكيد الرد الآلي"}, {"id": "SA-059", "date": "2026-11-08", "company": "dentsu", "title": "Performance Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4379681411", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Fragomen", "title": "Regional Marketing Manager (ME)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/regional-marketing-manager-me-at-fragomen-4487270049", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "SILQFi", "title": "Retention & Monetization Lead", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/retention-monetization-lead-at-silqfi-4474065479", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Jeeny", "title": "Growth Manager - Insights & Analytics", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-manager-insights-analytics-at-jeeny-4473247911", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "PepsiCo", "title": "Digital Analyst", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-analyst-at-pepsico-4481449399", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Mumzworld.com", "title": "E-Commerce Associate - Marketplace", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/e-commerce-associate-marketplace-at-mumzworld-com-4479308246", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Teamtailor وإكمال استبيان التضارب والتصريح والوصول لصفحة Thanks الرسمية (ID: b86179e9)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Shangri-La Group", "title": "Marketing Executive", "platform": "Location Filter", "city": "Jiddah, Makkah, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-shangri-la-group-4459171390", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Jiddah, Makkah, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-059", "date": "2026-11-08", "company": "Plat4mation", "title": "Marketing Specialist", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-plat4mation-4481882256", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "H. M. Al Rugaib & Sons Trading Co. - شركة حمد محمد الرقيب و أولاده التجارية", "title": "Digital Marketing Specialist", "platform": "Location Filter", "city": "Al Khobar, Eastern, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-h-m-al-rugaib-sons-trading-co-%D8%B4%D8%B1%D9%83%D8%A9-%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D9%85%D8%AF-%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A8-%D9%88-%D8%A3%D9%88%D9%84%D8%A7%D8%AF%D9%87-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9-4481608095", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Al Khobar, Eastern, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-059", "date": "2026-11-08", "company": "Astek Middle East", "title": "Digital Marketing & Digital Channels Expert", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-digital-channels-expert-at-astek-middle-east-4477708969", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي (contact-astekme@astek-international.com) بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-059", "date": "2026-11-08", "company": "Boutiqaat", "title": "Digital Marketing Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-boutiqaat-4480040260", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "MOBCO Group", "title": "Digital Marketing Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-mobco-group-4487245041", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "date": "2026-11-08", "company": "Saudi Company For Hardware - SACO", "title": "Digital Marketing Manager", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-saudi-company-for-hardware-saco-4483025841", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}];
-    let currentFilter = 'all';
+    const allJobs = [{"id": "SA-001", "added_time": "2026-11-08 01:15 ص", "company": "Elfaleh Sports House (بيت الفالح للرياضة)", "title": "Marketing Manager (Reporting to CEO)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485828406", "fit": "95%", "status": "جاهز للتقديم", "contact": "CEO Office", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Elfaleh_Marketing_Manager.tex", "followup": "2026-11-10", "notes": "التبعية المباشرة للـ CEO - قيادة فريق التسويق وإدارة الميزانيات وتوسيع المبيعات وحملات الأداء ومواءمة معارض التجزئة مع المتجر الإلكتروني"}, {"id": "SA-002", "added_time": "2026-11-08 01:15 ص", "company": "HungerStation | هنقرستيشن (Delivery Hero)", "title": "HSM Performance Senior Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4461605346", "fit": "88%", "status": "جاهز للتقديم", "contact": "Talent Acquisition Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_HungerStation_Performance.tex", "followup": "2026-11-11", "notes": "إدارة أداء السوق وتحليل نمو واكتساب واحتفاظ العملاء ونمذجة الربحية والتسعير وتنسيق الفرق المشتركة ومراجعات MBRs"}, {"id": "SA-003", "added_time": "2026-11-08 01:15 ص", "company": "Sharaf DG (شرف دي جي)", "title": "Assistant Manager - Online Business and Marketing", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4487767939", "fit": "94%", "status": "تم التقديم", "contact": "Country Manager / HR", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_SharafDG_Online_Marketing.tex", "followup": "2026-11-11", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق السيرة الذاتية PDF لحسن سرحان وتأكيد الرد الآلي من Microsoft 365"}, {"id": "SA-004", "added_time": "2026-11-08 01:15 ص", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "method": "بوابة خارجية (External ATS - آلي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "Executive Search Qiddiya", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Qiddiya_Residential_Marketing.tex", "followup": "2026-11-12", "notes": "قيادة استراتيجية طرح وإطلاق المشاريع السكنية الفاخرة بالقدية وحملات التسويق المتكاملة ودعم مبيعات كبار المستثمرين"}, {"id": "SA-005", "added_time": "2026-11-08 01:15 ص", "company": "Savills Middle East", "title": "Senior Marketing Executive (KAFD)", "method": "بوابة خارجية (External ATS - آلي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh - KAFD)", "url": "https://www.linkedin.com/jobs/view/4487263154", "fit": "90%", "status": "جاهز للتقديم", "contact": "KSA Leadership Savills", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Savills_Senior_Marketing.tex", "followup": "2026-11-12", "notes": "إدارة الحضور التسويقي والعلاقات الإعلامية والفعاليات في مركز الملك عبدالله المالي KAFD والمواءمة الثقافية بالعربية"}, {"id": "SA-006", "added_time": "2026-11-08 01:15 ص", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4484380298", "fit": "86%", "status": "جاهز للتقديم", "contact": "Talent Team Setup.sa", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "هندسة أنظمة النمو الرقمي وبناء مسارات الاستحواذ وأتمتة مسارات بايثون واستخدام أدوات الذكاء الاصطناعي لتسريع المبيعات"}, {"id": "SA-007", "added_time": "2026-11-08 01:15 ص", "company": "Qureos / Client", "title": "Marketing Manager (Food & Beverage)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4483694611", "fit": "87%", "status": "جاهز للتقديم", "contact": "Qureos Recruitment", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "قيادة استراتيجيات التسويق المتكاملة لقطاع الأغذية والمشروبات وإدارة ميزانيات الإعلانات وتحليل العائد على الاستثمار ROI"}, {"id": "SA-008", "added_time": "2026-11-08 01:15 ص", "company": "Red Sea Global (شركة البحر الأحمر الدولية)", "title": "Associate Director - Residential Marketing", "method": "بوابة خارجية (External ATS - آلي)", "platform": "LinkedIn Saudi Arabia", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4482280905", "fit": "84%", "status": "جاهز للتقديم", "contact": "RSG Talent Acquisition", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-14", "notes": "استراتيجيات تسويق الأصول السكنية الفاخرة للمستثمرين الدوليين وحملات إطلاق الأصول الكبرى"}, {"id": "SA-009", "added_time": "2026-11-08 01:15 ص", "company": "شركة سحاب الجنوب العقارية", "title": "مدير التسويق والمبيعات العقاري", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "LinkedIn / Email Direct", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4486641246", "fit": "80%", "status": "تم التقديم", "contact": "sscc-ksa@hotmail.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-15", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP مع السيرة الذاتية المعتمدة والتأكيد على اعتماد HRSD بالرياض"}, {"id": "SA-010", "added_time": "2026-11-08 01:15 ص", "company": "شركة تجارية بجدة (Jeddah Commercial Co)", "title": "Marketing Coordinator (حضوري بجدة)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "LinkedIn Saudi Arabia", "city": "جدة (Jeddah)", "url": "https://www.linkedin.com/jobs/view/example-jeddah", "fit": "65%", "status": "تم التخطي", "contact": "HR Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "—", "followup": "—", "notes": "تم التخطي: دوام حضوري خارج الرياض (جدة) ونسبة التوافق 65% أقل من 80% والراتب دون الحد الأدنى 10"}, {"id": "SA-011", "added_time": "2026-11-08 02:20 ص", "company": "Mnzil | منزل", "title": "Marketing Associate", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-associate-at-mnzil-%D9%85%D9%86%D8%B2%D9%84-4483255202", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-012", "added_time": "2026-11-08 02:20 ص", "company": "RAM Systems Company", "title": "Marketing Specialist", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-ram-systems-company-4442831617", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP إلى jobs@ramsys.com.sa مع إرفاق السيرة الذاتية المعتمدة والتأكيد على مطابقة متطلبات هيئة الموارد البشرية"}, {"id": "SA-013", "added_time": "2026-11-08 02:20 ص", "company": "IHG Hotels & Resorts", "title": "Marketing Executive", "method": "بوابة خارجية (External ATS - آلي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-ihg-hotels-resorts-4438013067", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-014", "added_time": "2026-11-08 02:20 ص", "company": "Qureos", "title": "Marketing Director", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-director-at-qureos-4479925987", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-015", "added_time": "2026-11-08 02:20 ص", "company": "OHC | العمر القابضة", "title": "Marketing & Digital Marketing Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-digital-marketing-specialist-at-ohc-%D8%A7%D9%84%D8%B9%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%A8%D8%B6%D8%A9-4484029270", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-016", "added_time": "2026-11-08 02:20 ص", "company": "JODAYN | جودين", "title": "Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-jodayn-%D8%AC%D9%88%D8%AF%D9%8A%D9%86-4466769201", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-017", "added_time": "2026-11-08 02:20 ص", "company": "Qureos", "title": "Marketing Manager (Food & Beverage)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-food-beverage-at-qureos-4483694611", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-018", "added_time": "2026-11-08 02:20 ص", "company": "UXBERT Labs", "title": "Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-uxbert-labs-4425494997", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-019", "added_time": "2026-11-08 02:20 ص", "company": "Rentokil Initial", "title": "Marketing Coordinator", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-coordinator-at-rentokil-initial-4419842160", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-020", "added_time": "2026-11-08 02:20 ص", "company": "أسفار لتأجير السيارات", "title": "مدير تسويق", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://www.linkedin.com/jobs/view/4479005887", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-021", "added_time": "2026-11-08 02:20 ص", "company": "Hilton", "title": "Assistant Marketing Manager", "method": "بوابة خارجية (External ATS - آلي)", "platform": "Portal / Easy Apply", "city": "عن بعد", "url": "https://sa.linkedin.com/jobs/view/assistant-marketing-manager-at-hilton-4485328665", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر بوابة Oracle HCM Cloud بعد التحقق الذاتي من كود OTP المستلم على الإيميل (رمز التحقق: 411037) وإدخال بيانات المرشح كاملة"}, {"id": "SA-022", "added_time": "2026-11-08 02:20 ص", "company": "Red Sea Global", "title": "Manager - Marketing (B2B)", "method": "بوابة خارجية (External ATS - آلي)", "platform": "Portal / Easy Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-marketing-b2b-at-red-sea-global-4485058908", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تمت المعالجة آلياً"}, {"id": "SA-023", "added_time": "2026-11-08 03:05 ص", "company": "webook.com", "title": "Director of Marketing & Brand", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-marketing-brand-at-webook-com-4438652564", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-024", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Founding Head of Marketing & Enrollment Growth", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/founding-head-of-marketing-enrollment-growth-at-urban-ridge-supplies-4430828768", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-025", "added_time": "2026-11-08 03:05 ص", "company": "Calo Inc.", "title": "Commercial Director (KSA)", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-ksa-at-calo-inc-4448269583", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-026", "added_time": "2026-11-08 03:05 ص", "company": "qlub", "title": "Growth Marketing Director", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-director-at-qlub-4478737545", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Ashby الدولية للتوظيف مع إرفاق السيرة الذاتية ورابط لينكد إن وتحديد الراتب المتوقع"}, {"id": "SA-027", "added_time": "2026-11-08 03:05 ص", "company": "AstraZeneca", "title": "Franchise Head - R&I", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/franchise-head-r-i-at-astrazeneca-4486059547", "fit": "92%", "status": "مغلقة من جهة العمل", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم فحص بوابة Eightfold التابعة لأسترازينيكا رسمياً وتبين إغلاق الشاغر رسمياً من جهة العمل وعدم قبول طلبات جديدة"}, {"id": "SA-028", "added_time": "2026-11-08 03:05 ص", "company": "Red Sea Global", "title": "Associate Director - Residential Marketing", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/associate-director-residential-marketing-at-red-sea-global-4482280905", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-029", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Director of Sales & Marketing", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-sales-marketing-at-ihg-hotels-resorts-4272153246", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-030", "added_time": "2026-11-08 03:05 ص", "company": "Publicis Groupe Middle East", "title": "Business Director - Strategy & Insights", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/business-director-strategy-insights-at-publicis-groupe-middle-east-4483634300", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-031", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Commercial Director", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-at-ihg-hotels-resorts-4476040193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-032", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Marketing Manager (F&B Retail, Specialty Coffee)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-f-b-retail-specialty-coffee-at-urban-ridge-supplies-4430847696", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-033", "added_time": "2026-11-08 03:05 ص", "company": "Qureos", "title": "Marketing Manager - Roastery / Coffee", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-roastery-coffee-at-qureos-4469987157", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-034", "added_time": "2026-11-08 03:05 ص", "company": "Novotel Hotels", "title": "Marketing Manager - Saudi Only", "method": "بوابة خارجية (External ATS - آلي)", "platform": "Policy Filter", "city": "Riyadh Region", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-saudi-only-at-novotel-hotels-4481103087", "fit": "60%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: الشاغر يشترط الجنسية السعودية فقط (Candidate is Egyptian)"}, {"id": "SA-035", "added_time": "2026-11-08 03:05 ص", "company": "Elfaleh Sports House", "title": "Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-elfaleh-sports-house-4485828406", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-036", "added_time": "2026-11-08 03:05 ص", "company": "Hilton", "title": "Marketing Communications Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-communications-manager-at-hilton-4487254587", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-037", "added_time": "2026-11-08 03:05 ص", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-residential-marketing-at-qiddiya-%D8%A7%D9%84%D9%82%D8%AF%D9%8A%D8%A9-4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-038", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4322076341", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-039", "added_time": "2026-11-08 03:05 ص", "company": "NICE ONE | نايس ون", "title": "Senior Paid Marketing Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-paid-marketing-specialist-at-nice-one-%D9%86%D8%A7%D9%8A%D8%B3-%D9%88%D9%86-4454261359", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-040", "added_time": "2026-11-08 03:05 ص", "company": "Mars SA", "title": "Growth Marketing Lead", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-lead-at-mars-sa-4461905560", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف info@mars.sa (Mars Ventures) مع إرفاق السيرة الذاتية التنفيذية لحسن سرحان"}, {"id": "SA-041", "added_time": "2026-11-08 03:05 ص", "company": "Futu Holdings Limited", "title": "Growth & Market Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-market-specialist-at-futu-holdings-limited-4473629284", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-042", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Senior Performance Executive", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-performance-executive-at-dentsu-4322166193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-043", "added_time": "2026-11-08 03:05 ص", "company": "OmniOps", "title": "Digital Marketing Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-omniops-4462224700", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-044", "added_time": "2026-11-08 03:05 ص", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth Specialist), (full-time, on-site, Riyadh)", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-hacking-specialist-digital-growth-specialist-full-time-on-site-riyadh-at-setup-sa-4484380298", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-045", "added_time": "2026-11-08 03:05 ص", "company": "Corebridge Financial", "title": "Digital Media Buyer - Corebridge Direct", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-media-buyer-corebridge-direct-at-corebridge-financial-4486066294", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي (TalentandInclusion@corebridgefinancial.com) بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-046", "added_time": "2026-11-08 03:05 ص", "company": "Sharaf DG", "title": "Assistant Manager - Online Business and Marketing", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/assistant-manager-online-business-and-marketing-at-sharaf-dg-4487767939", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق السيرة الذاتية PDF لحسن سرحان وتأكيد الرد الآلي من Microsoft 365"}, {"id": "SA-047", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4379681411", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-048", "added_time": "2026-11-08 03:05 ص", "company": "Fragomen", "title": "Regional Marketing Manager (ME)", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/regional-marketing-manager-me-at-fragomen-4487270049", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-049", "added_time": "2026-11-08 03:05 ص", "company": "SILQFi", "title": "Retention & Monetization Lead", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/retention-monetization-lead-at-silqfi-4474065479", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-050", "added_time": "2026-11-08 03:05 ص", "company": "Jeeny", "title": "Growth Manager - Insights & Analytics", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-manager-insights-analytics-at-jeeny-4473247911", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-051", "added_time": "2026-11-08 03:05 ص", "company": "PepsiCo", "title": "Digital Analyst", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-analyst-at-pepsico-4481449399", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-052", "added_time": "2026-11-08 03:25 ص", "company": "Mumzworld.com", "title": "E-Commerce Associate - Marketplace", "method": "بوابة خارجية (External ATS - آلي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/e-commerce-associate-marketplace-at-mumzworld-com-4479308246", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Teamtailor وإكمال استبيان الإفصاح وتحميل السيرة الذاتية (App ID: b86179e9-9376-47e2-95be-f3d1f831ddc9) وتأكيد الاستلام من Samra Khan"}, {"id": "SA-053", "added_time": "2026-11-08 03:25 ص", "company": "Shangri-La Group", "title": "Marketing Executive", "method": "بوابة خارجية (External ATS - آلي)", "platform": "Location Filter", "city": "Jiddah, Makkah, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-shangri-la-group-4459171390", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Jiddah, Makkah, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-054", "added_time": "2026-11-08 03:25 ص", "company": "Plat4mation", "title": "Marketing Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-plat4mation-4481882256", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-055", "added_time": "2026-11-08 03:25 ص", "company": "H. M. Al Rugaib & Sons Trading Co. - شركة حمد محمد الرقيب و أولاده التجارية", "title": "Digital Marketing Specialist", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "Location Filter", "city": "Al Khobar, Eastern, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-h-m-al-rugaib-sons-trading-co-%D8%B4%D8%B1%D9%83%D8%A9-%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D9%85%D8%AF-%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A8-%D9%88-%D8%A3%D9%88%D9%84%D8%A7%D8%AF%D9%87-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9-4481608095", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Al Khobar, Eastern, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-056", "added_time": "2026-11-08 03:25 ص", "company": "Astek Middle East", "title": "Digital Marketing & Digital Channels Expert", "method": "إيميل مباشر (Direct Email - آلي)", "platform": "Direct Apply", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-digital-channels-expert-at-astek-middle-east-4477708969", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي (contact-astekme@astek-international.com) بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-057", "added_time": "2026-11-08 03:25 ص", "company": "Boutiqaat", "title": "Digital Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-boutiqaat-4480040260", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-058", "added_time": "2026-11-08 03:25 ص", "company": "MOBCO Group", "title": "Digital Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-mobco-group-4487245041", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}, {"id": "SA-059", "added_time": "2026-11-08 03:25 ص", "company": "Saudi Company For Hardware - SACO", "title": "Digital Marketing Manager", "method": "تقديم سهل (Easy Apply - يدوي)", "platform": "External / Portal", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-saudi-company-for-hardware-saco-4483025841", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم الفعلي)"}];
+    let currentStatusFilter = 'all';
+    let currentMethodFilter = 'all';
 
     function renderTable(jobs) {
       const tbody = document.getElementById('jobsTableBody');
       tbody.innerHTML = '';
 
       if (jobs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:30px; color:#94a3b8;">لا توجد شواغر مطابقة لمعايير البحث الحالية</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:35px; color:#94a3b8;">لا توجد شواغر مطابقة لمعايير البحث والتصفية المختارة</td></tr>';
         return;
       }
 
@@ -669,9 +859,23 @@
           statusTag = '<span class="tag-status status-skipped">⚠️ تم التخطي</span>';
         }
 
+        // Method tag
+        let methodTag = '';
+        if (j.method.includes('إيميل')) {
+          methodTag = '<span class="badge-method method-email">✉️ إيميل مباشر (آلي)</span>';
+        } else if (j.method.includes('بوابة خارجية')) {
+          methodTag = '<span class="badge-method method-ats">🌐 بوابة خارجية (آلي)</span>';
+        } else {
+          methodTag = '<span class="badge-method method-easy">⚡ تقديم سهل (يدوي)</span>';
+        }
+
         // Fit meter
         const fitNum = parseInt(j.fit.replace(/[^0-9]/g, '')) || 85;
         const fitColor = fitNum >= 88 ? '#10b981' : (fitNum >= 80 ? '#3b82f6' : '#94a3b8');
+
+        // Time display
+        const timeParts = j.added_time.split(' ');
+        const shortTime = timeParts.length >= 3 ? (timeParts[1] + ' ' + timeParts[2]) : j.added_time;
 
         // Action button
         let actionBtn = '';
@@ -691,6 +895,8 @@
             <span>${escapeHtml(j.platform)}</span>
           </td>
           <td class="role-cell">${escapeHtml(j.title)}</td>
+          <td>${methodTag}</td>
+          <td><span class="badge-time" title="${escapeHtml(j.added_time)}">🕒 ${escapeHtml(shortTime)}</span></td>
           <td>${escapeHtml(j.city)}</td>
           <td>
             <div class="fit-meter">
@@ -716,29 +922,49 @@
 
       const filtered = allJobs.filter(j => {
         // Match status filter
-        let matchFilter = true;
-        if (currentFilter === 'applied') matchFilter = j.status.includes('تم التقديم');
-        else if (currentFilter === 'ready') matchFilter = j.status.includes('جاهز');
-        else if (currentFilter === 'skipped') matchFilter = j.status.includes('تم التخطي');
-        else if (currentFilter === 'closed') matchFilter = j.status.includes('مغلقة');
+        let matchStatus = true;
+        if (currentStatusFilter === 'applied') matchStatus = j.status.includes('تم التقديم');
+        else if (currentStatusFilter === 'ready') matchStatus = j.status.includes('جاهز');
+        else if (currentStatusFilter === 'skipped') matchStatus = j.status.includes('تم التخطي');
+        else if (currentStatusFilter === 'closed') matchStatus = j.status.includes('مغلقة');
+
+        // Match method filter
+        let matchMethod = true;
+        if (currentMethodFilter === 'email') matchMethod = j.method.includes('إيميل');
+        else if (currentMethodFilter === 'ats') matchMethod = j.method.includes('بوابة خارجية');
+        else if (currentMethodFilter === 'easy') matchMethod = j.method.includes('تقديم سهل');
 
         // Match search text
         const matchSearch =
           !query ||
           j.company.toLowerCase().includes(query) ||
           j.title.toLowerCase().includes(query) ||
-          j.city.toLowerCase().includes(query);
+          j.city.toLowerCase().includes(query) ||
+          j.method.toLowerCase().includes(query) ||
+          j.added_time.toLowerCase().includes(query);
 
-        return matchFilter && matchSearch;
+        return matchStatus && matchMethod && matchSearch;
       });
 
       renderTable(filtered);
     }
 
-    function setFilter(type, btn) {
-      currentFilter = type;
-      document.querySelectorAll('.filter-pills .pill').forEach(p => p.classList.remove('active'));
+    function setStatusFilter(type, btn) {
+      currentStatusFilter = type;
+      btn.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
+      filterJobs();
+    }
+
+    function setMethodFilter(type, btn) {
+      currentMethodFilter = type;
+      btn.parentElement.querySelectorAll('.pill-method').forEach(p => {
+        p.classList.remove('active', 'active-email', 'active-ats', 'active-easy');
+      });
+      btn.classList.add('active');
+      if (type === 'email') btn.classList.add('active-email');
+      else if (type === 'ats') btn.classList.add('active-ats');
+      else if (type === 'easy') btn.classList.add('active-easy');
       filterJobs();
     }
 
@@ -748,29 +974,45 @@
 
       document.getElementById('mCompanyRole').innerText = `${j.company} - ${j.title}`;
       document.getElementById('modalBody').innerHTML = `
+        <div class="modal-grid">
+          <div class="modal-row">
+            <div class="modal-label">وقت وتاريخ الإضافة على الداشبورد</div>
+            <div class="modal-value" style="color:#38bdf8; font-weight:700;">🕒 ${escapeHtml(j.added_time)} (الرياض)</div>
+          </div>
+          <div class="modal-row">
+            <div class="modal-label">طريقة التقديم المعتمدة</div>
+            <div class="modal-value" style="font-weight:700;">${escapeHtml(j.method)}</div>
+          </div>
+        </div>
         <div class="modal-row">
           <div class="modal-label">الشركة والمسمى الوظيفي</div>
           <div class="modal-value">${escapeHtml(j.company)} | ${escapeHtml(j.title)}</div>
         </div>
-        <div class="modal-row">
-          <div class="modal-label">المدينة ونمط العمل</div>
-          <div class="modal-value">${escapeHtml(j.city)}</div>
+        <div class="modal-grid">
+          <div class="modal-row">
+            <div class="modal-label">المدينة ونمط العمل</div>
+            <div class="modal-value">${escapeHtml(j.city)}</div>
+          </div>
+          <div class="modal-row">
+            <div class="modal-label">حالة التقديم الحالية</div>
+            <div class="modal-value"><strong>${escapeHtml(j.status)}</strong></div>
+          </div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">حالة التقديم الحالية</div>
-          <div class="modal-value"><strong>${escapeHtml(j.status)}</strong></div>
+          <div class="modal-label">مسؤول التوظيف / جهة الاتصال</div>
+          <div class="modal-value">${escapeHtml(j.contact)}</div>
         </div>
         <div class="modal-row">
           <div class="modal-label">الراتب المستهدف</div>
           <div class="modal-value">${escapeHtml(j.salary)}</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">ملاحظات وإثبات التقديم</div>
-          <div class="modal-value">${escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعاييرك.')}</div>
+          <div class="modal-label">ملاحظات وتأكيد التقديم الفعلي</div>
+          <div class="modal-value" style="line-height:1.7;">${escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعايير حسن سرحان.')}</div>
         </div>
         <div class="modal-row">
           <div class="modal-label">رابط التقديم المباشر</div>
-          <div class="modal-value"><a href="${j.url}" target="_blank" style="color:#60a5fa;">${j.url}</a></div>
+          <div class="modal-value"><a href="${j.url}" target="_blank" style="color:#60a5fa; word-break:break-all;">${j.url}</a></div>
         </div>
       `;
 
@@ -782,12 +1024,42 @@
     }
 
     function copyToClipboard() {
-      const headers = ['ID', 'التاريخ', 'اسم الشركة', 'المسمى الوظيفي', 'المنصة', 'المدينة', 'الرابط', 'التوافق', 'الحالة', 'جهة الاتصال', 'الراتب', 'السيرة الذاتية', 'المتابعة', 'الملاحظات'];
+      const headers = [
+        'ID',
+        'وقت وتاريخ الإضافة',
+        'اسم الشركة',
+        'المسمى الوظيفي',
+        'طريقة التقديم',
+        'المنصة / المصدر',
+        'المدينة',
+        'رابط الوظيفة',
+        'نسبة التوافق',
+        'حالة التقديم',
+        'جهة الاتصال',
+        'الراتب المستهدف',
+        'نسخة السيرة الذاتية',
+        'تاريخ المتابعة',
+        'ملاحظات وتأكيد التقديم'
+      ];
       const tsvRows = [headers.join('\t')];
 
       allJobs.forEach(j => {
         tsvRows.push([
-          j.id, j.date, j.company, j.title, j.platform, j.city, j.url, j.fit, j.status, j.contact, j.salary, j.cv, j.followup, j.notes
+          j.id,
+          j.added_time,
+          j.company,
+          j.title,
+          j.method,
+          j.platform,
+          j.city,
+          j.url,
+          j.fit,
+          j.status,
+          j.contact,
+          j.salary,
+          j.cv,
+          j.followup,
+          j.notes
         ].map(val => (val || '').replace(/\t/g, ' ').replace(/\n/g, ' ')).join('\t'));
       });
 

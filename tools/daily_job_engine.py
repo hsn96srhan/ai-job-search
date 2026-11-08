@@ -98,13 +98,20 @@ def process_and_apply_new_jobs(jobs):
     print("3. معالجة وتصفية الشواغر والتقديم الآلي المباشر بالإيميل...")
     print("=" * 60)
 
+    from datetime import datetime, timezone, timedelta
+    riyadh_tz = timezone(timedelta(hours=3))
+
     existing_urls = set()
+    total_existing = 0
     if TRACKER_CSV.exists():
         with open(TRACKER_CSV, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
+            header = next(reader, None)
             for row in reader:
-                if len(row) > 6 and row[6].startswith("http"):
-                    existing_urls.add(row[6].strip())
+                total_existing += 1
+                for cell in row:
+                    if cell.startswith("http://") or cell.startswith("https://"):
+                        existing_urls.add(cell.strip())
 
     linkedin_cli = REPO_ROOT / ".agents" / "skills" / "linkedin-search" / "cli" / "src" / "cli.ts"
     email_tool = REPO_ROOT / "tools" / "email_apply.py"
@@ -162,22 +169,34 @@ def process_and_apply_new_jobs(jobs):
             except Exception as e:
                 print(f"فشل إرسال الإيميل: {e}")
 
-        # Append row to tracker CSV
+        # Determine application method
+        if valid_emails:
+            method = "إيميل مباشر (Direct Email - آلي)"
+        elif any(ats in (job_desc + " " + url).lower() for ats in ["greenhouse", "lever", "workday", "ashby", "teamtailor", "oracle", "taleo", "smartrecruiters", "eightfold", "careers."]):
+            method = "بوابة خارجية (External ATS - آلي)"
+        else:
+            method = "تقديم سهل (Easy Apply - يدوي)"
+
+        now_str = datetime.now(riyadh_tz).strftime("%Y-%m-%d %I:%M %p").replace("AM", "ص").replace("PM", "م")
+        followup_date = (datetime.now(riyadh_tz) + timedelta(days=3)).strftime("%Y-%m-%d")
+
+        # Append row to tracker CSV matching 15-column schema
         new_row = [
-            f"SA-{len(existing_urls) + new_count + 1:03d}",
+            f"SA-{total_existing + new_count + 1:03d}",
+            now_str,
             company,
             title,
+            method,
+            "LinkedIn Saudi Arabia",
             "الرياض" if "riyadh" in location.lower() else "عن بعد",
+            url,
             "90%",
             status,
-            url,
-            "Direct Apply" if status == "تم التقديم" else "Portal / Easy Apply",
-            "8,000",
-            "10,000",
-            "مباشرة (15 يوم)",
-            "تمت المعالجة آلياً",
-            "2026-11-08",
-            "Hassan Sarhan"
+            valid_emails[0] if valid_emails else "مسؤول التوظيف",
+            "أساسي 8,000 / باكدج 10,000",
+            "cv/marketing-director-hsn.pdf",
+            followup_date,
+            "تم التقديم آلياً بنجاح عبر الإيميل مع إرفاق السيرة الذاتية PDF لحسن سرحان" if status == "تم التقديم" else "شاغر جديد مفحوص ومطابق لمعايير حسن سرحان (جاهز للتقديم)"
         ]
 
         with open(TRACKER_CSV, "a", encoding="utf-8", newline="") as f:
