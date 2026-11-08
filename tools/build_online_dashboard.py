@@ -48,6 +48,8 @@ def build_html(jobs):
     jobs_json = json.dumps(jobs, ensure_ascii=False)
 
     applied_count = sum(1 for j in jobs if "تم التقديم" in j["status"])
+    manual_applied_count = sum(1 for j in jobs if "يدوي" in j["status"])
+    auto_applied_count = sum(1 for j in jobs if "تم التقديم" in j["status"] and "يدوي" not in j["status"])
     ready_count = sum(1 for j in jobs if "جاهز" in j["status"])
     skipped_count = sum(1 for j in jobs if "تم التخطي" in j["status"])
     closed_count = sum(1 for j in jobs if "مغلقة" in j["status"])
@@ -414,6 +416,46 @@ def build_html(jobs):
       background: #3b82f6;
       color: #ffffff;
       border-color: #3b82f6;
+    }}
+
+    .pill.active-applied {{
+      background: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+    }}
+
+    .pill.active-manual {{
+      background: #059669;
+      color: #ffffff;
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }}
+
+    .pill.active-auto {{
+      background: #4f46e5;
+      color: #ffffff;
+      border-color: #6366f1;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    }}
+
+    .pill.active-ready {{
+      background: #d97706;
+      color: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+    }}
+
+    .pill.active-skipped {{
+      background: #475569;
+      color: #ffffff;
+      border-color: #64748b;
+    }}
+
+    .pill.active-closed {{
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #f43f5e;
     }}
 
     .pill-method {{
@@ -839,9 +881,9 @@ def build_html(jobs):
         <span>⚙️ قنوات وطرق التقديم المعتمدة في النظام:</span>
       </div>
       <div class="methods-badges">
-        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong>{easy_count}</strong></span>
-        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong>{email_count}</strong></span>
-        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong>{ats_count}</strong></span>
+        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong id="methodsCountEasy">{easy_count}</strong></span>
+        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong id="methodsCountEmail">{email_count}</strong></span>
+        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong id="methodsCountAts">{ats_count}</strong></span>
       </div>
     </div>
 
@@ -851,18 +893,20 @@ def build_html(jobs):
         <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو طريقة التقديم..." oninput="filterJobs()">
         <span class="search-icon">🔍</span>
       </div>
-      <div class="filter-pills">
-        <button class="pill active" onclick="setStatusFilter('all', this)">الكل ({total_count})</button>
-        <button class="pill" onclick="setStatusFilter('applied', this)">✓ تم التقديم ({applied_count})</button>
-        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم ({ready_count})</button>
-        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد ({skipped_count})</button>
-        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة ({closed_count})</button>
+      <div class="filter-pills" id="statusFilterPills">
+        <button class="pill active" onclick="setStatusFilter('all', this)">الكل (<span id="pillCountAll">{total_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('applied', this)">✓ إجمالي التقديم (<span id="pillCountApplied">{applied_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('manual', this)">👤 قدّمت يدوياً (<span id="pillCountManual">{manual_applied_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('auto', this)">🤖 تقديم آلي بالمنظومة (<span id="pillCountAuto">{auto_applied_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم (<span id="pillCountReady">{ready_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (<span id="pillCountSkipped">{skipped_count}</span>)</button>
+        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (<span id="pillCountClosed">{closed_count}</span>)</button>
       </div>
-      <div class="filter-pills" style="margin-right: 8px;">
-        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات</button>
-        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي</button>
-        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر</button>
-        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية</button>
+      <div class="filter-pills" id="methodFilterPills" style="margin-right: 8px;">
+        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات (<span id="pillCountMethodAll">{total_count}</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي (<span id="pillCountMethodEasy">{easy_count}</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر (<span id="pillCountMethodEmail">{email_count}</span>)</button>
+        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية (<span id="pillCountMethodAts">{ats_count}</span>)</button>
       </div>
     </div>
 
@@ -937,19 +981,63 @@ def build_html(jobs):
     }}
 
     function updateCountsAndUI() {{
-      const appliedCount = allJobs.filter(j => j.status.includes('تم التقديم')).length;
-      const readyCount = allJobs.filter(j => j.status.includes('جاهز')).length;
+      const total = allJobs.length;
+      const appliedJobs = allJobs.filter(j => j.status.includes('تم التقديم'));
+      const manualJobs = allJobs.filter(j => j.status.includes('يدوي') || j.manual === true);
+      const autoJobs = allJobs.filter(j => j.status.includes('تم التقديم') && !j.status.includes('يدوي') && !j.manual);
+      const readyJobs = allJobs.filter(j => j.status.includes('جاهز'));
+      const skippedJobs = allJobs.filter(j => j.status.includes('تم التخطي'));
+      const closedJobs = allJobs.filter(j => j.status.includes('مغلقة'));
+
+      const easyJobs = allJobs.filter(j => j.method.includes('ايزي ابلاي'));
+      const emailJobs = allJobs.filter(j => j.method.includes('ايميل'));
+      const atsJobs = allJobs.filter(j => j.method.includes('بوابة خارجية'));
+
       const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{{}}');
-      const manualCount = Object.keys(manualStore).length;
+      const manualStoreCount = Object.keys(manualStore).length;
+
+      // Update KPI cards
+      const kpiTotal = document.getElementById('kpi-total');
+      if (kpiTotal) kpiTotal.innerText = total;
 
       const kpiApplied = document.getElementById('kpi-applied');
-      if (kpiApplied) kpiApplied.innerText = appliedCount;
+      if (kpiApplied) kpiApplied.innerText = appliedJobs.length;
 
       const kpiReady = document.getElementById('kpi-ready');
-      if (kpiReady) kpiReady.innerText = readyCount;
+      if (kpiReady) kpiReady.innerText = readyJobs.length;
 
+      const kpiSkipped = document.getElementById('kpi-skipped');
+      if (kpiSkipped) kpiSkipped.innerText = skippedJobs.length + closedJobs.length;
+
+      // Update Header Sync badge
       const manualBadge = document.getElementById('manualAppliedCount');
-      if (manualBadge) manualBadge.innerText = manualCount;
+      if (manualBadge) manualBadge.innerText = manualStoreCount;
+
+      // Safe DOM updater helper
+      const setEl = (id, val) => {{
+        const el = document.getElementById(id);
+        if (el) el.innerText = val;
+      }};
+
+      // Update Status filter pill spans
+      setEl('pillCountAll', total);
+      setEl('pillCountApplied', appliedJobs.length);
+      setEl('pillCountManual', manualJobs.length);
+      setEl('pillCountAuto', autoJobs.length);
+      setEl('pillCountReady', readyJobs.length);
+      setEl('pillCountSkipped', skippedJobs.length);
+      setEl('pillCountClosed', closedJobs.length);
+
+      // Update Method filter pill spans
+      setEl('pillCountMethodAll', total);
+      setEl('pillCountMethodEasy', easyJobs.length);
+      setEl('pillCountMethodEmail', emailJobs.length);
+      setEl('pillCountMethodAts', atsJobs.length);
+
+      // Update Methods Breakdown card badges
+      setEl('methodsCountEasy', easyJobs.length);
+      setEl('methodsCountEmail', emailJobs.length);
+      setEl('methodsCountAts', atsJobs.length);
     }}
 
     function initManualApplied() {{
@@ -959,6 +1047,8 @@ def build_html(jobs):
         if (manualStore[j.id]) {{
           j.manual = true;
           j.status = 'تم التقديم (يدوي)';
+        }} else if (j.status.includes('يدوي')) {{
+          j.manual = true;
         }}
       }});
       updateCountsAndUI();
@@ -1101,10 +1191,19 @@ def build_html(jobs):
       const filtered = allJobs.filter(j => {{
         // Match status filter
         let matchStatus = true;
-        if (currentStatusFilter === 'applied') matchStatus = j.status.includes('تم التقديم');
-        else if (currentStatusFilter === 'ready') matchStatus = j.status.includes('جاهز');
-        else if (currentStatusFilter === 'skipped') matchStatus = j.status.includes('تم التخطي');
-        else if (currentStatusFilter === 'closed') matchStatus = j.status.includes('مغلقة');
+        if (currentStatusFilter === 'applied') {{
+          matchStatus = j.status.includes('تم التقديم');
+        }} else if (currentStatusFilter === 'manual') {{
+          matchStatus = j.status.includes('يدوي') || j.manual === true;
+        }} else if (currentStatusFilter === 'auto') {{
+          matchStatus = j.status.includes('تم التقديم') && !j.status.includes('يدوي') && !j.manual;
+        }} else if (currentStatusFilter === 'ready') {{
+          matchStatus = j.status.includes('جاهز');
+        }} else if (currentStatusFilter === 'skipped') {{
+          matchStatus = j.status.includes('تم التخطي');
+        }} else if (currentStatusFilter === 'closed') {{
+          matchStatus = j.status.includes('مغلقة');
+        }}
 
         // Match method filter
         let matchMethod = true;
@@ -1129,8 +1228,16 @@ def build_html(jobs):
 
     function setStatusFilter(type, btn) {{
       currentStatusFilter = type;
-      btn.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.parentElement.querySelectorAll('.pill').forEach(p => {{
+        p.classList.remove('active', 'active-applied', 'active-manual', 'active-auto', 'active-ready', 'active-skipped', 'active-closed');
+      }});
       btn.classList.add('active');
+      if (type === 'applied') btn.classList.add('active-applied');
+      else if (type === 'manual') btn.classList.add('active-manual');
+      else if (type === 'auto') btn.classList.add('active-auto');
+      else if (type === 'ready') btn.classList.add('active-ready');
+      else if (type === 'skipped') btn.classList.add('active-skipped');
+      else if (type === 'closed') btn.classList.add('active-closed');
       filterJobs();
     }}
 
@@ -1365,7 +1472,7 @@ def build_html(jobs):
 
     // Initial render with localStorage hydration
     initManualApplied();
-    renderTable(allJobs);
+    filterJobs();
   </script>
 </body>
 </html>

@@ -92,46 +92,87 @@ def run_job_search():
     return discovered
 
 
+def extract_numeric_job_id(url_or_text):
+    m = re.search(r'(\d{8,12})', str(url_or_text))
+    return m.group(1) if m else None
+
+
+def normalize_text_for_dedup(company, title):
+    comp = str(company).lower()
+    comp = re.sub(r'[\(\[\{].*?[\)\]\}]', '', comp)
+    comp = re.sub(r'\b(llc|co|ltd|inc|group|holdings|company|corp|مقفلة|شركة|مؤسسة|مجموعة|القابضة|المحدودة)\b', '', comp, flags=re.IGNORECASE)
+    comp = re.sub(r'[^\w\s]', '', comp).strip()
+    tit = str(title).lower()
+    tit = re.sub(r'[\(\[\{].*?[\)\]\}]', '', tit)
+    tit = re.sub(r'[^\w\s]', '', tit).strip()
+    return f"{comp}::{tit}"
+
+
 def process_and_apply_new_jobs(jobs):
-    """Filter, evaluate, auto-apply via email, and append to tracker."""
+    """Filter, evaluate, auto-apply via email, and append to tracker with strict multi-level deduplication."""
     print("\n" + "=" * 60)
-    print("3. معالجة وتصفية الشواغر والتقديم الآلي المباشر بالإيميل...")
+    print("3. معالجة وتصفية الشواغر والتقديم الآلي المباشر بالإيميل مع ضمان منع التكرار...")
     print("=" * 60)
 
     from datetime import datetime, timezone, timedelta
     riyadh_tz = timezone(timedelta(hours=3))
 
-    existing_urls = set()
+    existing_clean_urls = set()
+    existing_numeric_ids = set()
+    existing_comp_titles = set()
     total_existing = 0
+
     if TRACKER_CSV.exists():
         with open(TRACKER_CSV, "r", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            header = next(reader, None)
+            reader = csv.DictReader(f)
             for row in reader:
                 total_existing += 1
-                for cell in row:
-                    if cell.startswith("http://") or cell.startswith("https://"):
-                        existing_urls.add(cell.strip())
+                url = row.get("رابط الوظيفة (Job URL)", "").strip()
+                if url:
+                    clean_u = re.sub(r'\?.*$', '', url).rstrip('/')
+                    existing_clean_urls.add(clean_u)
+                    num_id = extract_numeric_job_id(url)
+                    if num_id:
+                        existing_numeric_ids.add(num_id)
+                comp = row.get("اسم الشركة (Company)", "")
+                tit = row.get("المسمى الوظيفي (Job Title)", "")
+                if comp and tit:
+                    existing_comp_titles.add(normalize_text_for_dedup(comp, tit))
 
     linkedin_cli = REPO_ROOT / ".agents" / "skills" / "linkedin-search" / "cli" / "src" / "cli.ts"
     email_tool = REPO_ROOT / "tools" / "email_apply.py"
 
     new_count = 0
     for job in jobs:
-        url = job.get("url", "")
-        if not url or url in existing_urls:
+        url = job.get("url", "").strip()
+        if not url:
             continue
 
-        title = job.get("title", "")
-        company = job.get("company", "")
+        title = job.get("title", "").strip()
+        company = job.get("company", "").strip()
         location = job.get("location", "Riyadh")
+
+        # Multi-Level Strict Deduplication Guard
+        clean_url = re.sub(r'\?.*$', '', url).rstrip('/')
+        num_id = extract_numeric_job_id(url) or extract_numeric_job_id(job.get("id", ""))
+        comp_title = normalize_text_for_dedup(company, title)
+
+        if clean_url in existing_clean_urls:
+            print(f"⚠️ [تخطي تكرار رابط]: {company} - {title}")
+            continue
+        if num_id and num_id in existing_numeric_ids:
+            print(f"⚠️ [تخطي تكرار رقم الشاغر #{num_id}]: {company} - {title}")
+            continue
+        if comp_title in existing_comp_titles:
+            print(f"⚠️ [تخطي تكرار الشركة والمسمى]: {company} - {title}")
+            continue
 
         # Basic filter: must be marketing related
         title_lower = title.lower()
         if not any(k in title_lower for k in ["marketing", "تسويق", "growth", "brand", "media"]):
             continue
 
-        print(f"\n🔍 شاغر جديد: {title} لدى {company} ({location})")
+        print(f"\n🔍 شاغر جديد مؤهل: {title} لدى {company} ({location})")
 
         # Fetch job detail to inspect description and look for email
         job_id = job.get("id", "")
@@ -169,13 +210,13 @@ def process_and_apply_new_jobs(jobs):
             except Exception as e:
                 print(f"فشل إرسال الإيميل: {e}")
 
-        # Determine application method
+        # Determine application method with standardized labels
         if valid_emails:
-            method = "إيميل مباشر (Direct Email - آلي)"
+            method = "✉️ ايميل مباشر (Email - آلي)"
         elif any(ats in (job_desc + " " + url).lower() for ats in ["greenhouse", "lever", "workday", "ashby", "teamtailor", "oracle", "taleo", "smartrecruiters", "eightfold", "careers."]):
-            method = "بوابة خارجية (External ATS - آلي)"
+            method = "🌐 بوابة خارجية (ATS - آلي)"
         else:
-            method = "تقديم سهل (Easy Apply - يدوي)"
+            method = "⚡ ايزي ابلاي (Easy Apply - يدوي)"
 
         now_str = datetime.now(riyadh_tz).strftime("%Y-%m-%d %I:%M %p").replace("AM", "ص").replace("PM", "م")
         followup_date = (datetime.now(riyadh_tz) + timedelta(days=3)).strftime("%Y-%m-%d")
@@ -203,10 +244,13 @@ def process_and_apply_new_jobs(jobs):
             writer = csv.writer(f)
             writer.writerow(new_row)
 
-        existing_urls.add(url)
+        existing_clean_urls.add(clean_url)
+        if num_id:
+            existing_numeric_ids.add(num_id)
+        existing_comp_titles.add(comp_title)
         new_count += 1
 
-    print(f"\n✓ تمت معالجة وإضافة {new_count} شواغر جديدة متوافقة إلى جدول المتابعة.")
+    print(f"\n✓ تمت معالجة وإضافة {new_count} شواغر جديدة متوافقة إلى جدول المتابعة (تم استبعاد كافة الشواغر المكررة).")
 
 
 def run_autonomous_applications(execute_browser=True):
