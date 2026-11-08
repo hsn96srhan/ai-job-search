@@ -37,122 +37,160 @@
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
-      min-height: 100vh;
       padding: 24px 16px;
     }
 
     .container {
-      max-width: 1460px;
+      max-width: 1440px;
       margin: 0 auto;
     }
 
-    /* Top Header */
+    /* Header */
     .header {
       background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
       border: 1px solid #312e81;
       border-radius: 16px;
-      padding: 22px 28px;
-      margin-bottom: 20px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
     }
 
     .profile-info h1 {
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 6px;
     }
 
     .badge-live {
       font-size: 12px;
       font-weight: 700;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 4px 10px;
-      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 3px 10px;
+      border-radius: 9999px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
     .badge-live::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background-color: #10b981;
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #10b981;
       border-radius: 50%;
+      display: inline-block;
       box-shadow: 0 0 8px #10b981;
     }
 
     .profile-meta {
-      font-size: 13.5px;
-      color: #cbd5e1;
-      margin-top: 6px;
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
+      font-size: 13.5px;
+      color: var(--text-muted);
     }
 
     .profile-meta span {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 6px;
     }
 
     .header-actions {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn {
       font-family: var(--font);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       padding: 10px 18px;
       border-radius: 10px;
-      border: none;
+      text-decoration: none;
       cursor: pointer;
+      border: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      text-decoration: none;
       transition: all 0.2s ease;
     }
 
     .btn-primary {
-      background: #2563eb;
+      background: #3b82f6;
       color: #ffffff;
     }
-    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
 
     .btn-success {
-      background: #059669;
+      background: #10b981;
       color: #ffffff;
     }
-    .btn-success:hover { background: #047857; transform: translateY(-1px); }
+    .btn-success:hover { background: #059669; transform: translateY(-1px); }
 
     .btn-secondary {
       background: #1f2937;
       color: #e5e7eb;
       border: 1px solid #374151;
     }
-    .btn-secondary:hover { background: #374151; }
+    .btn-secondary:hover { background: #374151; transform: translateY(-1px); }
 
-    /* KPI Grid */
+    .btn-sync-manual {
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 16px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-sync-manual:hover {
+      background: #10b981;
+      color: #0b0f19;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .pulse-badge {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-green 1.6s infinite;
+    }
+
+    @keyframes pulse-green {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* KPI Summary Cards */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .kpi-card {
@@ -160,187 +198,102 @@
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 18px 20px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
     }
-
-    .kpi-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .kpi-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 4px;
-    }
-
-    .kpi-total::before { background: #6366f1; }
-    .kpi-applied::before { background: var(--accent-green); }
-    .kpi-ready::before { background: var(--accent-blue); }
-    .kpi-skipped::before { background: #64748b; }
 
     .kpi-label {
       font-size: 13px;
-      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      font-weight: 600;
     }
 
     .kpi-number {
-      font-size: 30px;
-      font-weight: 900;
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
       line-height: 1.1;
-      margin-bottom: 4px;
     }
-
-    .kpi-total .kpi-number { color: #a5b4fc; }
-    .kpi-applied .kpi-number { color: #34d399; }
-    .kpi-ready .kpi-number { color: #60a5fa; }
-    .kpi-skipped .kpi-number { color: #94a3b8; }
 
     .kpi-subtext {
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 11.5px;
+      color: #6b7280;
     }
 
-    /* Dedicated Application Channels Section */
-    .channels-card {
-      background: #101626;
-      border: 1px solid #1e293b;
+    .kpi-total { border-color: rgba(99, 102, 241, 0.3); }
+    .kpi-total .kpi-number { color: #818cf8; }
+
+    .kpi-applied { border-color: rgba(16, 185, 129, 0.3); }
+    .kpi-applied .kpi-number { color: #34d399; }
+
+    .kpi-ready { border-color: rgba(59, 130, 246, 0.3); }
+    .kpi-ready .kpi-number { color: #60a5fa; }
+
+    .kpi-skipped { border-color: rgba(245, 158, 11, 0.3); }
+    .kpi-skipped .kpi-number { color: #fbbf24; }
+
+    /* Methods Bar */
+    .methods-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
-    }
-
-    .channels-header-row {
+      padding: 16px 20px;
+      margin-bottom: 24px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .channels-title {
+    .methods-title {
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
       color: #f1f5f9;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .channels-sync-time {
-      font-size: 12px;
-      color: #94a3b8;
-      background: #0b0f19;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid #1e293b;
-    }
-
-    .channels-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-    }
-
-    .channel-box {
-      background: #141d33;
-      border-radius: 12px;
-      padding: 14px 16px;
+    .methods-badges {
       display: flex;
-      align-items: flex-start;
+      flex-wrap: wrap;
       gap: 12px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
     }
 
-    .channel-box:hover {
-      transform: translateY(-2px);
-    }
-
-    .ch-easy {
-      border-color: rgba(245, 158, 11, 0.35);
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, #141d33 100%);
-    }
-
-    .ch-email {
-      border-color: rgba(139, 92, 246, 0.35);
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, #141d33 100%);
-    }
-
-    .ch-ats {
-      border-color: rgba(6, 182, 212, 0.35);
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, #141d33 100%);
-    }
-
-    .ch-icon {
-      font-size: 24px;
-      line-height: 1;
-      padding-top: 2px;
-    }
-
-    .ch-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .ch-name {
-      font-size: 14px;
-      font-weight: 800;
-      display: flex;
-      justify-content: space-between;
+    .badge-method {
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      display: inline-flex;
       align-items: center;
+      gap: 6px;
     }
 
-    .ch-easy .ch-name { color: #fcd34d; }
-    .ch-email .ch-name { color: #c4b5fd; }
-    .ch-ats .ch-name { color: #67e8f9; }
-
-    .ch-count {
-      font-size: 13px;
-      font-weight: 900;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-
-    .ch-desc {
-      font-size: 12px;
-      color: #94a3b8;
-      line-height: 1.5;
-    }
+    .method-email { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .method-ats { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .method-easy { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
 
     /* Controls Bar */
-    .controls-bar {
+    .controls-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 16px 20px;
       margin-bottom: 20px;
       display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .controls-top {
-      display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 16px;
     }
 
     .search-box {
       flex: 1;
-      min-width: 280px;
+      min-width: 260px;
       position: relative;
     }
 
@@ -348,41 +301,26 @@
       width: 100%;
       font-family: var(--font);
       background: #0f172a;
-      border: 1px solid #334155;
+      border: 1px solid #1e293b;
       border-radius: 10px;
-      padding: 10px 16px 10px 40px;
+      padding: 10px 14px 10px 38px;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border 0.15s ease;
     }
 
     .search-box input:focus {
       border-color: #3b82f6;
     }
 
-    .search-box svg {
+    .search-icon {
       position: absolute;
-      left: 14px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: #64748b;
-      width: 18px;
-      height: 18px;
-    }
-
-    .filter-section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .filter-label {
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #cbd5e1;
-      min-width: 120px;
+      font-size: 14px;
     }
 
     .filter-pills {
@@ -394,46 +332,44 @@
     .pill {
       font-family: var(--font);
       font-size: 12px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 8px;
+      font-weight: 600;
+      background: #1e293b;
+      color: #94a3b8;
       border: 1px solid #334155;
-      background: #0f172a;
-      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 20px;
       cursor: pointer;
       transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .pill:hover {
-      background: #1e293b;
+      background: #334155;
+      color: #ffffff;
     }
 
     .pill.active {
-      background: #2563eb;
+      background: #3b82f6;
       color: #ffffff;
-      border-color: #2563eb;
+      border-color: #3b82f6;
     }
 
-    .pill-method.active-email {
-      background: #7c3aed !important;
-      border-color: #7c3aed !important;
-      color: #ffffff !important;
+    .pill-method {
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
 
-    .pill-method.active-ats {
-      background: #0891b2 !important;
-      border-color: #0891b2 !important;
-      color: #ffffff !important;
-    }
-
-    .pill-method.active-easy {
-      background: #d97706 !important;
-      border-color: #d97706 !important;
-      color: #ffffff !important;
-    }
+    .pill-method:hover { background: #334155; color: #fff; }
+    .pill-method.active-email { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .pill-method.active-ats { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+    .pill-method.active-easy { background: #d97706; color: #fff; border-color: #d97706; }
 
     /* Table Container */
     .table-container {
@@ -447,88 +383,46 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      text-align: right;
       font-size: 13.5px;
+      text-align: right;
     }
 
-    th {
+    thead th {
       background: #0f172a;
       color: #94a3b8;
-      font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       padding: 14px 16px;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid var(--card-border);
       white-space: nowrap;
     }
 
-    th.th-highlight {
-      color: #38bdf8;
-      background: #131d33;
-    }
-
-    td {
+    tbody td {
       padding: 14px 16px;
       border-bottom: 1px solid #1f2937;
       vertical-align: middle;
     }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    tr:hover td {
-      background-color: rgba(30, 41, 59, 0.45);
+    tbody tr:hover {
+      background: #1e293b;
     }
 
     .company-cell strong {
-      color: #ffffff;
-      font-size: 14.5px;
+      color: #f1f5f9;
       display: block;
+      font-size: 14px;
     }
 
     .company-cell span {
       color: #64748b;
-      font-size: 12px;
+      font-size: 11.5px;
     }
 
     .role-cell {
       font-weight: 600;
       color: #e2e8f0;
-      max-width: 280px;
+      max-width: 240px;
     }
 
-    /* Method Badges (ايزي ابلاي / ايميل / بوابة خارجية) */
-    .badge-method {
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .method-email {
-      background: rgba(139, 92, 246, 0.22);
-      color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, 0.45);
-    }
-
-    .method-ats {
-      background: rgba(6, 182, 212, 0.22);
-      color: #67e8f9;
-      border: 1px solid rgba(6, 182, 212, 0.45);
-    }
-
-    .method-easy {
-      background: rgba(245, 158, 11, 0.22);
-      color: #fcd34d;
-      border: 1px solid rgba(245, 158, 11, 0.45);
-    }
-
-    /* Time Badge: وقت إضافة الوظيفة على الداشبورد */
     .time-cell {
       display: flex;
       flex-direction: column;
@@ -536,57 +430,14 @@
     }
 
     .time-main {
-      font-size: 12.5px;
       font-weight: 700;
       color: #38bdf8;
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      padding: 4px 8px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      font-size: 12.5px;
     }
 
     .time-sub {
-      font-size: 10.5px;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    /* Status Tags */
-    .tag-status {
       font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .status-applied {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .status-ready {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .status-skipped {
-      background: rgba(148, 163, 184, 0.15);
-      color: #94a3b8;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .status-closed {
-      background: rgba(244, 63, 94, 0.15);
-      color: #fb7185;
-      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #64748b;
     }
 
     .fit-meter {
@@ -597,20 +448,37 @@
     }
 
     .fit-bar {
-      width: 60px;
+      width: 50px;
       height: 6px;
       background: #1e293b;
-      border-radius: 3px;
+      border-radius: 9999px;
       overflow: hidden;
     }
 
     .fit-fill {
       height: 100%;
-      border-radius: 3px;
+      border-radius: 9999px;
     }
+
+    .tag-status {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .status-applied { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .status-ready { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .status-skipped { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .status-closed { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }
 
     .action-cell {
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn-apply {
@@ -639,6 +507,53 @@
       gap: 4px;
     }
 
+    .btn-mark-manual {
+      font-family: var(--font);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-mark-manual:hover {
+      background: #10b981;
+      color: #0b0f19;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-done-manual {
+      font-family: var(--font);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      border: 1px solid #10b981;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-done-manual:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
     .btn-view {
       font-family: var(--font);
       font-size: 12px;
@@ -649,7 +564,6 @@
       color: #cbd5e1;
       border: 1px solid #334155;
       cursor: pointer;
-      margin-left: 6px;
     }
 
     .btn-view:hover {
@@ -687,8 +601,8 @@
       background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(4px);
       display: none;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       z-index: 999;
       padding: 16px;
     }
@@ -709,31 +623,32 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       border-bottom: 1px solid #1f2937;
       padding-bottom: 14px;
     }
 
-    .modal-title {
+    .modal-header h3 {
       font-size: 18px;
-      font-weight: 800;
       color: #ffffff;
+      font-weight: 800;
     }
 
     .modal-close {
       background: none;
       border: none;
       color: #94a3b8;
-      font-size: 24px;
+      font-size: 22px;
       cursor: pointer;
+      padding: 4px;
     }
 
     .modal-highlight-box {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
+      background: #1e1b4b;
+      border: 1px solid #4338ca;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -756,6 +671,14 @@
       font-size: 13.5px;
       font-weight: 800;
       color: #f1f5f9;
+    }
+
+    .modal-manual-action-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
     }
 
     .modal-grid {
@@ -807,6 +730,10 @@
         </div>
       </div>
       <div class="header-actions">
+        <button class="btn btn-sync-manual" onclick="openSyncModal()" id="btnSyncManual">
+          <span class="pulse-badge"></span>
+          🔄 مزامنة تقديمي اليدوي (<span id="manualAppliedCount">0</span>)
+        </button>
         <button class="btn btn-success" onclick="copyToClipboard()">
           📋 نسخ للشيت (Cmd+V)
         </button>
@@ -828,120 +755,67 @@
       </div>
       <div class="kpi-card kpi-applied">
         <div class="kpi-label">تم التقديم رسمياً</div>
-        <div class="kpi-number" id="kpi-applied">9</div>
+        <div class="kpi-number" id="kpi-applied">10</div>
         <div class="kpi-subtext">تقديم مؤكد عبر البريد وبوابات ATS مع إرفاق السيرة الذاتية</div>
       </div>
       <div class="kpi-card kpi-ready">
         <div class="kpi-label">جاهز للتقديم الفوري</div>
-        <div class="kpi-number" id="kpi-ready">39</div>
+        <div class="kpi-number" id="kpi-ready">38</div>
         <div class="kpi-subtext">فرص مؤهلة ومطابقة لكافة معاييرك التنفيذية</div>
       </div>
       <div class="kpi-card kpi-skipped">
-        <div class="kpi-label">مستبعد / مغلق من جهة العمل</div>
+        <div class="kpi-label">مستبعد / مغلق</div>
         <div class="kpi-number" id="kpi-skipped">5</div>
-        <div class="kpi-subtext">شروط غير مطابقة أو شواغر أغلقت التقديم</div>
+        <div class="kpi-subtext">فرص مغلقة من الشركة أو استبعدت لعدم مطابقة الشروط</div>
       </div>
     </div>
 
-    <!-- Prominent Dedicated Channels Box (ايزي ابلاي / ايميل / بوابة خارجية) -->
-    <div class="channels-card">
-      <div class="channels-header-row">
-        <div class="channels-title">
-          <span>🎯 تصنيف طرق التقديم المستخدمة في لوحة التحكم (Channels):</span>
-        </div>
-        <div class="channels-sync-time">
-          🕒 آخر فحص ومزامنة: 2026-11-08 05:06 ص (بتوقيت الرياض)
-        </div>
+    <!-- Application Methods Breakdown -->
+    <div class="methods-card">
+      <div class="methods-title">
+        <span>⚙️ قنوات وطرق التقديم المعتمدة في النظام:</span>
       </div>
-      <div class="channels-grid">
-        <div class="channel-box ch-easy">
-          <div class="ch-icon">⚡</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>ايزي ابلاي (Easy Apply - يدوي)</span>
-              <span class="ch-count">30 وظيفة</span>
-            </div>
-            <div class="ch-desc">
-              شواغر التقديم السريع عبر لينكد إن — مخصصة لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت.
-            </div>
-          </div>
-        </div>
-        <div class="channel-box ch-email">
-          <div class="ch-icon">✉️</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>ايميل مباشر (Direct Email - آلي)</span>
-              <span class="ch-count">6 وظائف</span>
-            </div>
-            <div class="ch-desc">
-              تم التقديم عليها وإرسال السيرة الذاتية PDF التنفيذية آلياً عبر SMTP مع متابعة الردود.
-            </div>
-          </div>
-        </div>
-        <div class="channel-box ch-ats">
-          <div class="ch-icon">🌐</div>
-          <div class="ch-info">
-            <div class="ch-name">
-              <span>بوابة خارجية (External ATS - آلي)</span>
-              <span class="ch-count">17 وظيفة</span>
-            </div>
-            <div class="ch-desc">
-              بوابات توظيف عالمية (Teamtailor, Ashby, Oracle HCM, Workday) تم التقديم عليها بروبوت المتصفح.
-            </div>
-          </div>
-        </div>
+      <div class="methods-badges">
+        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong>30</strong></span>
+        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong>6</strong></span>
+        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong>17</strong></span>
       </div>
     </div>
 
-    <!-- Controls & Multi-Filters -->
-    <div class="controls-bar">
-      <div class="controls-top">
-        <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى، طريقة التقديم (ايزي ابلاي/ايميل/بوابة)، أو وقت الإضافة..." oninput="filterJobs()">
-        </div>
+    <!-- Controls Bar -->
+    <div class="controls-card">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو طريقة التقديم..." oninput="filterJobs()">
+        <span class="search-icon">🔍</span>
       </div>
-
-      <!-- Filter Row 1: Method -->
-      <div class="filter-section">
-        <span class="filter-label">طريقة التقديم:</span>
-        <div class="filter-pills">
-          <button class="pill pill-method active" onclick="setMethodFilter('all', this)">جميع الطرق (53)</button>
-          <button class="pill pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي (30)</button>
-          <button class="pill pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر (6)</button>
-          <button class="pill pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية (17)</button>
-        </div>
+      <div class="filter-pills">
+        <button class="pill active" onclick="setStatusFilter('all', this)">الكل (53)</button>
+        <button class="pill" onclick="setStatusFilter('applied', this)">✓ تم التقديم (10)</button>
+        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم (38)</button>
+        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (4)</button>
+        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (1)</button>
       </div>
-
-      <!-- Filter Row 2: Status -->
-      <div class="filter-section">
-        <span class="filter-label">حالة التقديم:</span>
-        <div class="filter-pills">
-          <button class="pill active" onclick="setStatusFilter('all', this)">الكل (53)</button>
-          <button class="pill" onclick="setStatusFilter('applied', this)">تم التقديم (9)</button>
-          <button class="pill" onclick="setStatusFilter('ready', this)">جاهز للتقديم (39)</button>
-          <button class="pill" onclick="setStatusFilter('skipped', this)">مستبعد (4)</button>
-          <button class="pill" onclick="setStatusFilter('closed', this)">مغلق (1)</button>
-        </div>
+      <div class="filter-pills" style="margin-right: 8px;">
+        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات</button>
+        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي</button>
+        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر</button>
+        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية</button>
       </div>
     </div>
 
-    <!-- Table -->
+    <!-- Table Container -->
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>الشركة والمصدر</th>
+            <th>الشركة والمنصة</th>
             <th>المسمى الوظيفي</th>
-            <th class="th-highlight">طريقة التقديم المستخدمة</th>
-            <th class="th-highlight">وقت إضافة الوظيفة على الداشبورد</th>
+            <th>طريقة التقديم</th>
+            <th>وقت وتاريخ الإضافة</th>
             <th>المدينة</th>
-            <th>التوافق</th>
+            <th>نسبة التوافق</th>
             <th>الحالة</th>
-            <th>الإجراء</th>
+            <th>الإجراء المباشر</th>
           </tr>
         </thead>
         <tbody id="jobsTableBody">
@@ -952,26 +826,119 @@
 
   </div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast">
-    <span>✓ تم نسخ كافة بيانات الشيت الـ 15 عموداً إلى الحافظة بنجاح! يمكنك لصقها الآن (Cmd+V).</span>
-  </div>
-
   <!-- Details Modal -->
-  <div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
+  <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card">
       <div class="modal-header">
-        <div class="modal-title" id="mCompanyRole">تفاصيل الشاغر</div>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3 id="mCompanyRole">تفاصيل الشاغر</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
       </div>
       <div id="modalBody"></div>
     </div>
   </div>
 
+  <!-- Manual Application Sync Modal -->
+  <div class="modal-overlay" id="syncModalOverlay" onclick="if(event.target===this) closeSyncModal()">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div>
+          <h3>🔄 مزامنة التقديم اليدوي مع المنظومة وقوقل شيت</h3>
+          <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">الوظائف التي قمت بتقديمها بنفسك يدوياً وترغب بتسجيلها في ملف التتبع والجدولة</p>
+        </div>
+        <button class="modal-close" onclick="closeSyncModal()">×</button>
+      </div>
+      <div id="syncModalBody" style="padding: 18px 0;"></div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #1e293b; padding-top: 16px; flex-wrap: wrap;">
+        <button class="btn btn-secondary" onclick="closeSyncModal()">إغلاق</button>
+        <button class="btn btn-success" onclick="copySyncCommand()">📋 نسخ أمر التحديث (Terminal)</button>
+        <button class="btn btn-primary" onclick="syncWithLocalServer()">⚡ مزامنة فورية الآن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span>✓ تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)</span>
+  </div>
+
   <script>
-    const allJobs = [{"id": "SA-001", "added_time": "2026-11-08 01:15 ص", "company": "Elfaleh Sports House (بيت الفالح للرياضة)", "title": "Marketing Manager (Reporting to CEO)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485828406", "fit": "95%", "status": "جاهز للتقديم", "contact": "CEO Office", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Elfaleh_Marketing_Manager.tex", "followup": "2026-11-10", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-002", "added_time": "2026-11-08 01:15 ص", "company": "HungerStation | هنقرستيشن (Delivery Hero)", "title": "HSM Performance Senior Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4461605346", "fit": "88%", "status": "جاهز للتقديم", "contact": "Talent Acquisition Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_HungerStation_Performance.tex", "followup": "2026-11-11", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-003", "added_time": "2026-11-08 01:15 ص", "company": "Sharaf DG (شرف دي جي)", "title": "Assistant Manager - Online Business and Marketing", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4487767939", "fit": "94%", "status": "تم التقديم", "contact": "recruitment@sharafdg.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_SharafDG_Online_Marketing.tex", "followup": "2026-11-11", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق السيرة الذاتية PDF وتأكيد الاستلام"}, {"id": "SA-004", "added_time": "2026-11-08 01:15 ص", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "Executive Search Qiddiya", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Qiddiya_Residential_Marketing.tex", "followup": "2026-11-12", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-005", "added_time": "2026-11-08 01:15 ص", "company": "Savills Middle East", "title": "Senior Marketing Executive (KAFD)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Career Portal", "city": "الرياض (Riyadh - KAFD)", "url": "https://www.linkedin.com/jobs/view/4487263154", "fit": "90%", "status": "جاهز للتقديم", "contact": "KSA Leadership Savills", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Savills_Senior_Marketing.tex", "followup": "2026-11-12", "notes": "بوابة توظيف خارجية لمجموعة سافيلز العقارية"}, {"id": "SA-006", "added_time": "2026-11-08 01:15 ص", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4484380298", "fit": "86%", "status": "جاهز للتقديم", "contact": "Talent Team Setup.sa", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-007", "added_time": "2026-11-08 01:15 ص", "company": "Qureos / Client", "title": "Marketing Manager (Food & Beverage)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4483694611", "fit": "87%", "status": "جاهز للتقديم", "contact": "Qureos Recruitment", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-008", "added_time": "2026-11-08 01:15 ص", "company": "Red Sea Global (شركة البحر الأحمر الدولية)", "title": "Associate Director - Residential Marketing", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Career Portal", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4482280905", "fit": "84%", "status": "جاهز للتقديم", "contact": "RSG Talent Acquisition", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-14", "notes": "بوابة توظيف خارجية لشركة البحر الأحمر الدولية"}, {"id": "SA-009", "added_time": "2026-11-08 01:15 ص", "company": "شركة سحاب الجنوب العقارية", "title": "مدير التسويق والمبيعات العقاري", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4486641246", "fit": "80%", "status": "تم التقديم", "contact": "sscc-ksa@hotmail.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-15", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP إلى sscc-ksa@hotmail.com مع السيرة الذاتية المعتمدة"}, {"id": "SA-010", "added_time": "2026-11-08 01:15 ص", "company": "شركة تجارية بجدة (Jeddah Commercial Co)", "title": "Marketing Coordinator (حضوري بجدة)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "جدة (Jeddah)", "url": "https://www.linkedin.com/jobs/view/example-jeddah", "fit": "65%", "status": "تم التخطي", "contact": "HR Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "—", "followup": "—", "notes": "تم التخطي: دوام حضوري خارج الرياض (جدة) ونسبة التوافق 65% أقل من 80% والراتب دون الحد الأدنى 10"}, {"id": "SA-011", "added_time": "2026-11-08 02:20 ص", "company": "Mnzil | منزل", "title": "Marketing Associate", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-associate-at-mnzil-%D9%85%D9%86%D8%B2%D9%84-4483255202", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-012", "added_time": "2026-11-08 02:20 ص", "company": "RAM Systems Company", "title": "Marketing Specialist", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-ram-systems-company-4442831617", "fit": "90%", "status": "تم التقديم", "contact": "jobs@ramsys.com.sa", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP إلى jobs@ramsys.com.sa مع إرفاق السيرة الذاتية وتأكيد التسليم"}, {"id": "SA-013", "added_time": "2026-11-08 02:20 ص", "company": "IHG Hotels & Resorts", "title": "Marketing Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-ihg-hotels-resorts-4438013067", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-014", "added_time": "2026-11-08 02:20 ص", "company": "Qureos", "title": "Marketing Director", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-director-at-qureos-4479925987", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-015", "added_time": "2026-11-08 02:20 ص", "company": "OHC | العمر القابضة", "title": "Marketing & Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-digital-marketing-specialist-at-ohc-%D8%A7%D9%84%D8%B9%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%A8%D8%B6%D8%A9-4484029270", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-016", "added_time": "2026-11-08 02:20 ص", "company": "JODAYN | جودين", "title": "Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-jodayn-%D8%AC%D9%88%D8%AF%D9%8A%D9%86-4466769201", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-017", "added_time": "2026-11-08 02:20 ص", "company": "UXBERT Labs", "title": "Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-uxbert-labs-4425494997", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-018", "added_time": "2026-11-08 02:20 ص", "company": "Rentokil Initial", "title": "Marketing Coordinator", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-coordinator-at-rentokil-initial-4419842160", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-019", "added_time": "2026-11-08 02:20 ص", "company": "أسفار لتأجير السيارات", "title": "مدير تسويق", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://www.linkedin.com/jobs/view/4479005887", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-020", "added_time": "2026-11-08 02:20 ص", "company": "Hilton", "title": "Assistant Marketing Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Oracle HCM", "city": "عن بعد", "url": "https://sa.linkedin.com/jobs/view/assistant-marketing-manager-at-hilton-4485328665", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر بوابة Oracle HCM Cloud بعد التحقق الذاتي من كود OTP المستلم على الإيميل (411037)"}, {"id": "SA-021", "added_time": "2026-11-08 02:20 ص", "company": "Red Sea Global", "title": "Manager - Marketing (B2B)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-marketing-b2b-at-red-sea-global-4485058908", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-022", "added_time": "2026-11-08 03:05 ص", "company": "webook.com", "title": "Director of Marketing & Brand", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-marketing-brand-at-webook-com-4438652564", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-023", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Founding Head of Marketing & Enrollment Growth", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/founding-head-of-marketing-enrollment-growth-at-urban-ridge-supplies-4430828768", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-024", "added_time": "2026-11-08 03:05 ص", "company": "Calo Inc.", "title": "Commercial Director (KSA)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Calo ATS", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-ksa-at-calo-inc-4448269583", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشركة كالو"}, {"id": "SA-025", "added_time": "2026-11-08 03:05 ص", "company": "qlub", "title": "Growth Marketing Director", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Ashby ATS", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-director-at-qlub-4478737545", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Ashby الدولية للتوظيف مع إرفاق السيرة الذاتية ورابط لينكد إن"}, {"id": "SA-026", "added_time": "2026-11-08 03:05 ص", "company": "AstraZeneca", "title": "Franchise Head - R&I", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Eightfold AI", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/franchise-head-r-i-at-astrazeneca-4486059547", "fit": "92%", "status": "مغلقة من جهة العمل", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم فحص بوابة Eightfold التابعة لأسترازينيكا وتبيّن إغلاق الشاغر رسمياً من جهة العمل وعدم قبول طلبات جديدة"}, {"id": "SA-027", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Director of Sales & Marketing", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-sales-marketing-at-ihg-hotels-resorts-4272153246", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-028", "added_time": "2026-11-08 03:05 ص", "company": "Publicis Groupe Middle East", "title": "Business Director - Strategy & Insights", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/business-director-strategy-insights-at-publicis-groupe-middle-east-4483634300", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-029", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Commercial Director", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-at-ihg-hotels-resorts-4476040193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-030", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Marketing Manager (F&B Retail, Specialty Coffee)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-f-b-retail-specialty-coffee-at-urban-ridge-supplies-4430847696", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-031", "added_time": "2026-11-08 03:05 ص", "company": "Qureos", "title": "Marketing Manager - Roastery / Coffee", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-roastery-coffee-at-qureos-4469987157", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-032", "added_time": "2026-11-08 03:05 ص", "company": "Novotel Hotels", "title": "Marketing Manager - Saudi Only", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Accor Careers", "city": "Riyadh Region", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-saudi-only-at-novotel-hotels-4481103087", "fit": "60%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: الشاغر يشترط الجنسية السعودية فقط عبر بوابة Accor"}, {"id": "SA-033", "added_time": "2026-11-08 03:05 ص", "company": "Hilton", "title": "Marketing Communications Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-communications-manager-at-hilton-4487254587", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-034", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4322076341", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-035", "added_time": "2026-11-08 03:05 ص", "company": "NICE ONE | نايس ون", "title": "Senior Paid Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-paid-marketing-specialist-at-nice-one-%D9%86%D8%A7%D9%8A%D8%B3-%D9%88%D9%86-4454261359", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-036", "added_time": "2026-11-08 03:05 ص", "company": "Mars SA", "title": "Growth Marketing Lead", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-lead-at-mars-sa-4461905560", "fit": "92%", "status": "تم التقديم", "contact": "info@mars.sa", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف info@mars.sa مع إرفاق السيرة الذاتية التنفيذية لحسن سرحان"}, {"id": "SA-037", "added_time": "2026-11-08 03:05 ص", "company": "Futu Holdings Limited", "title": "Growth & Market Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-market-specialist-at-futu-holdings-limited-4473629284", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-038", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Senior Performance Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-performance-executive-at-dentsu-4322166193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-039", "added_time": "2026-11-08 03:05 ص", "company": "OmniOps", "title": "Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-omniops-4462224700", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-040", "added_time": "2026-11-08 03:05 ص", "company": "Corebridge Financial", "title": "Digital Media Buyer - Corebridge Direct", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-media-buyer-corebridge-direct-at-corebridge-financial-4486066294", "fit": "92%", "status": "تم التقديم", "contact": "TalentandInclusion@corebridgefinancial.com", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي TalentandInclusion@corebridgefinancial.com مع إرفاق السيرة الذاتية PDF"}, {"id": "SA-041", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4379681411", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-042", "added_time": "2026-11-08 03:05 ص", "company": "Fragomen", "title": "Regional Marketing Manager (ME)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Workday", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/regional-marketing-manager-me-at-fragomen-4487270049", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فراغومين الدولية"}, {"id": "SA-043", "added_time": "2026-11-08 03:05 ص", "company": "SILQFi", "title": "Retention & Monetization Lead", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/retention-monetization-lead-at-silqfi-4474065479", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-044", "added_time": "2026-11-08 03:05 ص", "company": "Jeeny", "title": "Growth Manager - Insights & Analytics", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-manager-insights-analytics-at-jeeny-4473247911", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-045", "added_time": "2026-11-08 03:05 ص", "company": "PepsiCo", "title": "Digital Analyst", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / PepsiCo Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-analyst-at-pepsico-4481449399", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشركة بيبسيكو العالمية"}, {"id": "SA-046", "added_time": "2026-11-08 03:25 ص", "company": "Mumzworld.com", "title": "E-Commerce Associate - Marketplace", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Teamtailor", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/e-commerce-associate-marketplace-at-mumzworld-com-4479308246", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Teamtailor وإكمال استبيان الإفصاح وتحميل السيرة الذاتية (App ID: b86179e9-9376-47e2-95be-f3d1f831ddc9)"}, {"id": "SA-047", "added_time": "2026-11-08 03:25 ص", "company": "Shangri-La Group", "title": "Marketing Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Shangri-La Careers", "city": "Jiddah, Makkah, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-shangri-la-group-4459171390", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (جدة)"}, {"id": "SA-048", "added_time": "2026-11-08 03:25 ص", "company": "Plat4mation", "title": "Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-plat4mation-4481882256", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-049", "added_time": "2026-11-08 03:25 ص", "company": "H. M. Al Rugaib & Sons Trading Co. - شركة حمد محمد الرقيب و أولاده التجارية", "title": "Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "Al Khobar, Eastern, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-h-m-al-rugaib-sons-trading-co-%D8%B4%D8%B1%D9%83%D8%A9-%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D9%85%D8%AF-%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A8-%D9%88-%D8%A3%D9%88%D9%84%D8%A7%D8%AF%D9%87-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9-4481608095", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Al Khobar, Eastern, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-050", "added_time": "2026-11-08 03:25 ص", "company": "Astek Middle East", "title": "Digital Marketing & Digital Channels Expert", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-digital-channels-expert-at-astek-middle-east-4477708969", "fit": "92%", "status": "تم التقديم", "contact": "contact-astekme@astek-international.com", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي contact-astekme@astek-international.com بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-051", "added_time": "2026-11-08 03:25 ص", "company": "Boutiqaat", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-boutiqaat-4480040260", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-052", "added_time": "2026-11-08 03:25 ص", "company": "MOBCO Group", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-mobco-group-4487245041", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-053", "added_time": "2026-11-08 03:25 ص", "company": "Saudi Company For Hardware - SACO", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-saudi-company-for-hardware-saco-4483025841", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}];
+    const allJobs = [{"id": "SA-001", "added_time": "2026-11-08 01:15 ص", "company": "Elfaleh Sports House (بيت الفالح للرياضة)", "title": "Marketing Manager (Reporting to CEO)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485828406", "fit": "95%", "status": "تم التقديم (يدوي)", "contact": "CEO Office", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Elfaleh_Marketing_Manager.tex", "followup": "2026-11-10", "notes": "تم التقديم يدوياً من قِبل المرشح بتاريخ 2026-11-08 05:11 ص | شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-002", "added_time": "2026-11-08 01:15 ص", "company": "HungerStation | هنقرستيشن (Delivery Hero)", "title": "HSM Performance Senior Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4461605346", "fit": "88%", "status": "جاهز للتقديم", "contact": "Talent Acquisition Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_HungerStation_Performance.tex", "followup": "2026-11-11", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-003", "added_time": "2026-11-08 01:15 ص", "company": "Sharaf DG (شرف دي جي)", "title": "Assistant Manager - Online Business and Marketing", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4487767939", "fit": "94%", "status": "تم التقديم", "contact": "recruitment@sharafdg.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_SharafDG_Online_Marketing.tex", "followup": "2026-11-11", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف recruitment@sharafdg.com مع إرفاق السيرة الذاتية PDF وتأكيد الاستلام"}, {"id": "SA-004", "added_time": "2026-11-08 01:15 ص", "company": "Qiddiya | القدية", "title": "Manager - Residential Marketing", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4485401342", "fit": "92%", "status": "جاهز للتقديم", "contact": "Executive Search Qiddiya", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Qiddiya_Residential_Marketing.tex", "followup": "2026-11-12", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-005", "added_time": "2026-11-08 01:15 ص", "company": "Savills Middle East", "title": "Senior Marketing Executive (KAFD)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Career Portal", "city": "الرياض (Riyadh - KAFD)", "url": "https://www.linkedin.com/jobs/view/4487263154", "fit": "90%", "status": "جاهز للتقديم", "contact": "KSA Leadership Savills", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_Savills_Senior_Marketing.tex", "followup": "2026-11-12", "notes": "بوابة توظيف خارجية لمجموعة سافيلز العقارية"}, {"id": "SA-006", "added_time": "2026-11-08 01:15 ص", "company": "Setup.sa", "title": "Growth Hacking Specialist (Digital Growth)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4484380298", "fit": "86%", "status": "جاهز للتقديم", "contact": "Talent Team Setup.sa", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-007", "added_time": "2026-11-08 01:15 ص", "company": "Qureos / Client", "title": "Marketing Manager (Food & Beverage)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4483694611", "fit": "87%", "status": "جاهز للتقديم", "contact": "Qureos Recruitment", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-13", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-008", "added_time": "2026-11-08 01:15 ص", "company": "Red Sea Global (شركة البحر الأحمر الدولية)", "title": "Associate Director - Residential Marketing", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Career Portal", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4482280905", "fit": "84%", "status": "جاهز للتقديم", "contact": "RSG Talent Acquisition", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/main_example.tex", "followup": "2026-11-14", "notes": "بوابة توظيف خارجية لشركة البحر الأحمر الدولية"}, {"id": "SA-009", "added_time": "2026-11-08 01:15 ص", "company": "شركة سحاب الجنوب العقارية", "title": "مدير التسويق والمبيعات العقاري", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض (Riyadh)", "url": "https://www.linkedin.com/jobs/view/4486641246", "fit": "80%", "status": "تم التقديم", "contact": "sscc-ksa@hotmail.com", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-15", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP إلى sscc-ksa@hotmail.com مع السيرة الذاتية المعتمدة"}, {"id": "SA-010", "added_time": "2026-11-08 01:15 ص", "company": "شركة تجارية بجدة (Jeddah Commercial Co)", "title": "Marketing Coordinator (حضوري بجدة)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "جدة (Jeddah)", "url": "https://www.linkedin.com/jobs/view/example-jeddah", "fit": "65%", "status": "تم التخطي", "contact": "HR Team", "salary": "أساسي 8,000 / باكدج 10,000", "cv": "—", "followup": "—", "notes": "تم التخطي: دوام حضوري خارج الرياض (جدة) ونسبة التوافق 65% أقل من 80% والراتب دون الحد الأدنى 10"}, {"id": "SA-011", "added_time": "2026-11-08 02:20 ص", "company": "Mnzil | منزل", "title": "Marketing Associate", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-associate-at-mnzil-%D9%85%D9%86%D8%B2%D9%84-4483255202", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-012", "added_time": "2026-11-08 02:20 ص", "company": "RAM Systems Company", "title": "Marketing Specialist", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-ram-systems-company-4442831617", "fit": "90%", "status": "تم التقديم", "contact": "jobs@ramsys.com.sa", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم إرسال بريد التقديم الرسمي آلياً عبر SMTP إلى jobs@ramsys.com.sa مع إرفاق السيرة الذاتية وتأكيد التسليم"}, {"id": "SA-013", "added_time": "2026-11-08 02:20 ص", "company": "IHG Hotels & Resorts", "title": "Marketing Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-ihg-hotels-resorts-4438013067", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-014", "added_time": "2026-11-08 02:20 ص", "company": "Qureos", "title": "Marketing Director", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-director-at-qureos-4479925987", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-015", "added_time": "2026-11-08 02:20 ص", "company": "OHC | العمر القابضة", "title": "Marketing & Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-digital-marketing-specialist-at-ohc-%D8%A7%D9%84%D8%B9%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D8%A8%D8%B6%D8%A9-4484029270", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-016", "added_time": "2026-11-08 02:20 ص", "company": "JODAYN | جودين", "title": "Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-jodayn-%D8%AC%D9%88%D8%AF%D9%8A%D9%86-4466769201", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-017", "added_time": "2026-11-08 02:20 ص", "company": "UXBERT Labs", "title": "Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-at-uxbert-labs-4425494997", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-018", "added_time": "2026-11-08 02:20 ص", "company": "Rentokil Initial", "title": "Marketing Coordinator", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-coordinator-at-rentokil-initial-4419842160", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-019", "added_time": "2026-11-08 02:20 ص", "company": "أسفار لتأجير السيارات", "title": "مدير تسويق", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://www.linkedin.com/jobs/view/4479005887", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-020", "added_time": "2026-11-08 02:20 ص", "company": "Hilton", "title": "Assistant Marketing Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Oracle HCM", "city": "عن بعد", "url": "https://sa.linkedin.com/jobs/view/assistant-marketing-manager-at-hilton-4485328665", "fit": "90%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر بوابة Oracle HCM Cloud بعد التحقق الذاتي من كود OTP المستلم على الإيميل (411037)"}, {"id": "SA-021", "added_time": "2026-11-08 02:20 ص", "company": "Red Sea Global", "title": "Manager - Marketing (B2B)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/manager-marketing-b2b-at-red-sea-global-4485058908", "fit": "90%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-022", "added_time": "2026-11-08 03:05 ص", "company": "webook.com", "title": "Director of Marketing & Brand", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-marketing-brand-at-webook-com-4438652564", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-023", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Founding Head of Marketing & Enrollment Growth", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/founding-head-of-marketing-enrollment-growth-at-urban-ridge-supplies-4430828768", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-024", "added_time": "2026-11-08 03:05 ص", "company": "Calo Inc.", "title": "Commercial Director (KSA)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Calo ATS", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-ksa-at-calo-inc-4448269583", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشركة كالو"}, {"id": "SA-025", "added_time": "2026-11-08 03:05 ص", "company": "qlub", "title": "Growth Marketing Director", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Ashby ATS", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-director-at-qlub-4478737545", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Ashby الدولية للتوظيف مع إرفاق السيرة الذاتية ورابط لينكد إن"}, {"id": "SA-026", "added_time": "2026-11-08 03:05 ص", "company": "AstraZeneca", "title": "Franchise Head - R&I", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Eightfold AI", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/franchise-head-r-i-at-astrazeneca-4486059547", "fit": "92%", "status": "مغلقة من جهة العمل", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم فحص بوابة Eightfold التابعة لأسترازينيكا وتبيّن إغلاق الشاغر رسمياً من جهة العمل وعدم قبول طلبات جديدة"}, {"id": "SA-027", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Director of Sales & Marketing", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/director-of-sales-marketing-at-ihg-hotels-resorts-4272153246", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-028", "added_time": "2026-11-08 03:05 ص", "company": "Publicis Groupe Middle East", "title": "Business Director - Strategy & Insights", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/business-director-strategy-insights-at-publicis-groupe-middle-east-4483634300", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-029", "added_time": "2026-11-08 03:05 ص", "company": "IHG Hotels & Resorts", "title": "Commercial Director", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / IHG Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/commercial-director-at-ihg-hotels-resorts-4476040193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فنادق إنتركونتيننتال"}, {"id": "SA-030", "added_time": "2026-11-08 03:05 ص", "company": "Urban Ridge Supplies", "title": "Marketing Manager (F&B Retail, Specialty Coffee)", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-f-b-retail-specialty-coffee-at-urban-ridge-supplies-4430847696", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-031", "added_time": "2026-11-08 03:05 ص", "company": "Qureos", "title": "Marketing Manager - Roastery / Coffee", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-roastery-coffee-at-qureos-4469987157", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-032", "added_time": "2026-11-08 03:05 ص", "company": "Novotel Hotels", "title": "Marketing Manager - Saudi Only", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Accor Careers", "city": "Riyadh Region", "url": "https://sa.linkedin.com/jobs/view/marketing-manager-saudi-only-at-novotel-hotels-4481103087", "fit": "60%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: الشاغر يشترط الجنسية السعودية فقط عبر بوابة Accor"}, {"id": "SA-033", "added_time": "2026-11-08 03:05 ص", "company": "Hilton", "title": "Marketing Communications Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-communications-manager-at-hilton-4487254587", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-034", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4322076341", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-035", "added_time": "2026-11-08 03:05 ص", "company": "NICE ONE | نايس ون", "title": "Senior Paid Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-paid-marketing-specialist-at-nice-one-%D9%86%D8%A7%D9%8A%D8%B3-%D9%88%D9%86-4454261359", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-036", "added_time": "2026-11-08 03:05 ص", "company": "Mars SA", "title": "Growth Marketing Lead", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-marketing-lead-at-mars-sa-4461905560", "fit": "92%", "status": "تم التقديم", "contact": "info@mars.sa", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم بنجاح عبر الإيميل الرسمي للتوظيف info@mars.sa مع إرفاق السيرة الذاتية التنفيذية لحسن سرحان"}, {"id": "SA-037", "added_time": "2026-11-08 03:05 ص", "company": "Futu Holdings Limited", "title": "Growth & Market Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-market-specialist-at-futu-holdings-limited-4473629284", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-038", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Senior Performance Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/senior-performance-executive-at-dentsu-4322166193", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-039", "added_time": "2026-11-08 03:05 ص", "company": "OmniOps", "title": "Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-omniops-4462224700", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-040", "added_time": "2026-11-08 03:05 ص", "company": "Corebridge Financial", "title": "Digital Media Buyer - Corebridge Direct", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-media-buyer-corebridge-direct-at-corebridge-financial-4486066294", "fit": "92%", "status": "تم التقديم", "contact": "TalentandInclusion@corebridgefinancial.com", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي TalentandInclusion@corebridgefinancial.com مع إرفاق السيرة الذاتية PDF"}, {"id": "SA-041", "added_time": "2026-11-08 03:05 ص", "company": "dentsu", "title": "Performance Manager", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / SmartRecruiters", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/performance-manager-at-dentsu-4379681411", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشبكة دينتسو العالمية"}, {"id": "SA-042", "added_time": "2026-11-08 03:05 ص", "company": "Fragomen", "title": "Regional Marketing Manager (ME)", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Workday", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/regional-marketing-manager-me-at-fragomen-4487270049", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لمجموعة فراغومين الدولية"}, {"id": "SA-043", "added_time": "2026-11-08 03:05 ص", "company": "SILQFi", "title": "Retention & Monetization Lead", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/retention-monetization-lead-at-silqfi-4474065479", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-044", "added_time": "2026-11-08 03:05 ص", "company": "Jeeny", "title": "Growth Manager - Insights & Analytics", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/growth-manager-insights-analytics-at-jeeny-4473247911", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-045", "added_time": "2026-11-08 03:05 ص", "company": "PepsiCo", "title": "Digital Analyst", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / PepsiCo Careers", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-analyst-at-pepsico-4481449399", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "بوابة توظيف خارجية لشركة بيبسيكو العالمية"}, {"id": "SA-046", "added_time": "2026-11-08 03:25 ص", "company": "Mumzworld.com", "title": "E-Commerce Associate - Marketplace", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Teamtailor", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/e-commerce-associate-marketplace-at-mumzworld-com-4479308246", "fit": "92%", "status": "تم التقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً بنجاح عبر بوابة Teamtailor وإكمال استبيان الإفصاح وتحميل السيرة الذاتية (App ID: b86179e9-9376-47e2-95be-f3d1f831ddc9)"}, {"id": "SA-047", "added_time": "2026-11-08 03:25 ص", "company": "Shangri-La Group", "title": "Marketing Executive", "method": "🌐 بوابة خارجية (ATS - آلي)", "platform": "LinkedIn / Shangri-La Careers", "city": "Jiddah, Makkah, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/marketing-executive-at-shangri-la-group-4459171390", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (جدة)"}, {"id": "SA-048", "added_time": "2026-11-08 03:25 ص", "company": "Plat4mation", "title": "Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/marketing-specialist-at-plat4mation-4481882256", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-049", "added_time": "2026-11-08 03:25 ص", "company": "H. M. Al Rugaib & Sons Trading Co. - شركة حمد محمد الرقيب و أولاده التجارية", "title": "Digital Marketing Specialist", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "Al Khobar, Eastern, Saudi Arabia", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-specialist-at-h-m-al-rugaib-sons-trading-co-%D8%B4%D8%B1%D9%83%D8%A9-%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D9%85%D8%AF-%D8%A7%D9%84%D8%B1%D9%82%D9%8A%D8%A8-%D9%88-%D8%A3%D9%88%D9%84%D8%A7%D8%AF%D9%87-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9-4481608095", "fit": "65%", "status": "تم التخطي", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التخطي تلقائياً: دوام حضوري خارج الرياض (Al Khobar, Eastern, Saudi Arabia) والمطلوب خارج الرياض عن بعد فقط"}, {"id": "SA-050", "added_time": "2026-11-08 03:25 ص", "company": "Astek Middle East", "title": "Digital Marketing & Digital Channels Expert", "method": "✉️ ايميل مباشر (Email - آلي)", "platform": "LinkedIn / إيميل مباشر", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-digital-channels-expert-at-astek-middle-east-4477708969", "fit": "92%", "status": "تم التقديم", "contact": "contact-astekme@astek-international.com", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "تم التقديم آلياً عبر الإيميل الرسمي contact-astekme@astek-international.com بالسيرة الذاتية وخطاب التقديم"}, {"id": "SA-051", "added_time": "2026-11-08 03:25 ص", "company": "Boutiqaat", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-boutiqaat-4480040260", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-052", "added_time": "2026-11-08 03:25 ص", "company": "MOBCO Group", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-mobco-group-4487245041", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}, {"id": "SA-053", "added_time": "2026-11-08 03:25 ص", "company": "Saudi Company For Hardware - SACO", "title": "Digital Marketing Manager", "method": "⚡ ايزي ابلاي (Easy Apply - يدوي)", "platform": "LinkedIn (لينكد إن السعودية)", "city": "الرياض", "url": "https://sa.linkedin.com/jobs/view/digital-marketing-manager-at-saudi-company-for-hardware-saco-4483025841", "fit": "92%", "status": "جاهز للتقديم", "contact": "مسؤول التوظيف", "salary": "8,000 - 10,000", "cv": "cv/marketing-director-hsn.pdf", "followup": "2026-11-08", "notes": "شاغر تقديم سريع (LinkedIn Easy Apply) مخصص لتقديمك اليدوي بضغطة زر واحدة دون تدخل البوت"}];
     let currentStatusFilter = 'all';
     let currentMethodFilter = 'all';
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    }
+
+    function updateCountsAndUI() {
+      const appliedCount = allJobs.filter(j => j.status.includes('تم التقديم')).length;
+      const readyCount = allJobs.filter(j => j.status.includes('جاهز')).length;
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      const manualCount = Object.keys(manualStore).length;
+
+      const kpiApplied = document.getElementById('kpi-applied');
+      if (kpiApplied) kpiApplied.innerText = appliedCount;
+
+      const kpiReady = document.getElementById('kpi-ready');
+      if (kpiReady) kpiReady.innerText = readyCount;
+
+      const manualBadge = document.getElementById('manualAppliedCount');
+      if (manualBadge) manualBadge.innerText = manualCount;
+    }
+
+    function initManualApplied() {
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      allJobs.forEach(j => {
+        if (!j.originalStatus) j.originalStatus = j.status;
+        if (manualStore[j.id]) {
+          j.manual = true;
+          j.status = 'تم التقديم (يدوي)';
+        }
+      });
+      updateCountsAndUI();
+    }
+
+    function toggleManualApply(jobId) {
+      const j = allJobs.find(x => x.id === jobId);
+      if (!j) return;
+
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      const isCurrentlyManual = !!manualStore[jobId];
+
+      if (isCurrentlyManual) {
+        delete manualStore[jobId];
+        j.manual = false;
+        j.status = j.originalStatus || 'جاهز للتقديم';
+        showToast('↩ تم التراجع عن تسجيل التقديم اليدوي لـ ' + j.company);
+      } else {
+        manualStore[jobId] = {
+          id: j.id,
+          company: j.company,
+          title: j.title,
+          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+          date: new Date().toLocaleDateString('ar-SA')
+        };
+        j.manual = true;
+        if (!j.originalStatus) j.originalStatus = j.status;
+        j.status = 'تم التقديم (يدوي)';
+        showToast('🎉 تم تسجيل تقديمك اليدوي بنجاح على ' + j.company + '!');
+
+        // Attempt background live sync to local server if running
+        fetch(`http://127.0.0.1:5050/api/mark_applied?id=${jobId}`, { mode: 'cors' })
+          .then(r => r.json())
+          .then(data => {
+            if (data.success) console.log('✓ تم التحديث التلقائي في ملف التتبع وقوقل شيت:', data);
+          })
+          .catch(() => {});
+      }
+
+      localStorage.setItem('manual_applied_jobs', JSON.stringify(manualStore));
+      updateCountsAndUI();
+      filterJobs();
+    }
 
     function renderTable(jobs) {
       const tbody = document.getElementById('jobsTableBody');
@@ -988,7 +955,7 @@
         // Status tag
         let statusTag = '';
         if (j.status.includes('تم التقديم')) {
-          statusTag = '<span class="tag-status status-applied">✓ تم التقديم</span>';
+          statusTag = j.manual ? '<span class="tag-status status-applied">✓ تم التقديم (يدوياً)</span>' : '<span class="tag-status status-applied">✓ تم التقديم</span>';
         } else if (j.status.includes('جاهز')) {
           statusTag = '<span class="tag-status status-ready">🚀 جاهز للتقديم</span>';
         } else if (j.status.includes('مغلقة')) {
@@ -1014,13 +981,17 @@
         // Action button
         let actionBtn = '';
         if (j.status.includes('تم التقديم')) {
-          actionBtn = '<span class="btn-done">✓ تم إرسال الطلب</span>';
+          if (j.manual) {
+            actionBtn = `<button class="btn-done-manual" onclick="toggleManualApply('${j.id}')" title="اضغط للتراجع أو تعديل التقديم اليدوي">✓ قدّمت يدوياً</button>`;
+          } else {
+            actionBtn = '<span class="btn-done">✓ تم إرسال الطلب</span>';
+          }
         } else if (j.status.includes('مغلقة')) {
           actionBtn = '<span style="color:#fb7185; font-size:12px; font-weight:700;">مغلقة من الشركة</span>';
         } else if (j.status.includes('تم التخطي')) {
-          actionBtn = '<span style="color:#64748b; font-size:12px;">مستبعد من التقديم</span>';
+          actionBtn = `<span style="color:#64748b; font-size:12px;">مستبعد</span> <button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="إذا قدمت عليها يدوياً اضغط هنا">✅ قدّمت</button>`;
         } else {
-          actionBtn = `<a href="${j.url}" target="_blank" class="btn-apply">قدّم الآن ↗</a>`;
+          actionBtn = `<a href="${j.url}" target="_blank" class="btn-apply">قدّم الآن ↗</a> <button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="اضغط هنا لتسجيل أنك قدمت بنفسك على هذه الوظيفة">✅ قدّمت أنا</button>`;
         }
 
         // Parse date and time cleanly
@@ -1116,8 +1087,26 @@
       const j = allJobs.find(x => x.id === jobId);
       if (!j) return;
 
+      const isManual = !!j.manual;
+      const isApplied = j.status.includes('تم التقديم');
+
       document.getElementById('mCompanyRole').innerText = `${j.company} - ${j.title}`;
       document.getElementById('modalBody').innerHTML = `
+        <div class="modal-manual-action-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div>
+              <h4 style="font-size:14px; font-weight:800; color:#10b981; margin-bottom:4px;">
+                ${isApplied ? '✓ هذه الوظيفة مسجلة كـ "تم التقديم"' : 'هل قدمت على هذه الوظيفة يدوياً؟'}
+              </h4>
+              <p style="font-size:12px; color:#94a3b8;">
+                ${isManual ? 'تم تسجيل تقديمك اليدوي وحفظه في المنظومة وقاعدة البيانات.' : 'إذا قمت بالتقديم بنفسك على موقع الشركة أو عبر لينكدإن، اضغط الزر لإعلام المنظومة وتحديث الإحصائيات.'}
+              </p>
+            </div>
+            <button class="${isManual ? 'btn-done-manual' : 'btn-mark-manual'}" style="font-size:12.5px; padding:8px 16px;" onclick="toggleManualApply('${j.id}'); openDetails('${j.id}');">
+              ${isManual ? '↩ إلغاء التحديد كـ "تم التقديم يدوياً"' : '✅ تأكيد أنني قدمت يدوياً'}
+            </button>
+          </div>
+        </div>
         <div class="modal-highlight-box">
           <div class="m-highlight-item">
             <span class="m-hl-label">⏰ وقت إضافة الوظيفة على الداشبورد:</span>
@@ -1163,8 +1152,97 @@
       document.getElementById('modalOverlay').style.display = 'flex';
     }
 
-    function closeModal(e) {
+    function closeModal() {
       document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    function openSyncModal() {
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      const keys = Object.keys(manualStore);
+      const modalBody = document.getElementById('syncModalBody');
+
+      if (keys.length === 0) {
+        modalBody.innerHTML = `
+          <div style="text-align:center; padding:30px 10px; color:#94a3b8;">
+            <div style="font-size:36px; margin-bottom:12px;">📝</div>
+            <h4 style="color:#f1f5f9; margin-bottom:6px;">لم تقم بتسجيل أي تقديم يدوي بعد</h4>
+            <p style="font-size:13px;">عندما تقدم يدوياً على أي وظيفة اضغط على زر <strong>✅ قدّمت أنا</strong> في الجدول أو التفاصيل لتظهر هنا.</p>
+          </div>
+        `;
+      } else {
+        let listHtml = `
+          <div style="margin-bottom:14px; color:#cbd5e1; font-size:13.5px;">
+            لديك <strong>${keys.length}</strong> وظائف قمت بتسجيل التقديم عليها يدوياً:
+          </div>
+          <div style="max-height:220px; overflow-y:auto; border:1px solid #1e293b; border-radius:8px; padding:10px; background:#0b0f19; margin-bottom:16px;">
+        `;
+        keys.forEach(k => {
+          const item = manualStore[k];
+          listHtml += `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 6px; border-bottom:1px solid #1e293b; font-size:13px;">
+              <div>
+                <strong style="color:#38bdf8;">${k}</strong> - <span style="color:#f1f5f9;">${escapeHtml(item.company)}</span>
+                <div style="color:#64748b; font-size:11.5px;">${escapeHtml(item.title)}</div>
+              </div>
+              <span style="color:#34d399; font-size:12px; font-weight:700;">✓ قُدمت يدوياً</span>
+            </div>
+          `;
+        });
+        listHtml += `</div>
+          <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:8px; padding:12px; font-size:12.5px; color:#93c5fd; line-height:1.6;">
+            💡 <strong>خيارات المزامنة:</strong>
+            <br>1. <strong>مزامنة فورية الآن:</strong> يتصل بالخادم المحلي لتحديث ملف التتبع وشيت قوقل مباشرة.
+            <br>2. <strong>نسخ أمر التحديث:</strong> لتشغيل الأمر في الطرفية يدوياً بضغطة زر.
+          </div>
+        `;
+        modalBody.innerHTML = listHtml;
+      }
+
+      document.getElementById('syncModalOverlay').style.display = 'flex';
+    }
+
+    function closeSyncModal() {
+      document.getElementById('syncModalOverlay').style.display = 'none';
+    }
+
+    function copySyncCommand() {
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      const keys = Object.keys(manualStore);
+      if (keys.length === 0) {
+        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للنسخ');
+        return;
+      }
+      const cmd = `python3 tools/sync_manual_applied.py ${keys.join(' ')}`;
+      navigator.clipboard.writeText(cmd).then(() => {
+        showToast('📋 تم نسخ أمر المزامنة! الصقه في Terminal للتحديث المباشر.');
+      });
+    }
+
+    function syncWithLocalServer() {
+      const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
+      const keys = Object.keys(manualStore);
+      if (keys.length === 0) {
+        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للمزامنة');
+        return;
+      }
+
+      showToast('⏳ جارٍ الاتصال بخادم المزامنة المحلي...');
+      let completed = 0;
+      let failed = 0;
+
+      Promise.all(keys.map(k =>
+        fetch(`http://127.0.0.1:5050/api/mark_applied?id=${k}`, { mode: 'cors' })
+          .then(r => r.json())
+          .then(data => { if (data.success) completed++; else failed++; })
+          .catch(() => failed++)
+      )).then(() => {
+        if (completed > 0) {
+          showToast(`🎉 تمت المزامنة بنجاح! تم تحديث ${completed} وظائف في قوقل شيت.`);
+          closeSyncModal();
+        } else {
+          showToast('⚠️ تعذر الوصول للخادم المحلي. استخدم خيار نسخ أمر Terminal.');
+        }
+      });
     }
 
     function copyToClipboard() {
@@ -1208,9 +1286,7 @@
       });
 
       navigator.clipboard.writeText(tsvRows.join('\n')).then(() => {
-        const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3500);
+        showToast('📋 تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)');
       });
     }
 
@@ -1224,7 +1300,8 @@
         .replace(/'/g, "&#039;");
     }
 
-    // Initial render
+    // Initial render with localStorage hydration
+    initManualApplied();
     renderTable(allJobs);
   </script>
 </body>
