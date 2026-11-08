@@ -4,51 +4,45 @@ framework_version: 1.0.0
 
 # Behavioral Profile
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- You can use results from PI, DISC, Myers-Briggs, StrengthsFinder, or a self-assessment -->
-
 ## Overview
-[YOUR_NAME]'s behavioral assessment identifies them as a **[PROFILE_TYPE]** pattern. [1-2 SENTENCE_SUMMARY].
+Hassan Sarhan is a **Results-Oriented Growth Driver & Strategic Orchestrator**. With 8+ years across enterprise agencies, startups, and cross-border brands, he combines data-backed performance marketing with clear leadership to build repeatable revenue engines.
 
 ## Core Behavioral Drives
 
 | Drive | Level | Meaning |
 |-------|-------|---------|
-| [DRIVE_1] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_2] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_3] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_4] | [LEVEL] | [DESCRIPTION] |
+| Dominance / Drive | High | Proactive, decisive, focused on measurable ROAS, revenue velocity, and scaling |
+| Extraversion / Influence | High | Persuasive communicator, inspires teams of 20+, bridges tech, creative, and C-level stakeholders |
+| Pace / Adaptability | High | Thrives in dynamic markets, rapid campaign pivots, and agile experimentation |
+| Conformity / Systems | Moderate-High | Builds rigorous SOPs, attribution models, and conversion tracking frameworks without slowing down velocity |
 
 ## Strongest Behaviors
-- **[BEHAVIOR_1]:** [DESCRIPTION]
-- **[BEHAVIOR_2]:** [DESCRIPTION]
-- **[BEHAVIOR_3]:** [DESCRIPTION]
+- **Metrics-Obsessed Execution:** Every dollar spent must produce auditable business impact (ROAS, CPA, conversion rates, customer lifetime value).
+- **Cross-Functional Team Empowerment:** Leads multi-disciplinary teams (creative, tech, media buying, sales) by setting high benchmarks and fostering psychological safety.
+- **GCC Consumer Psychology Intuition:** Deep cultural understanding of Saudi and Gulf digital buyer behavior across Snapchat, TikTok, Instagram, and WhatsApp.
 
 ## How You Work Best
-- [ENVIRONMENT_PREFERENCE_1]
-- [ENVIRONMENT_PREFERENCE_2]
-- [ENVIRONMENT_PREFERENCE_3]
+- Environments that provide strategic autonomy to test, iterate, and scale budgets based on real-time ROAS.
+- Companies with clear commercial growth targets and collaborative executive alignment.
+- Cultures that embrace modern marketing technology, automation, and generative AI.
 
 ## Growth Areas (frame positively in applications)
-- **[AREA_1]:** [HOW_TO_FRAME_IT_POSITIVELY]
-- **[AREA_2]:** [HOW_TO_FRAME_IT_POSITIVELY]
+- **High Standards for Execution:** Can have very high expectations for campaign speed and output quality; actively addresses this by building comprehensive SOPs, onboarding frameworks, and training documentation.
+- **Deep Immersion in Metrics:** Balances short-term CAC/ROAS optimization with long-term brand equity building.
 
 ## Mapping to Job Posting Language
 
 When a job posting mentions these keywords, it's a **strong behavioral fit**:
-- [KEYWORD_OR_PHRASE_THAT_MATCHES_YOUR_STYLE]
-- [ANOTHER_KEYWORD]
+- "Growth mindset", "ROAS", "Performance Marketing", "Data-driven", "Scaling", "Omnichannel", "Team leadership", "SOPs", "Attribution", "CAC optimization", "Cross-functional leadership".
 
 When a job posting mentions these, flag as **potential friction** (not deal-breaker):
-- [KEYWORD_OR_PHRASE_THAT_MIGHT_CLASH]
-- [ANOTHER_KEYWORD]
+- "Strictly traditional marketing without digital attribution", "Micro-management", "No budget flexibility for testing".
 
 ## Management Style Preferences
-- [WHAT_MANAGEMENT_STYLE_WORKS_FOR_YOU]
-- [WHAT_DOESN'T_WORK]
+- **Works best:** Empowering, clear ownership, OKRs/KPIs-driven, data-informed strategic reviews.
+- **Doesn't work:** Bureaucratic sign-off delays on active ad campaigns that require same-day tactical pivots.
 
 ## Using This in Applications
-- **Cover letters:** [HOW_TO_WEAVE_IN_BEHAVIORAL_STRENGTHS]
-- **CV:** [WHAT_TO_EMPHASIZE]
-- **Interviews:** [WHAT_STAR_EXAMPLES_TO_USE]
-- **Don't overstate:** [WHAT_NOT_TO_CLAIM]
+- **Cover letters:** Emphasize the track record of scaling +7M SAR in ad spend, delivering up to 25x ROAS, and leading 20+ professionals.
+- **CV:** Highlight tangible metrics (SAR revenue, ROAS, percentage growth, team size).
+- **Interviews:** Use STAR examples illustrating high-stakes campaign turnarounds and revenue milestones.

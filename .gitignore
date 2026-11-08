@@ -36,6 +36,9 @@ linkedin_Profile.pdf
 # fetching service; the .env holding it must never be committed.
 .env
 .env.*
+jobs.env*
+tools/browser_apply/.chrome_session/
+tools/browser_apply/node_modules/
 
 # Personal photos and signatures
 *.jpg

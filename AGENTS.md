@@ -17,3 +17,9 @@ To prevent duplication and configuration drift across different AI agent framewo
    - Do not duplicate these rules or specifications. Treat `.claude/` files as the single source of truth.
 3. **Portal Search Skills:**
    - Job-portal search CLIs live under [.agents/skills/](.agents/skills/) in the portable Agent Skills format (with a `SKILL.md` per portal). Codex and Antigravity discover these automatically; the `/scrape` workflow in [.claude/skills/job-scraper/](.claude/skills/job-scraper/) orchestrates them.
+
+## Language Purity Rule for Applications & Emails
+
+- **Arabic Postings:** When a job description, company name, or role is in Arabic, the entire submission email (Subject, Salutation, Pitch, Executive Highlights, and Sign-off) must be **100% pure Arabic** with proper RTL formatting.
+- **English Postings:** When a job description or role is in English, the entire submission email must be **100% pure English** with proper LTR formatting.
+- **Strict Rule:** Never produce or send mixed-language emails (e.g. Arabic pitch with English greeting or bullet points). Every communication must be linguistically unified and culturally appropriate.

@@ -1,3 +1,4 @@
+import os
 import shutil
 import subprocess
 import sys
@@ -13,8 +14,9 @@ UPSTREAM_SLUG = "ai-job-search-dev/ai-job-search"
 
 
 def git(root: Path, *args: str) -> str:
+    env = {**os.environ, "GIT_EDITOR": "true"}
     return subprocess.run(
-        ["git", *args], cwd=root, check=True, capture_output=True, text=True
+        ["git", *args], cwd=root, check=True, capture_output=True, text=True, env=env
     ).stdout
 
 
@@ -34,6 +36,7 @@ class TriageRepoFixture(unittest.TestCase):
         git(self.root, "init", "-b", "master")
         git(self.root, "config", "user.name", "Test")
         git(self.root, "config", "user.email", "test@example.com")
+        git(self.root, "config", "core.editor", "true")
         git(self.root, "remote", "add", "upstream",
             f"https://github.com/{UPSTREAM_SLUG}.git")
 

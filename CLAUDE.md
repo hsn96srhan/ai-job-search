@@ -1,10 +1,7 @@
-# Job Application Assistant for [YOUR_NAME]
-
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
+# Job Application Assistant for Hassan Sarhan
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Claude acts as a career advisor and application assistant for Hassan Sarhan, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
 2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
 3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
@@ -13,79 +10,116 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ## Candidate Profile
 
-<!-- This section is auto-populated by /setup. You can also fill it in manually. -->
-
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
+- **Name:** Hassan Sarhan
+- **Location:** Riyadh, Saudi Arabia (Open to Riyadh on-site/hybrid, GCC, and Remote roles)
+- **Phone:** +966 50 626 7542
+- **Email:** hsn96srhan@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/srhan-jr/
+- **Portfolio / Website:** https://hsn96srhan.github.io/hsn/
 - **Languages:**
   | Language | Level |
   |----------|-------|
-  | [LANGUAGE] | [LEVEL] |
-  <!-- Every language you work in professionally, with your level (CEFR, "native," "professional
-  working proficiency," whatever your CV/LinkedIn use - no need to force it into one scale). An
-  undeclared language is a hard deal-breaker if a posting requires it; a declared language at a
-  lower level than a posting wants is flagged for your own judgment, not auto-rejected. See
-  04-job-evaluation.md's Language Gate. -->
-- **CV language:** [YOUR_CV_LANGUAGE] <!-- English unless your market expects otherwise; /setup asks -->
-
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+  | Arabic | Native |
+  | English | Professional Working Proficiency |
+- **CV language:** English
+- **Status:** Actively seeking executive & leadership roles (Marketing Director / Head of Marketing / Performance Lead)
+- **LinkedIn headline:** "HRSD Marketing Director | Strategic Growth & Performance Marketing Leader"
 
 ### Education
-<!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **Bachelor of Journalism** - Akhbar El Yom Academy, Cairo
 
 ### Professional Experience
-<!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Marketing Director** (2025 - Present) - **FLUX Ads Agency** (Riyadh, Saudi Arabia)
+  - Direct strategic growth roadmaps and omnichannel marketing operations for 30+ enterprise clients across Saudi Arabia in healthcare, retail, luxury fragrances, and F&B.
+  - Lead and supervise 4 internal divisions comprising 20+ professionals: Social Media Strategy, Creative & Visual Production, Outdoor/Field Advertising, and Software & Tech Solutions.
+  - Spearhead client brand repositioning and performance funnels, boosting qualified customer bookings by an average of +60% YoY for clinics and commercial businesses.
+  - Establish standard operating procedures (SOPs) for rapid campaign execution, automated reporting, and creative A/B testing frameworks.
+- **Digital Marketing Manager** (2025) - **RAKETBE Agency** (Riyadh, Saudi Arabia)
+  - Managed high-scale performance marketing budgets across Snapchat, Meta, TikTok, and Google Ads, consistently achieving ROAS from 5x up to 25x.
+  - Engineered custom audience segmentation and retargeting workflows, increasing client transaction conversion rates by +25%.
+  - Reduced Customer Acquisition Cost (CPA) by 32% across competitive GCC e-commerce niches through data attribution and creative angle testing.
+- **Marketing Manager** (2025) - **Arabiva Group** (Kuwait, GCC, EU & US Markets)
+  - Led marketing and digital performance for 3 global perfume and beauty brands (Arabiva, Tharb Perfume Bar, Generic Perfumes) across the GCC, Europe, and the United States.
+  - Built and localized GCC e-commerce stores with multi-currency checkouts and same-day logistics integration, +65% YoY sales growth.
+  - Executed scalable cross-border performance campaigns targeting US and UK fragrance consumers, boosting Western export sales by +50%.
+  - Orchestrated experiential retail launches and micro-influencer campaigns that generated +2,000,000 impressions.
+- **E-commerce Manager** (2022 - 2024) - **Fantazzia Bed** (Egypt, GCC & Africa)
+  - Built the company’s direct-to-consumer (D2C) e-commerce infrastructure, digital marketing, and inside sales operations from the ground up.
+  - Scaled monthly revenue from early startup numbers to 10,000,000 EGP per month: 5,000,000 EGP/Month generated directly through the proprietary online store, 5,000,000 EGP/Month closed via social channels and an integrated call center.
+  - Built automated CRM and WhatsApp recovery workflows, reclaiming +28% of abandoned shopping carts.
+- **Co-Founder & Marketing Director** (2021) - **VLEX** (Cairo & Giza, Egypt)
+  - Co-founded and steered the marketing division for a B2B logistics company dedicated to e-commerce fulfillment and last-mile delivery.
+  - Designed an automated B2B customer acquisition funnel via Google Ads and CRM bots that acquired +1,000 active e-commerce merchant clients and cut response time by 60%.
+- **Social Media & Content Specialist** (2018 - 2020) - **Medica Healthy** (Cairo, Egypt)
+  - Executed the go-to-market launch strategy for an integrated healthcare mobile application (Doctor Bookings, Labs, Diagnostic Imaging, and E-Pharmacy).
+  - Generated over 1,000,000 organic video views and accelerated app downloads and patient engagement by +90% through storytelling and expert healthcare content.
 
-### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+### Key Achievements & Metrics
+- **+7M SAR Ad Spend Managed:** Directed large-scale media buying investments with zero budget waste and audited attribution.
+- **Up to 25x Return on Ad Spend (ROAS):** Delivered high-yield performance for commercial and medical clients in Riyadh and the GCC.
+- **+50 Brands Scaled:** Led successful market entries, rebrandings, and digital acquisition campaigns across 5 countries.
+- **10M/Month Sales Engine:** Built an end-to-end e-commerce, fulfillment, and call-center revenue system within 3 years.
+- **Team of 20+ Led:** Supervised and mentored cross-functional creative, technical, and media buying teams.
 
-### Certifications
-<!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+### Technical & Marketing Skills
+- **Primary:** Paid Media Buying (Snapchat, Meta, TikTok, Google Ads), Performance Marketing, Growth Strategy, E-commerce Scaling, Team Leadership.
+- **Secondary:** Generative AI for Digital Marketing, Full-Funnel Marketing, Retention & CRM Automation (WhatsApp/Email), Conversion Rate Optimization (CRO), A/B Testing.
+- **Domain:** GCC E-commerce Localization, Healthcare & Clinics Marketing, Luxury Fragrances & Retail, B2B Logistics & Tech.
+- **Software:** Meta Ads Manager, Snapchat Ads Manager, TikTok Ads Manager, Google Ads & Analytics, Shopify, WooCommerce, CRM & Marketing Automation Tools.
 
-### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
-
-### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+### Certifications & Accreditations (18 International Credentials)
+- Official Marketing Manager Accreditation — Ministry of Human Resources and Social Development (HRSD, Saudi Arabia)
+- Advanced Meta Advertising & Campaign Optimization — Meta
+- Measuring & Optimizing Social Media Campaigns — Meta
+- Digital Marketing Challenger Track — MCIT & Udacity
+- Advanced Google Ads (Search & Display PPC) — LinkedIn Learning
+- Social Media Marketing Professional — Hootsuite & LinkedIn
+- Customer Experience Journey Mapping (CX) — LinkedIn Learning
+- Generative AI for Digital Marketers — LinkedIn Learning
+- Mastering SEO Strategy & Organic Growth — LinkedIn Learning
+- Marketing Project Management & Agile Execution — LinkedIn Learning
 
 ### Behavioral Profile
-<!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+- **Results-Oriented & Metrics-Obsessed:** Driven by ROAS, CAC/CPA, revenue velocity, and clear data attribution.
+- **Strategic Leader & Cross-Functional Orchestrator:** Skilled at aligning creative visual production, software engineering, media buying, and executive leadership.
+- **Strengths:** Rapid experimentation, team development, GCC consumer psychology, growth engine building.
+- **Thrives in:** Fast-paced, high-growth scale-ups, progressive enterprise organizations, and performance-driven agencies.
 
-### What Excites You
-<!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
-
-### Target Sectors
-<!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+### Target Roles & Preferences
+- **Roles:** All marketing-related roles at all levels (Marketing Director, Head of Marketing, Marketing Manager, Growth Lead, Performance Marketing Lead, Digital Marketing Specialist, E-Commerce Specialist/Manager, Brand Manager, Campaign Manager, Marketing Coordinator).
+- **Locations & Work Modes:**
+  - **Riyadh (الرياض):** All workplace types accepted — On-site, Hybrid, or Remote.
+  - **Rest of Saudi Arabia (Jeddah, Dammam, Khobar, etc.):** Remote only.
+  - **GCC / International:** Remote.
+- **Sectors:** Open to any sector (Retail, E-commerce, Real Estate, Healthcare, Tech/SaaS, Agency, F&B, Tourism, Logistics, etc.).
+- **Compensation Targets & Baseline:**
+  - **Current Basic Salary:** 8,000 SAR / month (+ 3 months basic housing allowance, employer-covered Iqama, flight, paid leave & family visit support).
+  - **Expected Basic Salary:** 9,000 SAR / month.
+  - **Minimum Basic Floor:** 8,000 SAR / month.
+  - **Minimum Total Package:** 10,000 SAR / month (All-inclusive gross compensation).
+- **Personal Details for Corporate Forms:**
+  - **Nationality:** Egyptian (مصري)
+  - **Religion:** Muslim (مسلم)
+  - **Marital Status:** Married (متزوج)
+  - **Iqama:** Transferable Iqama (إقامة نظامية قابلة للتحويل)
+  - **Notice Period:** Immediate / 15 days
+  - **Driving License:** Valid Saudi Driving License (رخصة قيادة سعودية سارية)
 
 ### Deal-breakers
-<!-- Hard constraints on job search. Language requirements are handled separately and
-automatically from your Languages table above - don't duplicate them here. -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+- On-site roles outside Riyadh (outside Riyadh must be Remote).
+- Basic salary below 8,000 SAR or total compensation below 10,000 SAR / month.
+- Low-autonomy environments with no appetite for data-driven experimentation.
+
+### Application Channel & Automation Rules (Strict Candidate Policy)
+- **LinkedIn Easy Apply:** NEVER attempt autonomous submission on Easy Apply. Always keep Easy Apply jobs classified as **`جاهز للتقديم`** (Ready to Apply) so the candidate submits manually in seconds.
+- **External Career Sites & Portals:** Focus autonomous Playwright Chrome bot on external links (Workday, Greenhouse, Lever, direct company career websites) to auto-fill corporate forms, legal questions, and upload PDF CVs.
+- **Direct Email Applications:** Focus 100% automated submission on jobs with dedicated application emails (`careers@`, `hr@`, etc.) via `tools/email_apply.py`, generating 100% pure Arabic or English pitch and attaching the master PDF CV.
+
+### Tracking Statuses (Saudi Tracker / Google Sheets)
+- **`تم التقديم`** (Applied): Direct email auto-submission completed via SMTP or external portal form submitted.
+- **`جاهز للتقديم`** (Ready to Apply): Matching marketing role (fit score ≥ 80%) in Riyadh (or remote) with tailored CV, cover letter, and application answers prepared (including all Easy Apply postings).
+- **`تم التخطي`** (Skipped): Unsuitable postings (fit score < 80%, on-site outside Riyadh, or total package < 10,000 SAR/mo).
 
 ## Repo Structure
 - `cv/` - LaTeX CV variants (moderncv template, banking style)

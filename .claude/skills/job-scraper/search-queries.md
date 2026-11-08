@@ -10,71 +10,105 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 **Language scope:** write every query category in every language listed in your CLAUDE.md Languages table (typically 1-2, sometimes more). A posting requiring a language you have *not* declared, as a job condition, is excluded before scoring; a posting requiring a *higher level* than you declared in a language you *do* work in is flagged for your own judgment, not excluded — see `04-job-evaluation.md`'s Language Gate, the single source of truth for this rule. Translate each category's keywords rather than machine-translating word-for-word (e.g. "Frontend Developer" -> "Desarrollador Frontend", not a literal word-for-word translation) if you work in more than one language.
 
+# Search Queries for Job Scraper
+
+## Installed portal CLIs (primary for `/scrape`)
+`/scrape` discovers every portal skill under `.agents/skills/*/SKILL.md` and runs its CLI first. Shipped country-agnostic CLIs include `linkedin-search` and `freehire-search`.
+
+The `site:` query templates in this file are the **WebSearch fallback** — for portals without a CLI, company career pages, or when a CLI fails.
+
 ## Search Sites
+Primary:
+- **linkedin.com/jobs** - LinkedIn job listings (Location: Riyadh, Saudi Arabia / GCC / Remote)
+- **bayt.com** - Leading regional job portal across Saudi Arabia & Gulf
+- **tanqeeb.com** - Major aggregator in Saudi Arabia
+- **gulftalent.com** - Executive & senior roles in GCC
 
-Primary (your market's job boards - scaffold one with `/add-portal`):
-- **[YOUR_JOB_BOARD]** - your market's largest general job board
-- **linkedin.com/jobs** - LinkedIn job listings (filter: [YOUR_COUNTRY] / [YOUR_CITY]); also covered by `linkedin-search` CLI
-- **[YOUR_INDUSTRY_JOB_BOARD]** - a niche/industry board for your field (optional)
-- **[YOUR_ADDITIONAL_JOB_BOARD]** - another major board for your market (optional)
-
-Secondary (company career pages via Google):
-- Direct Google searches with `site:` filters for known target companies
+Secondary:
+- Direct Google searches with `site:` filters for leading tech scale-ups and agencies in Saudi Arabia (Jahez, HungerStation, Nana, Floward, Tamara, Tabby, Salla, Zid, etc.)
 
 ## Query Categories
 
-Queries are grouped by priority. Write **each category in every language from your Languages table** (see Language scope above). Combine each query with your location terms (e.g. your city, region, or metro area) where the site supports it.
-
-**Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
-
-### Priority 1: [YOUR_PRIMARY_ROLE_TYPE]
-
-These match your strongest and most desired career direction.
-
+### Priority 1: Marketing Leadership (Director / Head of Marketing / CMO)
+English:
 ```
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_PRIMARY_JOB_TITLE_2]" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_KEY_SKILL]" [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_PRIMARY_JOB_TITLE_1]" [YOUR_COUNTRY]
+site:linkedin.com/jobs "Marketing Director" "Riyadh"
+site:linkedin.com/jobs "Head of Marketing" "Riyadh"
+site:linkedin.com/jobs "Chief Marketing Officer" "Saudi Arabia"
+site:linkedin.com/jobs "VP Marketing" "Riyadh"
 ```
-
-### Priority 2: [YOUR_DOMAIN_EXPERTISE]
-
-These match your domain expertise.
-
+Arabic:
 ```
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] OR [YOUR_REGION]
-site:[YOUR_JOB_BOARD] [YOUR_DOMAIN_KEYWORD_2] [YOUR_COUNTRY]
-site:linkedin.com/jobs [YOUR_DOMAIN_KEYWORD_1] [YOUR_CITY] [YOUR_COUNTRY]
+site:linkedin.com/jobs "مدير تسويق" "الرياض"
+site:linkedin.com/jobs "رئيس قطاع التسويق" "السعودية"
+site:bayt.com/ar/saudi-arabia/jobs "مدير تسويق" "الرياض"
 ```
 
-### Priority 3: [YOUR_ADJACENT_ROLE_TYPE]
-
-Adjacent roles you could pivot into.
-
+### Priority 2: Performance Marketing & Growth Leadership
+English:
 ```
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_1]" [YOUR_KEY_SKILL] [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "[YOUR_ADJACENT_TITLE_2]" [YOUR_KEY_SKILL] [YOUR_CITY]
+site:linkedin.com/jobs "Performance Marketing Director" "Riyadh"
+site:linkedin.com/jobs "Head of Performance Marketing" "Saudi Arabia"
+site:linkedin.com/jobs "Head of Growth" "Riyadh"
+site:linkedin.com/jobs "Growth Director" "Riyadh"
+site:linkedin.com/jobs "Digital Marketing Director" "Riyadh"
+```
+Arabic:
+```
+site:linkedin.com/jobs "مدير التسويق الرقمي" "الرياض"
+site:linkedin.com/jobs "مدير نمو" "الرياض"
 ```
 
-### Priority 4: Broader Technical / Consulting
-
-Wider net for general technical roles.
-
+### Priority 3: E-Commerce & D2C Growth Leadership
+English:
 ```
-site:[YOUR_JOB_BOARD] [YOUR_KEY_SKILL] developer [YOUR_CITY]
-site:linkedin.com/jobs "[YOUR_KEY_SKILL] developer" [YOUR_CITY]
-site:[YOUR_JOB_BOARD] "technical consultant" [YOUR_DOMAIN] [YOUR_CITY]
+site:linkedin.com/jobs "E-Commerce Director" "Riyadh"
+site:linkedin.com/jobs "Head of E-Commerce" "Saudi Arabia"
+site:linkedin.com/jobs "D2C Marketing Manager" "Riyadh"
+```
+Arabic:
+```
+site:linkedin.com/jobs "مدير التجارة الإلكترونية" "الرياض"
+```
+
+### Priority 4: Executive Agency & Commercial Leadership
+English:
+```
+site:linkedin.com/jobs "Managing Director" "Advertising Agency" "Riyadh"
+site:linkedin.com/jobs "Media Buying Director" "Riyadh"
+site:linkedin.com/jobs "Head of Paid Media" "Riyadh"
+```
+
+### Priority 5: All Marketing Roles & Specialists (All Levels across Saudi Arabia)
+English:
+```
+site:linkedin.com/jobs "Marketing Specialist" "Riyadh"
+site:linkedin.com/jobs "Digital Marketing Specialist" "Saudi Arabia"
+site:linkedin.com/jobs "Performance Marketing Specialist" "Riyadh"
+site:linkedin.com/jobs "Media Buyer" "Riyadh"
+site:linkedin.com/jobs "Brand Manager" "Riyadh"
+site:linkedin.com/jobs "Marketing Lead" "Saudi Arabia"
+site:linkedin.com/jobs "Marketing Manager" "Remote" "Saudi Arabia"
+```
+Arabic:
+```
+site:linkedin.com/jobs "أخصائي تسويق" "الرياض"
+site:linkedin.com/jobs "أخصائي تسويق رقمي" "السعودية"
+site:linkedin.com/jobs "مدير حملات إعلانية" "الرياض"
+site:linkedin.com/jobs "مسؤول تسويق" "الرياض"
 ```
 
 ## Location Filter
+- **Ideal / Accepted for any mode (Onsite/Hybrid/Remote):** Riyadh (الرياض)
+- **Outside Riyadh in Saudi Arabia (Jeddah, Dammam, Khobar, etc.):** Remote ONLY
+- **International / GCC:** Remote ONLY
+- **Excluded:** Any on-site job outside Riyadh
 
-When evaluating results, verify the job location is within reasonable commute distance from your home. Define acceptable areas:
-- [YOUR_CITY] and surrounding areas
-- [ACCEPTABLE_AREA_1]
-- [ACCEPTABLE_AREA_2]
-- [BORDERLINE_AREA] (borderline - ~X min by transit)
-- [TOO_FAR_AREA] (too far)
+## Language Filter
+- English and Arabic. Both are native/fluent working languages. Postings requiring either or both pass cleanly.
+
+## Date Filter
+- Include jobs posted within the last 14 days (or active postings with open application deadlines).
 
 ## Language Filter
 

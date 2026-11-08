@@ -60,9 +60,9 @@ How well do the required/preferred skills align with the candidate's capabilitie
 | 40-59 | Partial match, significant upskilling needed |
 | 0-39 | Fundamental mismatch |
 
-**Strong match areas:** [YOUR_PRIMARY_SKILLS]
-**Moderate match areas:** [YOUR_SECONDARY_SKILLS]
-**Weak match areas:** [SKILLS_YOU_LACK]
+**Strong match areas:** Performance Marketing, Paid Media Buying (Snapchat, Meta, TikTok, Google Ads), Omnichannel Growth Strategy, Full-Funnel Architecture, Team Leadership (20+ professionals), GCC E-Commerce Scaling, Conversion Rate Optimization (CRO), Budget Management (+7M SAR).
+**Moderate match areas:** Generative AI Workflow Integration, B2B Acquisition & Inside Sales, SEO Strategy & Content Direction, CRM Automation (WhatsApp/Klaviyo/HubSpot).
+**Weak match areas:** Pure software development/coding, traditional offline print buying with no digital component.
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for? Match on the function and nature of the work performed, not the literal job title - a "Data Consultant" and a "Data Scientist" role can be functionally identical.
@@ -74,9 +74,9 @@ Does work history align with what they're looking for? Match on the function and
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** [YOUR_DIRECT_EXPERIENCE_DOMAINS]
-**Moderate:** [YOUR_ADJACENT_EXPERIENCE]
-**Entry-level:** [ROLES_WITH_LIMITED_EXPERIENCE]
+**Strong:** All marketing roles across all levels (Marketing Director, Head of Marketing, Marketing Manager, Growth Lead, Performance Marketing Lead/Specialist, Digital Marketing Specialist, E-Commerce Specialist/Manager, Brand Manager, Campaign Manager, Marketing Coordinator). Any sector in Saudi Arabia.
+**Moderate:** Adjacent commercial or growth roles with a strong digital/marketing component.
+**Weak:** Pure non-marketing roles with no marketing or commercial growth function.
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
@@ -90,11 +90,11 @@ Does the role and company culture match the behavioral profile?
 
 **Red flags to research:** Department disorganization, work dominated by maintenance over development, poor chemistry with leadership, culture mismatches. Check reviews, media coverage, LinkedIn connections, and network contacts for insider perspective.
 
-### 4. Location & Logistics (Pass/Fail + Notes)
-- Within commute range: PASS
-- Remote with occasional office: PASS
-- Requires relocation: FAIL (deal-breaker)
-- Frequent international travel: FLAG (discuss with user)
+### 4. Location & Compensation Gate (Pass/Fail + Notes)
+- **Riyadh (الرياض):** On-site, Hybrid, or Remote: **PASS**
+- **Rest of Saudi Arabia (Jeddah, Dammam, etc.):** Remote only: **PASS** (On-site outside Riyadh: **FAIL / Deal-breaker**)
+- **GCC / International:** Remote: **PASS**
+- **Compensation Threshold:** Total package $\ge 10,000$ SAR/month (Basic target 8,000 SAR/month): **PASS** (Total package strictly below 10,000 SAR: **FAIL**)
 
 ### 5. Career Alignment & Motivation (0-100)
 Does this role advance career goals and contain tasks that energize?
@@ -107,19 +107,19 @@ Does this role advance career goals and contain tasks that energize?
 | 0-39 | Dead end or backwards step |
 
 **Career goals:**
-- [YOUR_CAREER_GOAL_1]
-- [YOUR_CAREER_GOAL_2]
-- [YOUR_CAREER_GOAL_3]
+- Lead marketing strategy and scaling for a major enterprise, high-growth unicorn, or top-tier regional agency in Saudi Arabia / GCC.
+- Spearhead multi-million SAR growth initiatives with high operational autonomy and data-driven teams.
+- Drive AI-powered marketing transformations and cross-border GCC expansion.
 
 **Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: [YOUR_ENERGIZING_TASKS]
-- Tasks that drain: [YOUR_DRAINING_TASKS]
+- Tasks that energize: Scaling paid campaigns profitably (ROAS), orchestrating multi-channel launches, building and mentoring high-performing teams, diagnosing funnels and unlocking conversion leaps.
+- Tasks that drain: Pure administrative bureaucracy without marketing strategy, micromanagement of creative output without data backing, stagnant budgets with unrealistic targets.
 - Non-task factors: leadership style, department culture, company values, degree of autonomy
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: [YOUR_FINANCIAL_SITUATION_CONTEXT]
-- **Flexibility**: [YOUR_SCHEDULE_CONSTRAINTS]
-- **Professional development**: [YOUR_GROWTH_PRIORITIES]
+- **Security**: Focus on well-funded scale-ups, established corporate brands, or leading regional advertising groups.
+- **Flexibility**: Riyadh-based, open to hybrid, on-site executive leadership, and GCC travel.
+- **Professional development**: Continued mastery of AI in marketing, executive leadership, and multi-country market expansion.
 
 ### 6. Salary Benchmark (Optional)
 
