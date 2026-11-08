@@ -6,23 +6,41 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>لوحة التقديم الآلي والتتبع التنفيذي | حسن سرحان</title>
+  <title>لوحة التقديم والمتابعة | حسن سرحان</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #111827;
-      --card-border: #1f2937;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --accent-green: #10b981;
-      --accent-blue: #3b82f6;
-      --accent-purple: #8b5cf6;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --accent-cyan: #06b6d4;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --emerald: #10b981;
+      --emerald-dark: #047857;
+      --emerald-bg: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      --blue: #3b82f6;
+      --blue-dark: #1d4ed8;
+      --blue-bg: #eff6ff;
+      --blue-border: #bfdbfe;
+      --purple: #8b5cf6;
+      --purple-dark: #6d28d9;
+      --purple-bg: #f5f3ff;
+      --purple-border: #ddd6fe;
+      --amber: #f59e0b;
+      --amber-dark: #b45309;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --rose: #f43f5e;
+      --rose-dark: #be123c;
+      --rose-bg: #fff1f2;
+      --rose-border: #fecdd3;
       --font: 'Cairo', system-ui, -apple-system, sans-serif;
     }
 
@@ -36,8 +54,9 @@
       font-family: var(--font);
       background-color: var(--bg);
       color: var(--text-main);
-      line-height: 1.6;
-      padding: 24px 16px;
+      line-height: 1.5;
+      padding: 24px 20px;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
@@ -47,142 +66,114 @@
 
     /* Header */
     .header {
-      background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
-      border: 1px solid #312e81;
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
     }
 
     .profile-info h1 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      color: var(--text-main);
       margin-bottom: 6px;
-    }
-
-    .badge-live {
-      font-size: 12px;
-      font-weight: 700;
-      background: rgba(16, 185, 129, 0.2);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      padding: 3px 10px;
-      border-radius: 9999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge-live::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: #10b981;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 8px #10b981;
+      letter-spacing: -0.3px;
     }
 
     .profile-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      font-size: 13.5px;
+      align-items: center;
+      gap: 8px 12px;
+      font-size: 13px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
-    .profile-meta span {
-      display: flex;
+    .profile-meta .sep {
+      color: var(--text-subtle);
+    }
+
+    .badge-live {
+      font-size: 11.5px;
+      font-weight: 700;
+      background: var(--emerald-bg);
+      color: var(--emerald-dark);
+      border: 1px solid var(--emerald-border);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+    }
+
+    .badge-live::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--emerald);
+      border-radius: 50%;
+      display: inline-block;
     }
 
     .header-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .btn {
       font-family: var(--font);
-      font-size: 13.5px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: #3b82f6;
-      color: #ffffff;
-    }
-    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
-
-    .btn-success {
-      background: #10b981;
-      color: #ffffff;
-    }
-    .btn-success:hover { background: #059669; transform: translateY(-1px); }
-
-    .btn-secondary {
-      background: #1f2937;
-      color: #e5e7eb;
-      border: 1px solid #374151;
-    }
-    .btn-secondary:hover { background: #374151; transform: translateY(-1px); }
-
-    .btn-sync-manual {
-      font-family: var(--font);
       font-size: 13px;
       font-weight: 700;
-      padding: 9px 16px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.5);
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
       cursor: pointer;
+      border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #334155;
+      border-color: var(--border-color);
+    }
+    .btn-secondary:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+    .btn-sync-manual {
+      background: var(--emerald-bg);
+      color: var(--emerald-dark);
+      border-color: var(--emerald-border);
     }
     .btn-sync-manual:hover {
-      background: #10b981;
-      color: #0b0f19;
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
-      transform: translateY(-1px);
+      background: #dcfce7;
+      border-color: #86efac;
     }
 
     .pulse-badge {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      animation: pulse-green 1.6s infinite;
-    }
-
-    @keyframes pulse-green {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+      background: var(--emerald);
     }
 
     /* KPI Summary Cards */
@@ -190,18 +181,19 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .kpi-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       padding: 18px 20px;
       display: flex;
       flex-direction: column;
       gap: 4px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: border-color 0.15s ease;
     }
 
     .kpi-label {
@@ -213,211 +205,203 @@
     .kpi-number {
       font-size: 32px;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--text-main);
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
     }
 
     .kpi-subtext {
-      font-size: 11.5px;
-      color: #6b7280;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .kpi-total { border-color: rgba(99, 102, 241, 0.3); }
-    .kpi-total .kpi-number { color: #818cf8; }
-
-    .kpi-applied { border-color: rgba(16, 185, 129, 0.3); }
-    .kpi-applied .kpi-number { color: #34d399; }
-
-    .kpi-ready { border-color: rgba(59, 130, 246, 0.3); }
-    .kpi-ready .kpi-number { color: #60a5fa; }
-
-    .kpi-skipped { border-color: rgba(245, 158, 11, 0.3); }
-    .kpi-skipped .kpi-number { color: #fbbf24; }
-
-    /* Methods Bar */
-    .methods-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+    .kpi-applied {
+      background: #fcfdfd;
+      border-color: #bbf7d0;
     }
+    .kpi-applied .kpi-number { color: var(--emerald-dark); }
 
-    .methods-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #f1f5f9;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .kpi-ready {
+      background: #fcfdfd;
+      border-color: #bfdbfe;
     }
+    .kpi-ready .kpi-number { color: var(--blue-dark); }
 
-    .methods-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .badge-method {
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .method-email { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
-    .method-ats { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
-    .method-easy { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .kpi-skipped .kpi-number { color: var(--text-muted); }
 
     /* Controls Bar */
     .controls-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .controls-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
+    }
+
+    .controls-bottom-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
     }
 
     .search-box {
       flex: 1;
-      min-width: 260px;
+      min-width: 280px;
       position: relative;
     }
 
     .search-box input {
       width: 100%;
       font-family: var(--font);
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 10px 14px 10px 38px;
-      color: #ffffff;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 9px 12px 9px 36px;
+      color: var(--text-main);
       font-size: 13.5px;
       outline: none;
-      transition: border 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .search-box input:focus {
-      border-color: #3b82f6;
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
     .search-icon {
       position: absolute;
-      left: 12px;
+      left: 11px;
       top: 50%;
       transform: translateY(-50%);
-      color: #64748b;
+      color: var(--text-subtle);
       font-size: 14px;
+      pointer-events: none;
     }
 
     .filter-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-left: 4px;
     }
 
     .pill {
       font-family: var(--font);
       font-size: 12px;
       font-weight: 600;
-      background: #1e293b;
-      color: #94a3b8;
-      border: 1px solid #334155;
-      padding: 6px 14px;
+      background: #ffffff;
+      color: #475569;
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .pill:hover {
-      background: #334155;
-      color: #ffffff;
+      background: #f1f5f9;
+      color: var(--text-main);
+      border-color: #cbd5e1;
     }
 
     .pill.active {
-      background: #3b82f6;
+      background: #0f172a;
       color: #ffffff;
-      border-color: #3b82f6;
+      border-color: #0f172a;
     }
 
     .pill.active-applied {
-      background: #10b981;
+      background: var(--emerald-dark);
       color: #ffffff;
-      border-color: #10b981;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+      border-color: var(--emerald-dark);
     }
 
     .pill.active-manual {
       background: #059669;
       color: #ffffff;
-      border-color: #10b981;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+      border-color: #059669;
     }
 
     .pill.active-auto {
-      background: #4f46e5;
+      background: #4338ca;
       color: #ffffff;
-      border-color: #6366f1;
-      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+      border-color: #4338ca;
     }
 
     .pill.active-ready {
       background: #d97706;
       color: #ffffff;
-      border-color: #f59e0b;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+      border-color: #d97706;
     }
 
     .pill.active-skipped {
       background: #475569;
       color: #ffffff;
-      border-color: #64748b;
+      border-color: #475569;
     }
 
     .pill.active-closed {
-      background: #e11d48;
+      background: var(--rose-dark);
       color: #ffffff;
-      border-color: #f43f5e;
+      border-color: var(--rose-dark);
     }
 
     .pill-method {
       font-family: var(--font);
       font-size: 12px;
       font-weight: 600;
-      background: #1e293b;
-      color: #94a3b8;
-      border: 1px solid #334155;
-      padding: 6px 12px;
+      background: #ffffff;
+      color: #475569;
+      border: 1px solid var(--border-color);
+      padding: 5px 11px;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .pill-method:hover { background: #334155; color: #fff; }
-    .pill-method.active-email { background: #2563eb; color: #fff; border-color: #2563eb; }
-    .pill-method.active-ats { background: #7c3aed; color: #fff; border-color: #7c3aed; }
-    .pill-method.active-easy { background: #d97706; color: #fff; border-color: #d97706; }
+    .pill-method:hover { background: #f1f5f9; color: var(--text-main); }
+    .pill-method.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .pill-method.active-email { background: var(--blue-dark); color: #fff; border-color: var(--blue-dark); }
+    .pill-method.active-ats { background: var(--purple-dark); color: #fff; border-color: var(--purple-dark); }
+    .pill-method.active-easy { background: var(--amber-dark); color: #fff; border-color: var(--amber-dark); }
 
     /* Table Container */
     .table-container {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       overflow-x: auto;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
 
     table {
@@ -428,69 +412,73 @@
     }
 
     thead th {
-      background: #0f172a;
-      color: #94a3b8;
+      background: #f8fafc;
+      color: #475569;
       font-weight: 700;
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--card-border);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
       white-space: nowrap;
+      font-size: 12.5px;
     }
 
     tbody td {
-      padding: 14px 16px;
-      border-bottom: 1px solid #1f2937;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
       vertical-align: middle;
+      color: var(--text-main);
     }
 
     tbody tr:hover {
-      background: #1e293b;
+      background: #f8fafc;
     }
 
     .company-cell strong {
-      color: #f1f5f9;
+      color: var(--text-main);
       display: block;
-      font-size: 14px;
+      font-size: 13.5px;
+      font-weight: 700;
     }
 
     .company-cell span {
-      color: #64748b;
+      color: var(--text-muted);
       font-size: 11.5px;
     }
 
     .role-cell {
       font-weight: 600;
-      color: #e2e8f0;
+      color: #1e293b;
       max-width: 240px;
     }
 
     .time-cell {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
 
     .time-main {
       font-weight: 700;
-      color: #38bdf8;
-      font-size: 12.5px;
+      color: #0369a1;
+      font-size: 12px;
     }
 
     .time-sub {
       font-size: 11px;
-      color: #64748b;
+      color: var(--text-muted);
     }
 
     .fit-meter {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-weight: 700;
+      font-size: 12px;
     }
 
     .fit-bar {
-      width: 50px;
-      height: 6px;
-      background: #1e293b;
+      width: 44px;
+      height: 5px;
+      background: #e2e8f0;
       border-radius: 9999px;
       overflow: hidden;
     }
@@ -500,19 +488,35 @@
       border-radius: 9999px;
     }
 
-    .tag-status {
-      font-size: 12px;
+    /* Badges */
+    .badge-method {
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .method-email { background: var(--blue-bg); color: var(--blue-dark); border: 1px solid var(--blue-border); }
+    .method-ats { background: var(--purple-bg); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+    .method-easy { background: var(--amber-bg); color: var(--amber-dark); border: 1px solid var(--amber-border); }
+
+    .tag-status {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
       border-radius: 9999px;
       display: inline-block;
       white-space: nowrap;
     }
 
-    .status-applied { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-    .status-ready { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
-    .status-skipped { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
-    .status-closed { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }
+    .status-applied { background: var(--emerald-bg); color: var(--emerald-dark); border: 1px solid var(--emerald-border); }
+    .status-ready { background: var(--blue-bg); color: var(--blue-dark); border: 1px solid var(--blue-border); }
+    .status-skipped { background: #f1f5f9; color: #475569; border: 1px solid var(--border-color); }
+    .status-closed { background: var(--rose-bg); color: var(--rose-dark); border: 1px solid var(--rose-border); }
 
     .action-cell {
       white-space: nowrap;
@@ -523,91 +527,86 @@
 
     .btn-apply {
       font-family: var(--font);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: #2563eb;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: var(--primary);
       color: #ffffff;
       text-decoration: none;
       display: inline-block;
       transition: background 0.15s ease;
     }
-
-    .btn-apply:hover {
-      background: #1d4ed8;
-    }
+    .btn-apply:hover { background: var(--primary-hover); }
 
     .btn-done {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: #34d399;
+      color: var(--emerald-dark);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
     }
 
     .btn-mark-manual {
       font-family: var(--font);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: var(--emerald-bg);
+      color: var(--emerald-dark);
+      border: 1px solid var(--emerald-border);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      transition: all 0.2s ease;
+      gap: 3px;
+      transition: all 0.15s ease;
       white-space: nowrap;
     }
-
     .btn-mark-manual:hover {
-      background: #10b981;
-      color: #0b0f19;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-      transform: translateY(-1px);
+      background: var(--emerald);
+      color: #ffffff;
+      border-color: var(--emerald);
     }
 
     .btn-done-manual {
       font-family: var(--font);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 5px 10px;
-      border-radius: 8px;
-      background: rgba(16, 185, 129, 0.25);
-      color: #34d399;
-      border: 1px solid #10b981;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #f0fdf4;
+      color: var(--emerald-dark);
+      border: 1px solid var(--emerald);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       white-space: nowrap;
     }
-
     .btn-done-manual:hover {
-      background: rgba(239, 68, 68, 0.2);
+      background: #fee2e2;
       border-color: #ef4444;
-      color: #f87171;
+      color: #dc2626;
     }
 
     .btn-view {
       font-family: var(--font);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid var(--border-color);
       cursor: pointer;
+      transition: all 0.15s ease;
     }
-
     .btn-view:hover {
-      background: #334155;
+      background: #f1f5f9;
+      border-color: #cbd5e1;
     }
 
     /* Toast Notification */
@@ -616,29 +615,29 @@
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: #059669;
+      background: #0f172a;
       color: #ffffff;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1000;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .toast.show {
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Modal */
+    /* Modals */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(15, 23, 42, 0.45);
       backdrop-filter: blur(4px);
       display: none;
       justify-content: center;
@@ -648,13 +647,13 @@
     }
 
     .modal-card {
-      background: #111827;
-      border: 1px solid #374151;
-      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       width: 100%;
-      max-width: 680px;
+      max-width: 640px;
       padding: 24px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       max-height: 90vh;
       overflow-y: auto;
     }
@@ -663,35 +662,37 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #1f2937;
-      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 12px;
     }
 
     .modal-header h3 {
-      font-size: 18px;
-      color: #ffffff;
+      font-size: 17px;
+      color: var(--text-main);
       font-weight: 800;
     }
 
     .modal-close {
       background: none;
       border: none;
-      color: #94a3b8;
+      color: var(--text-subtle);
       font-size: 22px;
       cursor: pointer;
-      padding: 4px;
+      line-height: 1;
+      padding: 2px 6px;
     }
+    .modal-close:hover { color: var(--text-main); }
 
     .modal-highlight-box {
-      background: #1e1b4b;
-      border: 1px solid #4338ca;
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .m-highlight-item {
@@ -702,52 +703,52 @@
     }
 
     .m-hl-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #94a3b8;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     .m-hl-val {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #f1f5f9;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
     .modal-manual-action-card {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
+      background: var(--emerald-bg);
+      border: 1px solid var(--emerald-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
     }
 
     .modal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .modal-row {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
     }
 
     .modal-label {
       font-size: 12px;
-      color: #94a3b8;
+      color: var(--text-muted);
       font-weight: 600;
     }
 
     .modal-value {
-      font-size: 14px;
-      color: #f1f5f9;
-      background: #0f172a;
+      font-size: 13.5px;
+      color: var(--text-main);
+      background: #f8fafc;
       padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
     }
   </style>
 </head>
@@ -755,33 +756,35 @@
 
   <div class="container">
 
-    <!-- Top Executive Header -->
+    <!-- Header -->
     <header class="header">
       <div class="profile-info">
-        <h1>
-          حسن سرحان | لوحة التقديم الآلي والتتبع
-          <span class="badge-live">نظام متصل ومحدّث لحظياً</span>
-        </h1>
+        <h1>لوحة التقديم والمتابعة</h1>
         <div class="profile-meta">
-          <span>💼 مدير تسويق تنفيذي (معتمد من HRSD)</span>
-          <span>📍 الرياض، السعودية</span>
-          <span>💰 الراتب: أساسي 8,000 ريال / باكدج 10,000 ريال</span>
-          <span>⚡ فترة الإشعار: فوري (15 يوم)</span>
+          <span>💼 حسن سرحان</span>
+          <span class="sep">•</span>
+          <span>مدير تسويق تنفيذي</span>
+          <span class="sep">•</span>
+          <span>الرياض</span>
+          <span class="sep">•</span>
+          <span>💰 8,000 أساسي / 10,000 باكدج</span>
+          <span class="sep">•</span>
+          <span class="badge-live">نظام متصل ومحدّث</span>
         </div>
       </div>
       <div class="header-actions">
         <button class="btn btn-sync-manual" onclick="openSyncModal()" id="btnSyncManual">
           <span class="pulse-badge"></span>
-          🔄 مزامنة تقديمي اليدوي (<span id="manualAppliedCount">0</span>)
+          🔄 مزامنة تقديمي (<span id="manualAppliedCount">0</span>)
         </button>
-        <button class="btn btn-success" onclick="copyToClipboard()">
-          📋 نسخ للشيت (Cmd+V)
+        <button class="btn btn-secondary" onclick="copyToClipboard()">
+          📋 نسخ للجدول
         </button>
         <a href="https://docs.google.com/spreadsheets/d/1pmyTxkwRc8NjddIfraoZzgV5CMulabVA59hdvKVzsYs" target="_blank" class="btn btn-primary">
-          📊 فتح قوقل شيت
+          📊 قوقل شيت
         </a>
         <a href="https://hsn96srhan.github.io/hsn/" target="_blank" class="btn btn-secondary">
-          🌐 البورتفوليو
+          🌐 بورتفوليو
         </a>
       </div>
     </header>
@@ -789,59 +792,54 @@
     <!-- KPI Summary Cards -->
     <div class="kpi-grid">
       <div class="kpi-card kpi-total">
-        <div class="kpi-label">إجمالي الفرص المفحوصة</div>
+        <div class="kpi-label">إجمالي الفرص</div>
         <div class="kpi-number" id="kpi-total">53</div>
         <div class="kpi-subtext">شواغر تسويق مستهدفة بالرياض وعن بعد</div>
       </div>
       <div class="kpi-card kpi-applied">
-        <div class="kpi-label">تم التقديم رسمياً</div>
+        <div class="kpi-label">تم التقديم</div>
         <div class="kpi-number" id="kpi-applied">44</div>
-        <div class="kpi-subtext">تقديم مؤكد عبر البريد وبوابات ATS مع إرفاق السيرة الذاتية</div>
+        <div class="kpi-subtext"><span id="kpiSubApplied">35 يدوياً • 9 آلياً</span></div>
       </div>
       <div class="kpi-card kpi-ready">
-        <div class="kpi-label">جاهز للتقديم الفوري</div>
+        <div class="kpi-label">جاهز للتقديم</div>
         <div class="kpi-number" id="kpi-ready">6</div>
-        <div class="kpi-subtext">فرص مؤهلة ومطابقة لكافة معاييرك التنفيذية</div>
+        <div class="kpi-subtext">فرص مؤهلة بانتظار الإرسال</div>
       </div>
       <div class="kpi-card kpi-skipped">
         <div class="kpi-label">مستبعد / مغلق</div>
         <div class="kpi-number" id="kpi-skipped">3</div>
-        <div class="kpi-subtext">فرص مغلقة من الشركة أو استبعدت لعدم مطابقة الشروط</div>
-      </div>
-    </div>
-
-    <!-- Application Methods Breakdown -->
-    <div class="methods-card">
-      <div class="methods-title">
-        <span>⚙️ قنوات وطرق التقديم المعتمدة في النظام:</span>
-      </div>
-      <div class="methods-badges">
-        <span class="badge-method method-easy">⚡ ايزي ابلاي (Easy Apply - يدوي): <strong id="methodsCountEasy">30</strong></span>
-        <span class="badge-method method-email">✉️ ايميل مباشر (Email - آلي): <strong id="methodsCountEmail">6</strong></span>
-        <span class="badge-method method-ats">🌐 بوابة خارجية (External ATS - آلي): <strong id="methodsCountAts">17</strong></span>
+        <div class="kpi-subtext">غير مطابقة أو مغلقة من الشركة</div>
       </div>
     </div>
 
     <!-- Controls Bar -->
     <div class="controls-card">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="ابحث باسم الشركة، المسمى الوظيفي، أو طريقة التقديم..." oninput="filterJobs()">
-        <span class="search-icon">🔍</span>
+      <div class="controls-top-row">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="بحث باسم الشركة، المسمى الوظيفي، أو المدينة..." oninput="filterJobs()">
+          <span class="search-icon">🔍</span>
+        </div>
+        <div class="filter-pills" id="methodFilterPills">
+          <span class="filter-label">القناة:</span>
+          <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات (<span id="pillCountMethodAll">53</span>)</button>
+          <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي (<span id="pillCountMethodEasy">30</span>)</button>
+          <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ إيميل مباشر (<span id="pillCountMethodEmail">6</span>)</button>
+          <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة ATS (<span id="pillCountMethodAts">17</span>)</button>
+        </div>
       </div>
-      <div class="filter-pills" id="statusFilterPills">
-        <button class="pill active" onclick="setStatusFilter('all', this)">الكل (<span id="pillCountAll">53</span>)</button>
-        <button class="pill" onclick="setStatusFilter('applied', this)">✓ إجمالي التقديم (<span id="pillCountApplied">44</span>)</button>
-        <button class="pill" onclick="setStatusFilter('manual', this)">👤 قدّمت يدوياً (<span id="pillCountManual">35</span>)</button>
-        <button class="pill" onclick="setStatusFilter('auto', this)">🤖 تقديم آلي بالمنظومة (<span id="pillCountAuto">9</span>)</button>
-        <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز للتقديم (<span id="pillCountReady">6</span>)</button>
-        <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (<span id="pillCountSkipped">2</span>)</button>
-        <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (<span id="pillCountClosed">1</span>)</button>
-      </div>
-      <div class="filter-pills" id="methodFilterPills" style="margin-right: 8px;">
-        <button class="pill-method active" onclick="setMethodFilter('all', this)">كل القنوات (<span id="pillCountMethodAll">53</span>)</button>
-        <button class="pill-method" onclick="setMethodFilter('easy', this)">⚡ ايزي ابلاي (<span id="pillCountMethodEasy">30</span>)</button>
-        <button class="pill-method" onclick="setMethodFilter('email', this)">✉️ ايميل مباشر (<span id="pillCountMethodEmail">6</span>)</button>
-        <button class="pill-method" onclick="setMethodFilter('ats', this)">🌐 بوابة خارجية (<span id="pillCountMethodAts">17</span>)</button>
+
+      <div class="controls-bottom-row">
+        <div class="filter-pills" id="statusFilterPills">
+          <span class="filter-label">الحالة:</span>
+          <button class="pill active" onclick="setStatusFilter('all', this)">الكل (<span id="pillCountAll">53</span>)</button>
+          <button class="pill" onclick="setStatusFilter('applied', this)">✓ تم التقديم (<span id="pillCountApplied">44</span>)</button>
+          <button class="pill" onclick="setStatusFilter('manual', this)">👤 قدّمت يدوياً (<span id="pillCountManual">35</span>)</button>
+          <button class="pill" onclick="setStatusFilter('auto', this)">🤖 تقديم آلي (<span id="pillCountAuto">9</span>)</button>
+          <button class="pill" onclick="setStatusFilter('ready', this)">🚀 جاهز (<span id="pillCountReady">6</span>)</button>
+          <button class="pill" onclick="setStatusFilter('skipped', this)">⚠️ مستبعد (<span id="pillCountSkipped">2</span>)</button>
+          <button class="pill" onclick="setStatusFilter('closed', this)">🔒 مغلقة (<span id="pillCountClosed">1</span>)</button>
+        </div>
       </div>
     </div>
 
@@ -850,14 +848,14 @@
       <table>
         <thead>
           <tr>
-            <th>الشركة والمنصة</th>
+            <th>الشركة</th>
             <th>المسمى الوظيفي</th>
             <th>طريقة التقديم</th>
-            <th>وقت وتاريخ الإضافة</th>
+            <th>تاريخ الإضافة</th>
             <th>المدينة</th>
-            <th>نسبة التوافق</th>
+            <th>التوافق</th>
             <th>الحالة</th>
-            <th>الإجراء المباشر</th>
+            <th>الإجراء</th>
           </tr>
         </thead>
         <tbody id="jobsTableBody">
@@ -881,26 +879,26 @@
 
   <!-- Manual Application Sync Modal -->
   <div class="modal-overlay" id="syncModalOverlay" onclick="if(event.target===this) closeSyncModal()">
-    <div class="modal-card" style="max-width: 620px;">
+    <div class="modal-card" style="max-width: 600px;">
       <div class="modal-header">
         <div>
-          <h3>🔄 مزامنة التقديم اليدوي مع المنظومة وقوقل شيت</h3>
-          <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">الوظائف التي قمت بتقديمها بنفسك يدوياً وترغب بتسجيلها في ملف التتبع والجدولة</p>
+          <h3>🔄 مزامنة التقديم اليدوي</h3>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 3px;">الوظائف التي قمت بتقديمها بنفسك يدوياً لحفظها في ملف التتبع وقوقل شيت</p>
         </div>
         <button class="modal-close" onclick="closeSyncModal()">×</button>
       </div>
-      <div id="syncModalBody" style="padding: 18px 0;"></div>
-      <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #1e293b; padding-top: 16px; flex-wrap: wrap;">
+      <div id="syncModalBody" style="padding: 14px 0;"></div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 14px; flex-wrap: wrap;">
         <button class="btn btn-secondary" onclick="closeSyncModal()">إغلاق</button>
-        <button class="btn btn-success" onclick="copySyncCommand()">📋 نسخ أمر التحديث (Terminal)</button>
-        <button class="btn btn-primary" onclick="syncWithLocalServer()">⚡ مزامنة فورية الآن</button>
+        <button class="btn btn-secondary" onclick="copySyncCommand()">📋 نسخ أمر Terminal</button>
+        <button class="btn btn-primary" onclick="syncWithLocalServer()">⚡ مزامنة فورية</button>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification -->
   <div class="toast" id="toast">
-    <span>✓ تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)</span>
+    <span>✓ تم نسخ البيانات للجدول (Cmd+V)</span>
   </div>
 
   <script>
@@ -912,7 +910,7 @@
       const toast = document.getElementById('toast');
       toast.innerText = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3800);
+      setTimeout(() => toast.classList.remove('show'), 3500);
     }
 
     function updateCountsAndUI() {
@@ -937,6 +935,9 @@
 
       const kpiApplied = document.getElementById('kpi-applied');
       if (kpiApplied) kpiApplied.innerText = appliedJobs.length;
+
+      const kpiSubApplied = document.getElementById('kpiSubApplied');
+      if (kpiSubApplied) kpiSubApplied.innerText = `${manualJobs.length} يدوياً • ${autoJobs.length} آلياً`;
 
       const kpiReady = document.getElementById('kpi-ready');
       if (kpiReady) kpiReady.innerText = readyJobs.length;
@@ -968,11 +969,6 @@
       setEl('pillCountMethodEasy', easyJobs.length);
       setEl('pillCountMethodEmail', emailJobs.length);
       setEl('pillCountMethodAts', atsJobs.length);
-
-      // Update Methods Breakdown card badges
-      setEl('methodsCountEasy', easyJobs.length);
-      setEl('methodsCountEmail', emailJobs.length);
-      setEl('methodsCountAts', atsJobs.length);
     }
 
     function initManualApplied() {
@@ -1012,9 +1008,9 @@
         j.manual = true;
         if (!j.originalStatus) j.originalStatus = j.status;
         j.status = 'تم التقديم (يدوي)';
-        showToast('🎉 تم تسجيل تقديمك اليدوي بنجاح على ' + j.company + '!');
+        showToast('✓ تم تسجيل تقديمك اليدوي على ' + j.company);
 
-        // Attempt background live sync to local server if running
+        // Background live sync to local bridge server if active
         fetch(`http://127.0.0.1:5050/api/mark_applied?id=${jobId}`, { mode: 'cors' })
           .then(r => r.json())
           .then(data => {
@@ -1033,7 +1029,7 @@
       tbody.innerHTML = '';
 
       if (jobs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:35px; color:#94a3b8;">لا توجد شواغر مطابقة لمعايير البحث والتصفية المختارة</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:35px; color:#64748b;">لا توجد شواغر مطابقة لمعايير البحث والتصفية المختارة</td></tr>';
         return;
       }
 
@@ -1043,43 +1039,43 @@
         // Status tag
         let statusTag = '';
         if (j.status.includes('تم التقديم')) {
-          statusTag = j.manual ? '<span class="tag-status status-applied">✓ تم التقديم (يدوياً)</span>' : '<span class="tag-status status-applied">✓ تم التقديم</span>';
+          statusTag = j.manual ? '<span class="tag-status status-applied">✓ تم التقديم (يدوي)</span>' : '<span class="tag-status status-applied">✓ تم التقديم</span>';
         } else if (j.status.includes('جاهز')) {
-          statusTag = '<span class="tag-status status-ready">🚀 جاهز للتقديم</span>';
+          statusTag = '<span class="tag-status status-ready">جاهز للتقديم</span>';
         } else if (j.status.includes('مغلقة')) {
-          statusTag = '<span class="tag-status status-closed">🔒 مغلقة</span>';
+          statusTag = '<span class="tag-status status-closed">مغلقة</span>';
         } else {
-          statusTag = '<span class="tag-status status-skipped">⚠️ تم التخطي</span>';
+          statusTag = '<span class="tag-status status-skipped">مستبعد</span>';
         }
 
-        // Method tag (ايزي ابلاي / ايميل مباشر / بوابة خارجية)
+        // Method tag
         let methodTag = '';
         if (j.method.includes('ايميل')) {
-          methodTag = '<span class="badge-method method-email">✉️ ايميل مباشر (آلي)</span>';
+          methodTag = '<span class="badge-method method-email">✉️ إيميل مباشر</span>';
         } else if (j.method.includes('بوابة خارجية')) {
-          methodTag = '<span class="badge-method method-ats">🌐 بوابة خارجية (آلي)</span>';
+          methodTag = '<span class="badge-method method-ats">🌐 بوابة ATS</span>';
         } else {
-          methodTag = '<span class="badge-method method-easy">⚡ ايزي ابلاي (يدوي)</span>';
+          methodTag = '<span class="badge-method method-easy">⚡ ايزي ابلاي</span>';
         }
 
         // Fit meter
         const fitNum = parseInt(j.fit.replace(/[^0-9]/g, '')) || 85;
-        const fitColor = fitNum >= 88 ? '#10b981' : (fitNum >= 80 ? '#3b82f6' : '#94a3b8');
+        const fitColor = fitNum >= 88 ? '#10b981' : (fitNum >= 80 ? '#2563eb' : '#64748b');
 
         // Action button
         let actionBtn = '';
         if (j.status.includes('تم التقديم')) {
           if (j.manual) {
-            actionBtn = `<button class="btn-done-manual" onclick="toggleManualApply('${j.id}')" title="اضغط للتراجع أو تعديل التقديم اليدوي">✓ قدّمت يدوياً</button>`;
+            actionBtn = `<button class="btn-done-manual" onclick="toggleManualApply('${j.id}')" title="اضغط للتراجع">✓ قدّمت يدوياً</button>`;
           } else {
-            actionBtn = '<span class="btn-done">✓ تم إرسال الطلب</span>';
+            actionBtn = '<span class="btn-done">✓ تم الإرسال</span>';
           }
         } else if (j.status.includes('مغلقة')) {
-          actionBtn = '<span style="color:#fb7185; font-size:12px; font-weight:700;">مغلقة من الشركة</span>';
+          actionBtn = '<span style="color:#be123c; font-size:12px; font-weight:700;">مغلقة</span>';
         } else if (j.status.includes('تم التخطي')) {
-          actionBtn = `<span style="color:#64748b; font-size:12px;">مستبعد</span> <button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="إذا قدمت عليها يدوياً اضغط هنا">✅ قدّمت</button>`;
+          actionBtn = `<button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="تسجيل تقديم يدوي">✅ قدّمت</button>`;
         } else {
-          actionBtn = `<a href="${j.url}" target="_blank" class="btn-apply">قدّم الآن ↗</a> <button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="اضغط هنا لتسجيل أنك قدمت بنفسك على هذه الوظيفة">✅ قدّمت أنا</button>`;
+          actionBtn = `<a href="${j.url}" target="_blank" class="btn-apply">قدّم الآن ↗</a> <button class="btn-mark-manual" onclick="toggleManualApply('${j.id}')" title="تسجيل تقديم يدوي">✅ قدّمت</button>`;
         }
 
         // Parse date and time cleanly
@@ -1097,7 +1093,7 @@
           <td>
             <div class="time-cell">
               <span class="time-main">🕒 ${escapeHtml(timePart)}</span>
-              <span class="time-sub">📅 ${escapeHtml(datePart)} (أضيفت للداشبورد)</span>
+              <span class="time-sub">📅 ${escapeHtml(datePart)}</span>
             </div>
           </td>
           <td>${escapeHtml(j.city)}</td>
@@ -1200,30 +1196,30 @@
         <div class="modal-manual-action-card">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
             <div>
-              <h4 style="font-size:14px; font-weight:800; color:#10b981; margin-bottom:4px;">
-                ${isApplied ? '✓ هذه الوظيفة مسجلة كـ "تم التقديم"' : 'هل قدمت على هذه الوظيفة يدوياً؟'}
+              <h4 style="font-size:13.5px; font-weight:800; color:var(--emerald-dark); margin-bottom:2px;">
+                ${isApplied ? '✓ الوظيفة مسجلة كـ "تم التقديم"' : 'توثيق التقديم اليدوي'}
               </h4>
-              <p style="font-size:12px; color:#94a3b8;">
-                ${isManual ? 'تم تسجيل تقديمك اليدوي وحفظه في المنظومة وقاعدة البيانات.' : 'إذا قمت بالتقديم بنفسك على موقع الشركة أو عبر لينكدإن، اضغط الزر لإعلام المنظومة وتحديث الإحصائيات.'}
+              <p style="font-size:12px; color:var(--text-muted);">
+                ${isManual ? 'تم تسجيل تقديمك المباشر في المنظومة وقاعدة البيانات.' : 'إذا قمت بالتقديم بنفسك على موقع الشركة أو لينكدإن، اضغط الزر لتحديث الحالة.'}
               </p>
             </div>
-            <button class="${isManual ? 'btn-done-manual' : 'btn-mark-manual'}" style="font-size:12.5px; padding:8px 16px;" onclick="toggleManualApply('${j.id}'); openDetails('${j.id}');">
-              ${isManual ? '↩ إلغاء التحديد كـ "تم التقديم يدوياً"' : '✅ تأكيد أنني قدمت يدوياً'}
+            <button class="${isManual ? 'btn-done-manual' : 'btn-mark-manual'}" style="font-size:12px; padding:6px 14px;" onclick="toggleManualApply('${j.id}'); openDetails('${j.id}');">
+              ${isManual ? '↩ إلغاء التحديد' : '✅ تأكيد التقديم يدوياً'}
             </button>
           </div>
         </div>
         <div class="modal-highlight-box">
           <div class="m-highlight-item">
-            <span class="m-hl-label">⏰ وقت إضافة الوظيفة على الداشبورد:</span>
-            <span class="m-hl-val" style="color:#38bdf8;">🕒 ${escapeHtml(j.added_time)} (بتوقيت الرياض)</span>
+            <span class="m-hl-label">⏰ تاريخ ووقت الإضافة:</span>
+            <span class="m-hl-val" style="color:#0369a1;">🕒 ${escapeHtml(j.added_time)}</span>
           </div>
           <div class="m-highlight-item">
-            <span class="m-hl-label">🎯 طريقة التقديم المعتمدة:</span>
+            <span class="m-hl-label">🎯 طريقة التقديم:</span>
             <span class="m-hl-val">${escapeHtml(j.method)}</span>
           </div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">الشركة والمسمى الوظيفي</div>
+          <div class="modal-label">الشركة والمسمى</div>
           <div class="modal-value">${escapeHtml(j.company)} | ${escapeHtml(j.title)}</div>
         </div>
         <div class="modal-grid">
@@ -1232,12 +1228,12 @@
             <div class="modal-value">${escapeHtml(j.city)}</div>
           </div>
           <div class="modal-row">
-            <div class="modal-label">حالة التقديم الحالية</div>
+            <div class="modal-label">الحالة الحالية</div>
             <div class="modal-value"><strong>${escapeHtml(j.status)}</strong></div>
           </div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">مسؤول التوظيف / جهة الاتصال</div>
+          <div class="modal-label">جهة الاتصال</div>
           <div class="modal-value">${escapeHtml(j.contact)}</div>
         </div>
         <div class="modal-row">
@@ -1245,15 +1241,14 @@
           <div class="modal-value">${escapeHtml(j.salary)}</div>
         </div>
         <div class="modal-row">
-          <div class="modal-label">ملاحظات وتأكيد التقديم الفعلي</div>
-          <div class="modal-value" style="line-height:1.7;">${escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعايير حسن سرحان.')}</div>
+          <div class="modal-label">ملاحظات التقديم</div>
+          <div class="modal-value" style="line-height:1.6;">${escapeHtml(j.notes || 'شاغر مفحوص ومطابق لمعايير حسن سرحان.')}</div>
         </div>
         <div class="modal-row">
           <div class="modal-label">رابط التقديم المباشر</div>
-          <div class="modal-value"><a href="${j.url}" target="_blank" style="color:#60a5fa; word-break:break-all;">${j.url}</a></div>
+          <div class="modal-value"><a href="${j.url}" target="_blank" style="color:var(--primary); word-break:break-all;">${j.url}</a></div>
         </div>
       `;
-
       document.getElementById('modalOverlay').style.display = 'flex';
     }
 
@@ -1264,43 +1259,38 @@
     function openSyncModal() {
       const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
       const keys = Object.keys(manualStore);
-      const modalBody = document.getElementById('syncModalBody');
+      const container = document.getElementById('syncModalBody');
 
       if (keys.length === 0) {
-        modalBody.innerHTML = `
-          <div style="text-align:center; padding:30px 10px; color:#94a3b8;">
-            <div style="font-size:36px; margin-bottom:12px;">📝</div>
-            <h4 style="color:#f1f5f9; margin-bottom:6px;">لم تقم بتسجيل أي تقديم يدوي بعد</h4>
-            <p style="font-size:13px;">عندما تقدم يدوياً على أي وظيفة اضغط على زر <strong>✅ قدّمت أنا</strong> في الجدول أو التفاصيل لتظهر هنا.</p>
+        container.innerHTML = `
+          <div style="text-align:center; padding:24px; color:var(--text-muted);">
+            <div style="font-size:36px; margin-bottom:8px;">✓</div>
+            <h4 style="font-size:15px; color:var(--text-main); margin-bottom:4px;">كافة التقديمات متطابقة مع قوقل شيت</h4>
+            <p style="font-size:12.5px;">لم تسجل أي تقديمات يدوية جديدة غير متزامنة على هذا المتصفح.</p>
           </div>
         `;
       } else {
-        let listHtml = `
-          <div style="margin-bottom:14px; color:#cbd5e1; font-size:13.5px;">
-            لديك <strong>${keys.length}</strong> وظائف قمت بتسجيل التقديم عليها يدوياً:
-          </div>
-          <div style="max-height:220px; overflow-y:auto; border:1px solid #1e293b; border-radius:8px; padding:10px; background:#0b0f19; margin-bottom:16px;">
-        `;
-        keys.forEach(k => {
+        let listHtml = keys.map(k => {
           const item = manualStore[k];
-          listHtml += `
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 6px; border-bottom:1px solid #1e293b; font-size:13px;">
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#f8fafc; border:1px solid var(--border-color); border-radius:8px; margin-bottom:6px;">
               <div>
-                <strong style="color:#38bdf8;">${k}</strong> - <span style="color:#f1f5f9;">${escapeHtml(item.company)}</span>
-                <div style="color:#64748b; font-size:11.5px;">${escapeHtml(item.title)}</div>
+                <strong style="color:var(--text-main); font-size:13px;">${escapeHtml(item.company)}</strong>
+                <span style="color:var(--text-muted); font-size:12px; margin-right:8px;">${escapeHtml(item.title)}</span>
               </div>
-              <span style="color:#34d399; font-size:12px; font-weight:700;">✓ قُدمت يدوياً</span>
+              <span style="font-size:11.5px; color:var(--emerald-dark); font-weight:700;">🕒 ${item.time}</span>
             </div>
           `;
-        });
-        listHtml += `</div>
-          <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:8px; padding:12px; font-size:12.5px; color:#93c5fd; line-height:1.6;">
-            💡 <strong>خيارات المزامنة:</strong>
-            <br>1. <strong>مزامنة فورية الآن:</strong> يتصل بالخادم المحلي لتحديث ملف التتبع وشيت قوقل مباشرة.
-            <br>2. <strong>نسخ أمر التحديث:</strong> لتشغيل الأمر في الطرفية يدوياً بضغطة زر.
+        }).join('');
+
+        container.innerHTML = `
+          <div style="margin-bottom:12px;">
+            <p style="font-size:13px; color:var(--text-main); font-weight:600; margin-bottom:8px;">
+              لديك <span style="color:var(--emerald-dark); font-weight:800;">${keys.length}</span> وظائف مسجلة يدوياً جاهزة للمزامنة:
+            </p>
+            <div style="max-height:220px; overflow-y:auto;">${listHtml}</div>
           </div>
         `;
-        modalBody.innerHTML = listHtml;
       }
 
       document.getElementById('syncModalOverlay').style.display = 'flex';
@@ -1314,12 +1304,12 @@
       const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
       const keys = Object.keys(manualStore);
       if (keys.length === 0) {
-        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للنسخ');
+        showToast('ℹ️ لا توجد تقديمات يدوية جديدة للنسخ');
         return;
       }
       const cmd = `python3 tools/sync_manual_applied.py ${keys.join(' ')}`;
       navigator.clipboard.writeText(cmd).then(() => {
-        showToast('📋 تم نسخ أمر المزامنة! الصقه في Terminal للتحديث المباشر.');
+        showToast('📋 تم نسخ أمر المزامنة! الصقه في Terminal');
       });
     }
 
@@ -1327,11 +1317,10 @@
       const manualStore = JSON.parse(localStorage.getItem('manual_applied_jobs') || '{}');
       const keys = Object.keys(manualStore);
       if (keys.length === 0) {
-        showToast('ℹ️ لا توجد وظائف يدوية مسجلة للمزامنة');
+        showToast('ℹ️ لا توجد تقديمات يدوية جديدة للمزامنة');
         return;
       }
 
-      showToast('⏳ جارٍ الاتصال بخادم المزامنة المحلي...');
       let completed = 0;
       let failed = 0;
 
@@ -1342,10 +1331,10 @@
           .catch(() => failed++)
       )).then(() => {
         if (completed > 0) {
-          showToast(`🎉 تمت المزامنة بنجاح! تم تحديث ${completed} وظائف في قوقل شيت.`);
+          showToast(`🎉 تمت المزامنة! تم تحديث ${completed} وظائف.`);
           closeSyncModal();
         } else {
-          showToast('⚠️ تعذر الوصول للخادم المحلي. استخدم خيار نسخ أمر Terminal.');
+          showToast('⚠️ تعذر الاتصال بالخادم المحلي. استخدم نسخ أمر Terminal.');
         }
       });
     }
@@ -1353,51 +1342,55 @@
     function copyToClipboard() {
       const headers = [
         'ID',
-        'وقت وتاريخ الإضافة على الداشبورد',
+        'تاريخ الإضافة',
         'اسم الشركة',
         'المسمى الوظيفي',
-        'طريقة التقديم (ايزي ابلاي / ايميل / بوابة)',
-        'المنصة / المصدر',
+        'طريقة التقديم',
+        'المنصة',
         'المدينة',
         'رابط الوظيفة',
         'نسبة التوافق',
         'حالة التقديم',
         'جهة الاتصال',
         'الراتب المستهدف',
-        'نسخة السيرة الذاتية',
+        'ملف السيرة الذاتية',
         'تاريخ المتابعة',
-        'ملاحظات وتأكيد التقديم'
+        'ملاحظات'
       ];
-      const tsvRows = [headers.join('\t')];
 
-      allJobs.forEach(j => {
-        tsvRows.push([
-          j.id,
-          j.added_time,
-          j.company,
-          j.title,
-          j.method,
-          j.platform,
-          j.city,
-          j.url,
-          j.fit,
-          j.status,
-          j.contact,
-          j.salary,
-          j.cv,
-          j.followup,
-          j.notes
-        ].map(val => (val || '').replace(/\t/g, ' ').replace(/\n/g, ' ')).join('\t'));
-      });
+      const rows = allJobs.map(j => [
+        j.id,
+        j.added_time,
+        j.company,
+        j.title,
+        j.method,
+        j.platform,
+        j.city,
+        j.url,
+        j.fit,
+        j.status,
+        j.contact,
+        j.salary,
+        j.cv,
+        j.followup,
+        j.notes
+      ]);
 
-      navigator.clipboard.writeText(tsvRows.join('\n')).then(() => {
-        showToast('📋 تم نسخ بيانات الجدول كـ TSV! الصقها مباشرة في قوقل شيت (Cmd+V)');
+      const tsvContent = [
+        headers.join('\t'),
+        ...rows.map(r => r.map(c => (c || '').replace(/\t/g, ' ').replace(/\r?\n/g, ' ')).join('\t'))
+      ].join('\n');
+
+      navigator.clipboard.writeText(tsvContent).then(() => {
+        showToast('✓ تم نسخ البيانات للجدول (Cmd+V)');
+      }).catch(() => {
+        showToast('فشل النسخ إلى الحافظة');
       });
     }
 
     function escapeHtml(text) {
       if (!text) return '';
-      return text
+      return String(text)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
