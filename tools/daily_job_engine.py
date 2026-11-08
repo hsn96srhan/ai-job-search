@@ -210,6 +210,25 @@ def run_autonomous_applications(execute_browser=True):
             print("⚠️ روبوت التقديم عبر المتصفح غير مهيأ.")
 
 
+def sync_online_dashboard():
+    """Build and publish updated dashboard to GitHub Pages."""
+    print("\n" + "=" * 60)
+    print("5. بناء ومزامنة لوحة التحكم الحية ورفعها إلى GitHub Pages...")
+    print("=" * 60)
+    build_script = REPO_ROOT / "tools" / "build_online_dashboard.py"
+    if build_script.exists():
+        subprocess.run([sys.executable, str(build_script)], check=False)
+
+    try:
+        # Sync to ai-job-search repo
+        subprocess.run(["git", "add", "saudi_jobs_google_sheets_tracker.csv", "docs/index.html"], cwd=REPO_ROOT, check=False)
+        subprocess.run(["git", "commit", "-m", "Auto-update live online dashboard [Daily Sync]"], cwd=REPO_ROOT, check=False)
+        subprocess.run(["git", "push", "origin", "main"], cwd=REPO_ROOT, capture_output=True, text=True, timeout=30)
+        print("✓ تم تحديث ورفع لوحة التحكم بنجاح إلى GitHub Pages: https://hsn96srhan.github.io/ai-job-search/")
+    except Exception as e:
+        print(f"تنبيه مزامنة جيت هوب: {e}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Daily 10 AM Job Engine")
     parser.add_argument("--skip-browser", action="store_true", help="Skip browser auto-apply")
@@ -220,6 +239,7 @@ def main():
     jobs = run_job_search()
     process_and_apply_new_jobs(jobs)
     run_autonomous_applications(execute_browser=not args.skip_browser)
+    sync_online_dashboard()
 
     print("\n" + "=" * 60)
     print("✓ اكتمل الفحص والتشغيل اليومي بنجاح.")
