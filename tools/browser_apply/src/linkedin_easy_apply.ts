@@ -181,18 +181,62 @@ async function answerLinkedInQuestions(page: Page) {
       const currentVal = await input.inputValue().catch(() => "");
       if (currentVal && currentVal.length > 0) continue;
 
-      if (qText.includes("year") || qText.includes("خبرة") || qText.includes("experience")) {
+      // A. Current Salary
+      if (qText.includes("current") && (qText.includes("salary") || qText.includes("compensation") || qText.includes("راتب") || qText.includes("حالي"))) {
+        if (qText.includes("basic") || qText.includes("أساسي")) {
+          await input.fill("8000");
+          console.log(`     -> الراتب الأساسي الحالي: 8,000 ريال`);
+        } else {
+          await input.fill("10000");
+          console.log(`     -> الراتب الإجمالي الحالي: 10,000 ريال`);
+        }
+      }
+      // B. Expected Salary
+      else if (qText.includes("expect") || qText.includes("متوقع") || qText.includes("salary") || qText.includes("راتب") || qText.includes("compensation") || qText.includes("package")) {
+        const type = await input.getAttribute("type");
+        if (type === "number") {
+          if (qText.includes("basic") || qText.includes("أساسي")) {
+            await input.fill("9000");
+            console.log(`     -> الراتب الأساسي المتوقع: 9,000 ريال`);
+          } else {
+            await input.fill("10000");
+            console.log(`     -> الراتب الإجمالي المتوقع: 10,000 ريال`);
+          }
+        } else {
+          if (qText.includes("basic") || qText.includes("أساسي")) {
+            await input.fill("9,000 - 10,000 SAR");
+          } else {
+            await input.fill("10,000 - 12,000 SAR");
+          }
+          console.log(`     -> مدى الراتب المتوقع: 10,000 - 12,000 ريال`);
+        }
+      }
+      // C. Years of Experience
+      else if (qText.includes("year") || qText.includes("خبرة") || qText.includes("experience")) {
         await input.fill("8");
-        console.log(`     -> إجابة سنوات الخبرة: 8`);
-      } else if (qText.includes("salary") || qText.includes("راتب") || qText.includes("compensation")) {
-        await input.fill("10000");
-        console.log(`     -> إجابة الراتب المتوقع: 10,000`);
-      } else if (qText.includes("notice") || qText.includes("إشعار") || qText.includes("start")) {
+        console.log(`     -> إجابة سنوات الخبرة: 8 سنوات`);
+      }
+      // D. Notice Period
+      else if (qText.includes("notice") || qText.includes("إشعار") || qText.includes("start")) {
         await input.fill("15");
         console.log(`     -> إجابة فترة الإشعار: 15 يوماً`);
-      } else if (qText.includes("city") || qText.includes("مدينة") || qText.includes("location")) {
+      }
+      // E. Location / City
+      else if (qText.includes("city") || qText.includes("مدينة") || qText.includes("location")) {
         await input.fill("Riyadh, Saudi Arabia");
         console.log(`     -> إجابة المدينة: Riyadh, Saudi Arabia`);
+      }
+      // F. Essay: Why join / Interest
+      else if (qText.includes("why") || qText.includes("interest") || qText.includes("excite") || qText.includes("لماذا") || qText.includes("اهتمام")) {
+        await input.fill("Passionate about scaling commercial growth and high-performance marketing in Saudi Arabia. As an HRSD-accredited Marketing Director with 8+ years of experience managing 7M+ SAR in ad budgets, delivering up to 25x ROAS, and scaling monthly revenue engines to 10M, I bring proven leadership in customer acquisition, CAC reduction, and omnichannel brand building.");
+      }
+      // G. Essay: Accomplishment / Initiative / Metric
+      else if (qText.includes("achieve") || qText.includes("initiative") || qText.includes("success") || qText.includes("metric") || qText.includes("إنجاز") || qText.includes("مبادرة") || qText.includes("نجاح")) {
+        await input.fill("Built and scaled an omnichannel commercial growth engine from early-stage to 10M/month in revenue. Directed 7M+ SAR in paid media across Snapchat, Meta, TikTok, and Google Ads achieving up to 25x audited ROAS, while reducing CAC by 28% and boosting customer retention through automated CRM workflows.");
+      }
+      // H. Essay: Additional Information / Summary
+      else if (qText.includes("additional") || qText.includes("strengthen") || qText.includes("know you") || qText.includes("إضافي") || qText.includes("معلومات") || qText.includes("about you")) {
+        await input.fill("HRSD-accredited Marketing Director based in Riyadh with Transferable Iqama, valid Saudi Driving License, and immediate availability. Proven track record leading 20+ member cross-functional teams, managing multi-million SAR media budgets, and scaling GCC consumer brands aligned with Vision 2030.");
       }
     } catch {}
   }

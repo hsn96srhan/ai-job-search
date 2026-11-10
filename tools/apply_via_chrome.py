@@ -94,22 +94,68 @@ def apply_current_tab():
                 phone.dispatchEvent(new Event('change', { bubbles: true }));
             }
 
-            // 2. Fill numeric & text questions
+            // 2. Intelligent Handling for Salary & Essay Questions
             const inputs = Array.from(document.querySelectorAll('input[type="text"], input[type="number"], textarea'));
             inputs.forEach(inp => {
-                if (!inp.value) {
-                    const label = (inp.labels && inp.labels[0] ? inp.labels[0].innerText : inp.placeholder || '').toLowerCase();
-                    if (label.includes('year') || label.includes('خبرة') || label.includes('experience')) {
-                        inp.value = '8';
-                    } else if (label.includes('salary') || label.includes('راتب') || label.includes('compensation')) {
-                        inp.value = '10000';
-                    } else if (label.includes('notice') || label.includes('إشعار')) {
-                        inp.value = '15';
-                    } else if (label.includes('city') || label.includes('مدينة')) {
-                        inp.value = 'Riyadh, Saudi Arabia';
+                if (!inp.value || inp.value.trim().length === 0) {
+                    const label = (inp.labels && inp.labels[0] ? inp.labels[0].innerText : inp.placeholder || inp.getAttribute('aria-label') || '').toLowerCase();
+                    const proto = inp.tagName === 'TEXTAREA' ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype;
+                    const setter = Object.getOwnPropertyDescriptor(proto, 'value').set;
+
+                    function setVal(val) {
+                        setter.call(inp, val);
+                        inp.dispatchEvent(new Event('input', { bubbles: true }));
+                        inp.dispatchEvent(new Event('change', { bubbles: true }));
                     }
-                    inp.dispatchEvent(new Event('input', { bubbles: true }));
-                    inp.dispatchEvent(new Event('change', { bubbles: true }));
+
+                    // A. Current Salary (الراتب الحالي)
+                    if (label.includes('current') && (label.includes('salary') || label.includes('compensation') || label.includes('راتب') || label.includes('حالي'))) {
+                        if (label.includes('basic') || label.includes('أساسي')) {
+                            setVal('8000');
+                        } else {
+                            setVal('10000');
+                        }
+                    }
+                    // B. Expected Salary (الراتب المتوقع)
+                    else if (label.includes('expect') || label.includes('متوقع') || label.includes('salary') || label.includes('راتب') || label.includes('compensation') || label.includes('package')) {
+                        if (inp.type === 'number') {
+                            if (label.includes('basic') || label.includes('أساسي')) {
+                                setVal('9000');
+                            } else {
+                                setVal('10000');
+                            }
+                        } else {
+                            if (label.includes('basic') || label.includes('أساسي')) {
+                                setVal('9,000 - 10,000 SAR');
+                            } else {
+                                setVal('10,000 - 12,000 SAR');
+                            }
+                        }
+                    }
+                    // C. Years of Experience
+                    else if (label.includes('year') || label.includes('خبرة') || label.includes('experience')) {
+                        setVal('8');
+                    }
+                    // D. Notice Period
+                    else if (label.includes('notice') || label.includes('إشعار') || label.includes('start date') || label.includes('join')) {
+                        setVal('15');
+                    }
+                    // E. Location / City
+                    else if (label.includes('city') || label.includes('مدينة') || label.includes('location') || label.includes('reside') || label.includes('address')) {
+                        setVal('Riyadh, Saudi Arabia');
+                    }
+                    // F. Essay: Why join / Interest
+                    else if (label.includes('why') || label.includes('interest') || label.includes('excite') || label.includes('لماذا') || label.includes('اهتمام')) {
+                        setVal("Passionate about scaling commercial growth and high-performance marketing in Saudi Arabia. As an HRSD-accredited Marketing Director with 8+ years of experience managing 7M+ SAR in ad budgets, delivering up to 25x ROAS, and scaling monthly revenue engines to 10M, I bring proven leadership in customer acquisition, CAC reduction, and omnichannel brand building.");
+                    }
+                    // G. Essay: Accomplishment / Initiative / Metric
+                    else if (label.includes('achieve') || label.includes('initiative') || label.includes('success') || label.includes('metric') || label.includes('إنجاز') || label.includes('مبادرة') || label.includes('نجاح')) {
+                        setVal("Built and scaled an omnichannel commercial growth engine from early-stage to 10M/month in revenue. Directed 7M+ SAR in paid media across Snapchat, Meta, TikTok, and Google Ads achieving up to 25x audited ROAS, while reducing CAC by 28% and boosting customer retention through automated CRM workflows.");
+                    }
+                    // H. Essay: Additional Information / Summary
+                    else if (label.includes('additional') || label.includes('strengthen') || label.includes('know you') || label.includes('إضافي') || label.includes('معلومات') || label.includes('about you')) {
+                        setVal("HRSD-accredited Marketing Director based in Riyadh with Transferable Iqama, valid Saudi Driving License, and immediate availability. Proven track record leading 20+ member cross-functional teams, managing multi-million SAR media budgets, and scaling GCC consumer brands aligned with Vision 2030.");
+                    }
                 }
             });
 
