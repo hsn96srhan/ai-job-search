@@ -102,9 +102,9 @@ export const candidateProfile: CandidateCorporateProfile = {
 
   // Current Compensation & Benefits
   currentBasicSalary: 8000,
-  currentHousingAllowance: 2000, // 3 months basic per year = 24,000 / 12 = 2,000/mo
+  currentHousingAllowance: 2000, // 3 months basic per year (25% cash allowance, not company-provided)
   currentTotalBenefitsDescription:
-    "راتب أساسي 8000 ريال وبدل سكن 3 شهور، بالإضافة إلى تكفل الشركة الكامل بالإقامة وتذاكر الطيران والإجازة السنوية مع خيار استبدال الإجازة باستقدام العائلة شهراً سنوياً بمساعدة الشركة.",
+    "راتب أساسي 8000 ريال، بدل سكن نقدي 3 شهور من الأساسي سنوياً (25%)، نقل كفالة عبر قوى، كرت عمل، تأمين طبي تعاوني شامل CCHI، وتذاكر طيران سنوية وإجازة مدفوعة.",
   iqamaCoveredByCompany: true,
   flightTicketsCoveredByCompany: true,
   annualLeaveCoveredByCompany: true,
@@ -113,7 +113,7 @@ export const candidateProfile: CandidateCorporateProfile = {
   // Target Compensation
   expectedBasicSalary: 9000,
   minimumBasicSalaryFloor: 8000,
-  expectedTotalSalaryPackage: 10000, // 10,000 SAR minimum total package
+  expectedTotalSalaryPackage: 10000, // 10,000 - 12,000+ SAR total package + Qiwa transfer, work permit & medical insurance
   currency: "SAR",
 
   // Corporate Portal Account Credentials

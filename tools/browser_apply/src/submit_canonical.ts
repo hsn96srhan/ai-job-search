@@ -16,8 +16,7 @@ async function submitCanonical() {
 
   const browser = await chromium.launch({
     executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    headless: false,
-    slowMo: 100,
+    headless: true,
   });
 
   const page = await browser.newPage({ viewport: { width: 1280, height: 850 } });
@@ -49,13 +48,13 @@ async function submitCanonical() {
     // Education
     console.log("✍️ تعبئة المؤهل التعليمي...");
     const schoolEl = await page.$("#school--0");
-    if (schoolEl) await schoolEl.fill("Cairo University");
+    if (schoolEl) await schoolEl.fill("Akhbar El Yom Academy");
 
     const degreeEl = await page.$("#degree--0");
-    if (degreeEl) await degreeEl.fill("Bachelor of Business Administration");
+    if (degreeEl) await degreeEl.fill("Bachelor of Journalism");
 
     const discEl = await page.$("#discipline--0");
-    if (discEl) await discEl.fill("Marketing & Business Administration");
+    if (discEl) await discEl.fill("Journalism & Media Communications");
 
     // Custom Questions
     console.log("✍️ الإجابة على الأسئلة التخصصية لكانونيكال...");
