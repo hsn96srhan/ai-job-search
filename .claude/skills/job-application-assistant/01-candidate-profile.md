@@ -20,8 +20,8 @@ framework_version: 1.1.1
 - **Notice Period:** Immediate / 15 days
 - **Status:** Actively seeking Marketing Director / Head of Marketing / Performance Marketing Leader roles
 - **Constraints:** Open to on-site/hybrid in Riyadh, and remote across rest of Saudi Arabia & GCC
-- **Easy Apply Policy:** Do NOT auto-apply to LinkedIn Easy Apply. Always set status as `جاهز للتقديم` (Ready to Apply) with prepared answers for manual submission by candidate.
-- **External & Email Focus:** Focus autonomous automation on external career portal URLs (Workday, ATS, company sites) and direct employer emails.
+- **Easy Apply Policy:** Autonomous AI submission enabled across LinkedIn Easy Apply and external ATS portals.
+- **External & Email Focus:** Full autonomous automation enabled for direct emails (SMTP), external career portals (Workday, ATS, Taleo, Greenhouse), and LinkedIn Easy Apply.
 
 ### Current Compensation & Benefits (Verified Corporate Baseline)
 - **Current Basic Salary:** 8,000 SAR / month (This is the absolute minimum acceptable basic salary floor).
