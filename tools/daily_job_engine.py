@@ -283,24 +283,12 @@ def sync_online_dashboard():
         subprocess.run([sys.executable, str(build_script)], check=False)
 
     try:
-        # 1. Sync to ai-job-search repo
+        # Sync strictly to ai-job-search repo (GitHub Pages: https://hsn96srhan.github.io/ai-job-search/)
+        # Never sync to hsn portfolio repo to preserve candidate's personal portfolio website integrity.
         subprocess.run(["git", "add", "saudi_jobs_google_sheets_tracker.csv", "docs/index.html"], cwd=REPO_ROOT, check=False)
         subprocess.run(["git", "commit", "-m", "Auto-update live online dashboard [Daily Sync]"], cwd=REPO_ROOT, check=False)
         subprocess.run(["git", "push", "origin", "main"], cwd=REPO_ROOT, capture_output=True, text=True, timeout=30)
         print("✓ تم تحديث ورفع لوحة التحكم بنجاح إلى GitHub Pages: https://hsn96srhan.github.io/ai-job-search/")
-
-        # 2. Sync to personal portfolio repo (hsn96srhan/hsn)
-        hsn_repo = Path("/tmp/hsn_repo")
-        if hsn_repo.exists() and (hsn_repo / ".git").exists():
-            docs_html = REPO_ROOT / "docs" / "index.html"
-            target_dash = hsn_repo / "dashboard.html"
-            if docs_html.exists():
-                import shutil
-                shutil.copy(docs_html, target_dash)
-                subprocess.run(["git", "add", "dashboard.html"], cwd=hsn_repo, check=False)
-                subprocess.run(["git", "commit", "-m", "Auto-update executive dashboard [Daily Sync]"], cwd=hsn_repo, check=False)
-                subprocess.run(["git", "push", "origin", "main"], cwd=hsn_repo, capture_output=True, text=True, timeout=30)
-                print("✓ تم تحديث ورفع لوحة التحكم بنجاح إلى الموقع الشخصي: https://hsn96srhan.github.io/hsn/dashboard.html")
     except Exception as e:
         print(f"تنبيه مزامنة جيت هوب: {e}")
 

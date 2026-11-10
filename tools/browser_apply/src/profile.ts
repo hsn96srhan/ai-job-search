@@ -26,10 +26,17 @@ export interface CandidateCorporateProfile {
   // Work & Legal
   iqamaStatusArabic: string;
   iqamaStatusEnglish: string;
+  iqamaNumber: string;
+  currentlyOnCompanySponsorship: boolean;
   hasDrivingLicense: boolean;
   drivingLicenseCountry: string;
   hrsdAccredited: boolean;
   hrsdTitle: string;
+  educationDegreeArabic: string;
+  educationDegreeEnglish: string;
+  educationInstitutionArabic: string;
+  educationInstitutionEnglish: string;
+  educationGraduationYear: number;
   currentRoleArabic: string;
   currentRoleEnglish: string;
   yearsOfExperience: number;
@@ -86,12 +93,19 @@ export const candidateProfile: CandidateCorporateProfile = {
   currentAddress: "Riyadh, Saudi Arabia",
 
   // Work Authorization & Legal
-  iqamaStatusArabic: "إقامة نظامية قابلة للتحويل (نقل كفالة)",
-  iqamaStatusEnglish: "Transferable Iqama",
+  iqamaStatusArabic: "إقامة عمل نظامية سارية قابلة للتحويل (نقل كفالة عبر قوى)",
+  iqamaStatusEnglish: "Work Visa - Transferable Iqama via Qiwa",
+  iqamaNumber: "2644162360",
+  currentlyOnCompanySponsorship: true,
   hasDrivingLicense: true,
   drivingLicenseCountry: "Saudi Arabia",
   hrsdAccredited: true,
   hrsdTitle: "Marketing Manager (Accredited by Ministry of Human Resources and Social Development)",
+  educationDegreeArabic: "بكالوريوس إعلام قسم صحافة",
+  educationDegreeEnglish: "Bachelor of Journalism & Media",
+  educationInstitutionArabic: "أكاديمية أخبار اليوم",
+  educationInstitutionEnglish: "Akhbar El Yom Academy",
+  educationGraduationYear: 2018,
   currentRoleArabic: "مدير تسويق تنفيذي (معتمد من HRSD)",
   currentRoleEnglish: "Marketing Director (HRSD Accredited)",
   yearsOfExperience: 8,

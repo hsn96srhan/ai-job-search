@@ -14,7 +14,10 @@ framework_version: 1.1.1
 - **Email:** hsn96srhan@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/srhan-jr/
 - **Portfolio / Website:** https://hsn96srhan.github.io/hsn/
-- **Iqama & Work Authorization:** Transferable Iqama (إقامة نظامية قابلة للتحويل الفوري عبر منصة قوى).
+- **Iqama & Work Authorization:** Transferable Iqama (إقامة عمل نظامية سارية قابلة للتحويل الفوري عبر منصة قوى).
+  - **Iqama Number (رقم الإقامة):** 2644162360
+  - **Current Sponsorship:** On current employer sponsorship (على كفالة الشركة الحالية في الرياض).
+  - **Driving License:** Valid Saudi Driving License (رخصة قيادة سعودية سارية).
 - **Mandatory Legal & Employment Procedures (شروط وإجراءات قانونية إلزامية):**
   - **Sponsorship Transfer (نقل الكفالة / نقل الخدمات):** Must be transferred to the hiring entity via Qiwa (منصة قوى) with all legal transfer fees covered by employer.
   - **Work Permit (كرت العمل / رخصة العمل):** Mandatory statutory issuance and renewal covered by employer.
@@ -22,7 +25,7 @@ framework_version: 1.1.1
   - **Statutory Legal Compliance:** Full registration with GOSI (التأمينات الاجتماعية), labor contracts via Qiwa/Mudad, and standard Saudi Labor Law benefits.
 - **Form Answers for Sponsorship:**
   - When asked: *"Will you require sponsorship for employment visa / work authorization?"*: Select **Yes** (نعم), as candidate requires local sponsorship transfer (نقل كفالة) to the new company.
-  - When free text is provided: *"Transferable Iqama (مقيم نظامي بإقامة قابلة للتحويل). Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), and medical insurance according to Saudi Labor Law."*
+  - When free text is provided: *"Transferable Iqama: 2644162360 (مقيم نظامي بإقامة عمل سارية قابلة للتحويل على كفالة الشركة الحالية ولديه رخصة قيادة سعودية). Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), and medical insurance according to Saudi Labor Law."*
 - **Professional Accreditation:** Accredited Marketing Manager by Ministry of Human Resources and Social Development (HRSD, Saudi Arabia)
 - **Driving License:** Valid Saudi Driving License (رخصة قيادة سعودية سارية)
 - **Notice Period:** Immediate / 15 days
@@ -57,7 +60,7 @@ framework_version: 1.1.1
 
 | Degree | Period | Institution | Key Topics |
 |--------|--------|-------------|------------|
-| Bachelor of Journalism | 2014 - 2018 | Akhbar El Yom Academy, Cairo | Media, Communications, Content Strategy, Storytelling |
+| Bachelor of Journalism & Media (بكالوريوس إعلام قسم صحافة) | 2014 - 2018 | Akhbar El Yom Academy (أكاديمية أخبار اليوم), Cairo | Media, Journalism, Communications, Content Strategy, Storytelling |
 
 ## Professional Experience
 

@@ -26,16 +26,19 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **Status:** Actively seeking executive & leadership roles (Marketing Director / Head of Marketing / Performance Lead)
 - **LinkedIn headline:** "HRSD Marketing Director | Strategic Growth & Performance Marketing Leader"
 - **Legal & Sponsorship Requirements:**
-  - **Iqama:** Transferable Iqama (إقامة نظامية قابلة للتحويل الفوري عبر قوى).
+  - **Iqama:** Transferable Iqama (إقامة عمل نظامية سارية قابلة للتحويل الفوري عبر قوى).
+  - **Iqama Number (رقم الإقامة):** 2644162360
+  - **Current Sponsorship:** On current employer sponsorship in Riyadh (على كفالة الشركة الحالية).
+  - **Driving License:** Valid Saudi Driving License (رخصة قيادة سعودية سارية).
   - **Housing Allowance (بدل سكن نقدي):** 3 months of basic salary annually (25% cash housing allowance, strictly paid as cash allowance and NOT company-provided housing).
   - **Sponsorship Transfer (نقل كفالة):** Must be officially transferred to the hiring entity via Qiwa (منصة قوى) with all legal transfer fees covered by the employer.
   - **Work Permit (كرت عمل):** Statutory work permit issuance and annual renewals covered by the employer.
   - **Medical Insurance (تأمين طبي):** Mandatory cooperative health insurance (CCHI) covered by the employer.
   - **All Legal Procedures:** Full compliance with Saudi Labor Law, GOSI, and Mudad.
-  - **Sponsorship Question Rule:** When an application asks *"Will you require sponsorship for employment visa / work authorization?"*, the answer is **Yes** (candidate requires local sponsorship transfer [نقل كفالة] to the hiring company). If a text field exists, explain: *"Transferable Iqama in Riyadh. Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), cash housing allowance (3 months basic salary), and medical insurance according to Saudi Labor Law."*
+  - **Sponsorship Question Rule:** When an application asks *"Will you require sponsorship for employment visa / work authorization?"*, the answer is **Yes** (candidate requires local sponsorship transfer [نقل كفالة] to the hiring company). If a text field exists, explain: *"Transferable Iqama: 2644162360 (مقيم نظامي بإقامة عمل قابلة للتحويل على كفالة الشركة الحالية ولديه رخصة قيادة سعودية). Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), cash housing allowance (3 months basic salary), and medical insurance according to Saudi Labor Law."*
 
 ### Education
-- **Bachelor of Journalism** - Akhbar El Yom Academy, Cairo
+- **Bachelor of Journalism & Media (بكالوريوس إعلام قسم صحافة)** - Akhbar El Yom Academy (أكاديمية أخبار اليوم), Cairo (2014 - 2018)
 
 ### Professional Experience
 - **Marketing Director** (2025 - Present) - **FLUX Ads Agency** (Riyadh, Saudi Arabia)
