@@ -29,3 +29,16 @@ To prevent duplication and configuration drift across different AI agent framewo
 - **Strictly Preserve Settings:** Never touch, navigate to, or modify any LinkedIn account settings, profile preferences, or privacy options.
 - **Always Uncheck "Follow Company":** During LinkedIn Easy Apply submissions, LinkedIn checks "Follow [Company]" by default on the Review screen. You MUST ALWAYS explicitly uncheck/disable this checkbox before submitting so that the candidate never follows any company during application.
 
+## Legal Requirements, Sponsorship & Benefits Rule
+
+- **Legal Status:** Candidate resides in Riyadh with a Transferable Iqama (إقامة نظامية قابلة للتحويل الفوري عبر منصة قوى).
+- **Mandatory Employer Coverage:** Any offer/application must account for:
+  1. **Housing Allowance (بدل سكن نقدي):** 3 months of basic salary annually (25% cash housing allowance, strictly paid as cash allowance and NOT company-provided housing).
+  2. **Sponsorship Transfer (نقل كفالة / نقل خدمات):** Executed via Qiwa with legal transfer fees borne by the employer.
+  3. **Work Permit (كرت عمل / رخصة عمل):** Statutory issuance and annual renewal borne by the employer.
+  4. **Medical Insurance (تأمين طبي تعاوني CCHI):** Comprehensive medical insurance coverage.
+  5. **All Statutory Procedures:** Full legal adherence under the Saudi Labor Law.
+- **Sponsorship Questions:** When an application asks *"Will you require sponsorship for employment visa / work authorization?"*, select **Yes** (نعم), since the candidate requires official in-kingdom sponsorship transfer (نقل كفالة) to the new employer. In free-text fields, explain: *"Transferable Iqama in Riyadh. Requires standard sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), and medical insurance according to Saudi Labor Law."*
+- **Compensation & Benefits Fields:** State Basic: 8,000 - 9,000 SAR | Cash Housing Allowance: 3 months basic salary annually (25%) | Total package: 10,000 - 12,000+ SAR + sponsorship transfer fees, work permit, medical insurance, and annual flight tickets.
+
+

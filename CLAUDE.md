@@ -25,6 +25,14 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **CV language:** English
 - **Status:** Actively seeking executive & leadership roles (Marketing Director / Head of Marketing / Performance Lead)
 - **LinkedIn headline:** "HRSD Marketing Director | Strategic Growth & Performance Marketing Leader"
+- **Legal & Sponsorship Requirements:**
+  - **Iqama:** Transferable Iqama (إقامة نظامية قابلة للتحويل الفوري عبر قوى).
+  - **Housing Allowance (بدل سكن نقدي):** 3 months of basic salary annually (25% cash housing allowance, strictly paid as cash allowance and NOT company-provided housing).
+  - **Sponsorship Transfer (نقل كفالة):** Must be officially transferred to the hiring entity via Qiwa (منصة قوى) with all legal transfer fees covered by the employer.
+  - **Work Permit (كرت عمل):** Statutory work permit issuance and annual renewals covered by the employer.
+  - **Medical Insurance (تأمين طبي):** Mandatory cooperative health insurance (CCHI) covered by the employer.
+  - **All Legal Procedures:** Full compliance with Saudi Labor Law, GOSI, and Mudad.
+  - **Sponsorship Question Rule:** When an application asks *"Will you require sponsorship for employment visa / work authorization?"*, the answer is **Yes** (candidate requires local sponsorship transfer [نقل كفالة] to the hiring company). If a text field exists, explain: *"Transferable Iqama in Riyadh. Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), cash housing allowance (3 months basic salary), and medical insurance according to Saudi Labor Law."*
 
 ### Education
 - **Bachelor of Journalism** - Akhbar El Yom Academy, Cairo

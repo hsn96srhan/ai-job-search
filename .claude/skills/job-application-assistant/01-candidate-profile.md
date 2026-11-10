@@ -14,7 +14,15 @@ framework_version: 1.1.1
 - **Email:** hsn96srhan@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/srhan-jr/
 - **Portfolio / Website:** https://hsn96srhan.github.io/hsn/
-- **Iqama & Work Authorization:** Transferable Iqama (إقامة نظامية قابلة للتحويل)
+- **Iqama & Work Authorization:** Transferable Iqama (إقامة نظامية قابلة للتحويل الفوري عبر منصة قوى).
+- **Mandatory Legal & Employment Procedures (شروط وإجراءات قانونية إلزامية):**
+  - **Sponsorship Transfer (نقل الكفالة / نقل الخدمات):** Must be transferred to the hiring entity via Qiwa (منصة قوى) with all legal transfer fees covered by employer.
+  - **Work Permit (كرت العمل / رخصة العمل):** Mandatory statutory issuance and renewal covered by employer.
+  - **Medical Insurance (التأمين الطبي):** Mandatory comprehensive cooperative health insurance (مجلس الضمان الصحي CCHI) covered by employer.
+  - **Statutory Legal Compliance:** Full registration with GOSI (التأمينات الاجتماعية), labor contracts via Qiwa/Mudad, and standard Saudi Labor Law benefits.
+- **Form Answers for Sponsorship:**
+  - When asked: *"Will you require sponsorship for employment visa / work authorization?"*: Select **Yes** (نعم), as candidate requires local sponsorship transfer (نقل كفالة) to the new company.
+  - When free text is provided: *"Transferable Iqama (مقيم نظامي بإقامة قابلة للتحويل). Requires standard in-kingdom sponsorship transfer via Qiwa (نقل كفالة عبر قوى), work permit issuance (كرت العمل), and medical insurance according to Saudi Labor Law."*
 - **Professional Accreditation:** Accredited Marketing Manager by Ministry of Human Resources and Social Development (HRSD, Saudi Arabia)
 - **Driving License:** Valid Saudi Driving License (رخصة قيادة سعودية سارية)
 - **Notice Period:** Immediate / 15 days
@@ -25,17 +33,19 @@ framework_version: 1.1.1
 
 ### Current Compensation & Benefits (Verified Corporate Baseline)
 - **Current Basic Salary:** 8,000 SAR / month (This is the absolute minimum acceptable basic salary floor).
-- **Current Housing Allowance:** 3 months basic salary per year (2,000 SAR / month equivalent).
-- **Current Company-Covered Benefits:**
-  - Full Iqama renewal and government fees covered by employer.
-  - Annual flight tickets covered by employer.
-  - Paid annual leave covered by employer.
+- **Housing Allowance (بدل سكن نقدي):** 3 months of basic salary annually (25% cash housing allowance, strictly paid as cash allowance and NOT company-provided housing).
+- **Mandatory Legal Procedures & Benefits (شروط نظامية ومزايا وظيفية إلزامية):**
+  - **Sponsorship Transfer (نقل كفالة / نقل خدمات):** In-kingdom transfer via Qiwa (منصة قوى) with all government fees covered by employer.
+  - **Work Permit (كرت العمل / رخصة العمل):** Statutory issuance and annual renewal covered by employer.
+  - **Medical Insurance (تأمين طبي):** Mandatory cooperative health insurance (CCHI) for candidate and eligible dependents covered by employer.
+  - **Annual Flights & Leave:** Annual flight tickets and statutory paid annual leave covered by employer.
   - Option to exchange annual vacation for family visit visa sponsorship support for 1 month annually.
 
 ### Target Compensation Expectations
-- **Expected Basic Salary:** 9,000 SAR / month.
+- **Expected Basic Salary:** 9,000 - 10,000 SAR / month.
 - **Minimum Basic Salary Floor:** 8,000 SAR / month.
-- **Minimum Total Package (All-Inclusive):** 10,000 SAR / month (when gross all-inclusive compensation is requested).
+- **Housing Allowance:** 3 months of basic salary annually (Cash allowance).
+- **Minimum Total Package (All-Inclusive):** 10,000 - 12,000+ SAR / month (when gross all-inclusive compensation is requested).
 
 ### Languages
 | Language | Level | Notes |

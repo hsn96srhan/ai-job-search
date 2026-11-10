@@ -132,7 +132,14 @@ def apply_current_tab():
                             }
                         }
                     }
-                    // C. Years of Experience
+                    // Benefits / Allowances
+                    else if (label.includes('benefit') || label.includes('مزايا') || label.includes('allowance')) {
+                        setVal('Cash housing allowance (3 months basic salary annually / 25%), in-kingdom sponsorship transfer via Qiwa (نقل كفالة), statutory work permit (كرت عمل), comprehensive medical insurance (CCHI), and annual flight tickets.');
+                    }
+                    // Sponsorship / Legal
+                    else if (label.includes('sponsor') || label.includes('كفالة') || label.includes('تأشيرة') || label.includes('visa')) {
+                        setVal('Transferable Iqama in Riyadh (إقامة قابلة للتحويل). Requires standard in-kingdom sponsorship transfer via Qiwa, work permit, cash housing allowance (3 months basic), and medical insurance.');
+                    }
                     else if (label.includes('year') || label.includes('خبرة') || label.includes('experience')) {
                         setVal('8');
                     }
@@ -163,12 +170,17 @@ def apply_current_tab():
             const fieldsets = Array.from(document.querySelectorAll('fieldset, .jobs-easy-apply-form-section__grouping'));
             fieldsets.forEach(fs => {
                 const txt = fs.innerText.toLowerCase();
-                if (txt.includes('sponsorship now or in the future') || txt.includes('require sponsorship')) {
-                    const noBtn = fs.querySelector('label:has-text("No"), input[value="No"], label:has-text("لا")') || fs.querySelectorAll('input[type="radio"]')[1];
-                    if (noBtn) noBtn.click();
-                } else if (txt.includes('authorized') || txt.includes('license') || txt.includes('iqama') || txt.includes('reside') || txt.includes('موافق')) {
-                    const yesBtn = fs.querySelector('label:has-text("Yes"), input[value="Yes"], label:has-text("نعم")') || fs.querySelectorAll('input[type="radio"]')[0];
-                    if (yesBtn) yesBtn.click();
+                const radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
+                const checked = radios.some(r => r.checked);
+                if (!checked && radios.length >= 2) {
+                    if (txt.includes('saudi national') || txt.includes('سعودي الجنسية') || txt.includes('مواطن')) {
+                        const noBtn = fs.querySelector('label:has-text("No"), input[value="No"], label:has-text("لا")') || radios[1];
+                        if (noBtn) noBtn.click();
+                    } else {
+                        // Sponsorship transfer, authorized to work, driving license, experience -> Yes
+                        const yesBtn = fs.querySelector('label:has-text("Yes"), input[value="Yes"], label:has-text("نعم")') || radios[0];
+                        if (yesBtn) yesBtn.click();
+                    }
                 }
             });
 

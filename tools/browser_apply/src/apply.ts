@@ -5,6 +5,7 @@ import fs from "fs";
 import { candidateProfile } from "./profile.js";
 import { detectCaptchaOrBotChallenge, waitForUserCaptchaResolution } from "./captcha_detector.js";
 import { autofillCommonFields, clickPrimarySubmitOrNext } from "./form_autofill.js";
+import { submitLinkedInEasyApply } from "./linkedin_easy_apply.js";
 
 interface CliOptions {
   url?: string;
@@ -32,13 +33,68 @@ function parseArgs(): CliOptions {
   return options;
 }
 
+async function handleLinkedInAuth(page: any): Promise<boolean> {
+  const signInBtn = await page.$('a:has-text("Sign in"), button:has-text("Sign in"), a:has-text("تسجيل الدخول"), button:has-text("تسجيل الدخول")');
+  const needsAuth = await page.$('input[name="session_key"], #username, input[type="email"]');
+
+  if (signInBtn && (await signInBtn.isVisible().catch(() => false)) && !needsAuth) {
+    console.log("🔑 النقر على تسجيل الدخول للينكد إن...");
+    await signInBtn.click().catch(() => {});
+    await page.waitForTimeout(3000);
+  }
+
+  const usernameInput = await page.$('input[name="session_key"], #username, input[id*="email"]');
+  const passwordInput = await page.$('input[name="session_password"], #password');
+
+  if (usernameInput && passwordInput) {
+    console.log(`🔑 تسجيل الدخول بحساب المرشح: ${candidateProfile.email}...`);
+    await usernameInput.fill(candidateProfile.email);
+    await passwordInput.fill(candidateProfile.defaultAccountPassword);
+    
+    const submitLogin = await page.$('button[type="submit"], button:has-text("Sign in"), button:has-text("تسجيل الدخول")');
+    if (submitLogin) {
+      await submitLogin.click();
+      await page.waitForTimeout(5000);
+    }
+
+    const otpInput = await page.$('input[id*="pin"], input[name*="pin"], input[id*="verification"], input[name*="code"]');
+    if (otpInput) {
+      console.log("📧 مطلوب رمز تحقق (OTP) من البريد، جارٍ الجلب التلقائي من Gmail...");
+      const repoRoot = path.resolve(process.cwd(), process.cwd().endsWith("browser_apply") ? "../.." : ".");
+      const otpScript = path.resolve(repoRoot, "tools/fetch_email_verification.py");
+      if (fs.existsSync(otpScript)) {
+        try {
+          const { execSync } = await import("child_process");
+          let code = "";
+          for (let attempt = 0; attempt < 4; attempt++) {
+            code = execSync(`python3 "${otpScript}" --otp`, { encoding: "utf-8" }).trim();
+            if (code && /^\d{4,8}$/.test(code)) break;
+            await page.waitForTimeout(3000);
+          }
+          if (code && /^\d{4,8}$/.test(code)) {
+            console.log(`✓ إدخال كود التحقق الأمني: ${code}`);
+            await otpInput.fill(code);
+            const submitOtp = await page.$('button[type="submit"], button:has-text("Submit"), button:has-text("Verify")');
+            if (submitOtp) await submitOtp.click();
+            await page.waitForTimeout(4000);
+          }
+        } catch (e) {
+          console.warn("تنبيه جلب OTP:", e);
+        }
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 async function applyToUrl(page: any, url: string): Promise<boolean> {
   console.log(`\n============================================================`);
   console.log(`🌐 بدء التقديم الآلي الذكي على: ${url}`);
   console.log(`============================================================`);
 
   try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 35000 });
     await page.waitForTimeout(3000);
 
     // 1. CAPTCHA Check
@@ -46,7 +102,7 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
       await waitForUserCaptchaResolution(page);
     }
 
-    // 2. Check for LinkedIn Easy Apply (Strict User Rule: Never auto-submit Easy Apply, leave for candidate manual submit)
+    // 2. Check for LinkedIn Easy Apply
     const easyApplySelectors = [
       'button:has-text("Easy Apply")',
       'button:has-text("التقديم السريع")',
@@ -67,9 +123,11 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
     }
 
     if (isEasyApply) {
-      console.log(`ℹ️ [استبعاد آلي للتقديم السريع] الشاغر (${url}) يعتمد Easy Apply (التقديم السريع عبر لينكدإن).`);
-      console.log(`📌 توجيه المرشح الصارم: يتم إبقاؤه بحالة 'جاهز للتقديم' للتقديم اليدوي السريع من قِبل المرشح.`);
-      return false; // strictly skip auto-apply, keep as ready
+      console.log(`⚡ هذا الشاغر متاح عبر التقديم السريع (LinkedIn Easy Apply)، جارٍ التقديم الآلي الشامل...`);
+      const easySuccess = await submitLinkedInEasyApply(page, url);
+      if (easySuccess) {
+        return true;
+      }
     }
 
     // 3. External Career Site Apply Buttons (LinkedIn Arabic & English)
@@ -140,7 +198,9 @@ async function applyToUrl(page: any, url: string): Promise<boolean> {
         pageText.includes("Your application was sent") ||
         pageText.includes("تم إرسال طلبك بنجاح") ||
         pageText.includes("شكراً لتقديمك") ||
-        pageText.includes("Thank you for applying")
+        pageText.includes("Thank you for applying") ||
+        pageText.includes("Application received") ||
+        pageText.includes("تم استلام طلبك")
       ) {
         console.log("🎉 تم تأكيد إرسال الطلب في موقع الشركة بنجاح 100%!");
         isCompleted = true;
@@ -204,14 +264,15 @@ async function updateTrackerStatus(targetUrl: string) {
   try {
     const content = fs.readFileSync(csvPath, "utf-8");
     const lines = content.split("\n");
+    const cleanTarget = targetUrl.split("?")[0].replace(/\/+$/, "");
     const updatedLines = lines.map((line) => {
-      if (line.includes(targetUrl) && line.includes("جاهز للتقديم")) {
+      if (line.includes(cleanTarget) && line.includes("جاهز للتقديم")) {
         return line.replace("جاهز للتقديم", "تم التقديم");
       }
       return line;
     });
     fs.writeFileSync(csvPath, updatedLines.join("\n"), "utf-8");
-    console.log(`✓ تم تحديث حالة الشاغر إلى 'تم التقديم' في ملف التتبع والشيت!`);
+    console.log(`✓ تم تحديث حالة الشاغر إلى 'تم التقديم' في جدول التتبع.`);
   } catch (e) {
     console.warn(`فشل تحديث الشيت: ${e}`);
   }
@@ -233,6 +294,12 @@ async function main() {
   const profileDir = path.resolve(process.cwd(), "tools/browser_apply/.chrome_session");
   if (!fs.existsSync(profileDir)) {
     fs.mkdirSync(profileDir, { recursive: true });
+  }
+
+  // Clean stale lock if needed
+  const lockFile = path.join(profileDir, "SingletonLock");
+  if (fs.existsSync(lockFile)) {
+    try { fs.unlinkSync(lockFile); } catch {}
   }
 
   // Launch Google Chrome with persistent session context
@@ -260,12 +327,7 @@ async function main() {
       const content = fs.readFileSync(csvPath, "utf-8");
       const lines = content.split("\n");
       for (const line of lines) {
-        // Target ONLY External ATS jobs that are ready, leave Easy Apply for manual candidate submission
-        if (
-          line.includes("جاهز للتقديم") &&
-          (line.includes("بوابة خارجية") || line.includes("External ATS")) &&
-          line.includes("http")
-        ) {
+        if (line.includes("جاهز للتقديم") && line.includes("http")) {
           const match = line.match(/https?:\/\/[^\s",]+/);
           if (match) {
             const cleanUrl = match[0].trim();
@@ -292,4 +354,3 @@ async function main() {
 }
 
 main().catch(console.error);
-

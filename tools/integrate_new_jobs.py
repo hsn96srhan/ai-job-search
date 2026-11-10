@@ -554,3 +554,4 @@ for item in NEW_ENTRIES:
     print(f"✓ Added [{new_id}] {item['company']} - {item['title']} ({item['status']})")
 
 print(f"\nDone! Added {added_count} new entries to tracker. Total jobs is now {last_num}.")
+
