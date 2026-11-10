@@ -23,3 +23,9 @@ To prevent duplication and configuration drift across different AI agent framewo
 - **Arabic Postings:** When a job description, company name, or role is in Arabic, the entire submission email (Subject, Salutation, Pitch, Executive Highlights, and Sign-off) must be **100% pure Arabic** with proper RTL formatting.
 - **English Postings:** When a job description or role is in English, the entire submission email must be **100% pure English** with proper LTR formatting.
 - **Strict Rule:** Never produce or send mixed-language emails (e.g. Arabic pitch with English greeting or bullet points). Every communication must be linguistically unified and culturally appropriate.
+
+## LinkedIn Integrity & No-Follow Rule
+
+- **Strictly Preserve Settings:** Never touch, navigate to, or modify any LinkedIn account settings, profile preferences, or privacy options.
+- **Always Uncheck "Follow Company":** During LinkedIn Easy Apply submissions, LinkedIn checks "Follow [Company]" by default on the Review screen. You MUST ALWAYS explicitly uncheck/disable this checkbox before submitting so that the candidate never follows any company during application.
+

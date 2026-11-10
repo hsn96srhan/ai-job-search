@@ -126,6 +126,19 @@ def apply_current_tab():
                 }
             });
 
+            // Strict User Rule: Uncheck any "Follow Company" checkbox before review or submission
+            const allCheckboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+            allCheckboxes.forEach(cb => {
+                const label = (cb.labels && cb.labels[0] ? cb.labels[0].innerText : '').toLowerCase();
+                const parent = (cb.parentElement ? cb.parentElement.innerText : '').toLowerCase();
+                const desc = `${label} ${parent} ${cb.id} ${cb.name}`.toLowerCase();
+                if (desc.includes('follow') || desc.includes('متابعة') || desc.includes('stay up to date')) {
+                    if (cb.checked) {
+                        cb.click();
+                    }
+                }
+            });
+
             // 4. Check for Submit button
             const btns = Array.from(document.querySelectorAll('button'));
             const submitBtn = btns.find(b => {
