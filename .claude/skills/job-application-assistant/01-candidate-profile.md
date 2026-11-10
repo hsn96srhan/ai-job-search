@@ -64,38 +64,38 @@ framework_version: 1.1.1
 
 ## Professional Experience
 
-### Marketing Director - FLUX Ads Agency (2025 - Present)
+### Marketing Director - FLUX Ads Agency (Dec 2025 - Present)
 Riyadh, Saudi Arabia
 - Direct strategic growth roadmaps and omnichannel marketing operations for 30+ enterprise clients across Saudi Arabia in healthcare, retail, luxury fragrances, and F&B.
 - Lead and supervise 4 internal divisions comprising 20+ professionals: Social Media Strategy, Creative & Visual Production, Outdoor/Field Advertising, and Software & Tech Solutions.
 - Spearhead client brand repositioning and performance funnels, boosting qualified customer bookings by an average of +60% YoY for clinics and commercial businesses.
 - Establish standard operating procedures (SOPs) for rapid campaign execution, automated reporting, and creative A/B testing frameworks.
 
-### Digital Marketing Manager - RAKETBE Agency (2025 - 2025)
+### Digital Marketing & Performance Manager - RAKETBE Agency (Aug 2025 - Jan 2026)
 Riyadh, Saudi Arabia
 - Managed high-scale performance marketing budgets across Snapchat, Meta, TikTok, and Google Ads, consistently achieving ROAS from 5x up to 25x.
 - Engineered custom audience segmentation and retargeting workflows, increasing client transaction conversion rates by +25%.
 - Reduced Customer Acquisition Cost (CPA) by 32% across competitive GCC e-commerce niches through data attribution and creative angle testing.
 
-### Marketing Manager - Arabiva Group (2025 - 2025)
+### Marketing Director - Arabiva Group (Mar 2025 - Aug 2025)
 Kuwait, GCC, EU & US Markets
 - Led marketing and digital performance for 3 global perfume and beauty brands (Arabiva, Tharb Perfume Bar, Generic Perfumes) across the GCC, Europe, and the United States.
 - Built and localized GCC e-commerce stores with multi-currency checkouts and same-day logistics integration, achieving +65% YoY sales growth.
 - Executed scalable cross-border performance campaigns targeting US and UK fragrance consumers, boosting Western export sales by +50%.
 - Orchestrated experiential retail launches and micro-influencer campaigns that generated +2,000,000 impressions.
 
-### E-commerce Manager - Fantazzia Bed (2022 - 2024)
+### Digital Commerce / E-Commerce Manager - Fantazzia Bed (Feb 2022 - Mar 2025)
 Egypt, GCC & Africa
-- Built the company’s direct-to-consumer (D2C) e-commerce infrastructure, digital marketing, and inside sales operations from the ground up.
+- Built the company’s direct-to-consumer (D2C) e-commerce infrastructure, digital marketing, and inside sales operations from the ground up on over 3 years of continuous growth.
 - Scaled monthly revenue from early startup numbers to 10,000,000 EGP per month: 5,000,000 EGP/Month generated directly through the proprietary online store, and 5,000,000 EGP/Month closed via social channels and an integrated call center.
 - Built automated CRM and WhatsApp recovery workflows, reclaiming +28% of abandoned shopping carts.
 
-### Co-Founder & Marketing Director - VLEX (2021 - 2021)
+### Co-Founder & Marketing Director - VLEX Shipping (Jan 2021 - Dec 2021)
 Cairo & Giza, Egypt
 - Co-founded and steered the marketing division for a B2B logistics company dedicated to e-commerce fulfillment and last-mile delivery.
 - Designed an automated B2B customer acquisition funnel via Google Ads and CRM bots that acquired +1,000 active e-commerce merchant clients and cut response time by 60%.
 
-### Social Media & Content Specialist - Medica Healthy (2018 - 2020)
+### Social Media & Content Specialist - Medica Healthy App (Jul 2018 - Dec 2020)
 Cairo, Egypt
 - Executed the go-to-market launch strategy for an integrated healthcare mobile application (Doctor Bookings, Labs, Diagnostic Imaging, and E-Pharmacy).
 - Generated over 1,000,000 organic video views and accelerated app downloads and patient engagement by +90% through storytelling and expert healthcare content.

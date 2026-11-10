@@ -67,6 +67,16 @@ export interface CandidateCorporateProfile {
   masterCvPdfPath: string;
   summaryArabic: string;
   summaryEnglish: string;
+  workHistory: Array<{
+    company: string;
+    roleArabic: string;
+    roleEnglish: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    isCurrent: boolean;
+    descriptionArabic: string;
+  }>;
 }
 
 export const candidateProfile: CandidateCorporateProfile = {
@@ -139,4 +149,66 @@ export const candidateProfile: CandidateCorporateProfile = {
     "مدير تسويق تنفيذي معتمد من وزارة الموارد البشرية والتنمية الاجتماعية (HRSD) بخبرة تزيد عن 8 سنوات في قيادة التسويق الرقمي وتجارة التجزئة والتجارة الإلكترونية في السعودية والخليج، مع إدارة ميزانيات إعلانية بملايين الريالات وتحقيق عائد ROAS يصل إلى 25x.",
   summaryEnglish:
     "HRSD-accredited Marketing Director with 8+ years of leadership experience driving omnichannel retail, e-commerce, and high-performance paid marketing across Saudi Arabia and the GCC, managing multi-million SAR advertising budgets with audited ROAS up to 25x.",
+  workHistory: [
+    {
+      company: "FLUX Ads Agency",
+      roleArabic: "مدير التسويق",
+      roleEnglish: "Marketing Director",
+      location: "الرياض، المملكة العربية السعودية",
+      startDate: "2025-12",
+      endDate: "Present",
+      isCurrent: true,
+      descriptionArabic: "قيادة الاستراتيجيات التسويقية والنمو لأكثر من 30 عميلاً بالسوق السعودي، والإشراف المباشر على 4 قطاعات: السوشيال ميديا، الإنتاج الإبداعي، الحملات الخارجية، والتطوير البرمجي."
+    },
+    {
+      company: "RAKETBE Agency",
+      roleArabic: "مدير التسويق الرقمي والأداء",
+      roleEnglish: "Digital Marketing & Performance Manager",
+      location: "الرياض، المملكة العربية السعودية",
+      startDate: "2025-08",
+      endDate: "2026-01",
+      isCurrent: false,
+      descriptionArabic: "إخراج وإدارة الحملات الإعلانية المدفوعة بالسعودية، إدارة الميزانيات وتحقيق عائد ROAS من 5x حتى 25x، ورفع معدلات التحويل 25% وخفض تكلفة الاستحواذ 32%."
+    },
+    {
+      company: "Arabiva Group",
+      roleArabic: "مدير التسويق",
+      roleEnglish: "Marketing Director",
+      location: "الكويت والخليج وأوروبا وأمريكا",
+      startDate: "2025-03",
+      endDate: "2025-08",
+      isCurrent: false,
+      descriptionArabic: "قيادة الاستراتيجيات التسويقية لـ 3 علامات تجارية عالمية للعطور، توطين المتاجر الإلكترونية للخليج، وتوسيع الصادرات بنسبة +65%."
+    },
+    {
+      company: "Fantazzia Bed",
+      roleArabic: "مدير التجارة الرقمية",
+      roleEnglish: "Digital Commerce / E-Commerce Manager",
+      location: "مصر والخليج وإفريقيا",
+      startDate: "2022-02",
+      endDate: "2025-03",
+      isCurrent: false,
+      descriptionArabic: "تأسيس المتجر الإلكتروني وإدارة المبيعات والتسويق والكول سنتر والوصول بالمبيعات إلى 10 مليون شهرياً (5 مليون متجر إلكتروني + 5 مليون سوشيال وكول سنتر)."
+    },
+    {
+      company: "VLEX Shipping",
+      roleArabic: "شريك مؤسس ومدير تسويق",
+      roleEnglish: "Co-Founder & Marketing Director",
+      location: "القاهرة والجيزة، مصر",
+      startDate: "2021-01",
+      endDate: "2021-12",
+      isCurrent: false,
+      descriptionArabic: "تأسيس التسويق لشركة الشحن والتوصيل للمتاجر الإلكترونية، واستقطاب أكثر من 1,000 تاجر تجزئة عبر قنوات رقمية مؤتمتة."
+    },
+    {
+      company: "Medica Healthy App",
+      roleArabic: "أخصائي سوشيال ميديا ومحتوى",
+      roleEnglish: "Social Media & Content Specialist",
+      location: "القاهرة، مصر",
+      startDate: "2018-07",
+      endDate: "2020-12",
+      isCurrent: false,
+      descriptionArabic: "إطلاق التطبيق الطبي الشامل لحجز الأطباء والمختبرات والصيدليات، وتجاوز مليون مشاهدة تفاعلية وبناء الثقة لدى المرضى."
+    }
+  ]
 };
