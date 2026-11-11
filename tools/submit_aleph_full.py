@@ -195,3 +195,4 @@ end tell
 '''
 check_res = subprocess.run(["osascript", "-e", check_as], capture_output=True, text=True)
 print("Result:", check_res.stdout.strip())
+

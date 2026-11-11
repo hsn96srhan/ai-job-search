@@ -124,3 +124,4 @@ Path('/tmp/run_hams.applescript').write_text(as_content, encoding='utf-8')
 res = subprocess.run(["osascript", "/tmp/run_hams.applescript"], capture_output=True, text=True)
 print("Fill output:", res.stdout.strip())
 if res.stderr.strip(): print("Fill error:", res.stderr.strip())
+

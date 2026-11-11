@@ -90,3 +90,4 @@ check_script = '''
 '''
 out, err = run_js(check_script)
 print("Final confirmation:", out)
+

@@ -82,3 +82,4 @@ Path('/tmp/run_ennismore.applescript').write_text(as_content, encoding='utf-8')
 res = subprocess.run(["osascript", "/tmp/run_ennismore.applescript"], capture_output=True, text=True)
 print("STDOUT:", res.stdout.strip())
 print("STDERR:", res.stderr.strip())
+

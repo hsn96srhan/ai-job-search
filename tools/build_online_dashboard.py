@@ -16,6 +16,16 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TRACKER_CSV = REPO_ROOT / "saudi_jobs_google_sheets_tracker.csv"
+PLATFORMS_JSON = REPO_ROOT / "platforms_registry.json"
+
+
+def load_platforms():
+    """تحميل كتالوج المنصات من platforms_registry.json"""
+    if not PLATFORMS_JSON.exists():
+        return []
+    with open(PLATFORMS_JSON, encoding="utf-8") as f:
+        data = json.load(f)
+    return data.get("platforms", [])
 
 
 def load_jobs():
@@ -44,6 +54,102 @@ def load_jobs():
                 "notes": r.get("ملاحظات وتأكيد التقديم (Notes)", "").strip()
             })
     return items
+
+
+def build_platforms_section_html(platforms):
+    """يبني قسم HTML لكتالوج المنصات"""
+    if not platforms:
+        return ""
+
+    rows_html = ""
+    for p in platforms:
+        status = p.get("profile_status", "—")
+        profile_url = p.get("profile_url", "")
+        name_ar = p.get("name_ar", "")
+        name_en = p.get("name_en", "")
+        scope = p.get("scope", "")
+        notes = p.get("notes", "")
+        category = p.get("category", "")
+
+        # لون الحالة
+        if "100%" in status:
+            badge_cls = "badge-green"
+        elif "87%" in status or "جزئي" in status or "🟡" in status:
+            badge_cls = "badge-yellow"
+        elif "لم يبدأ" in status or "❌" in status:
+            badge_cls = "badge-red"
+        elif "يدوي" in status or "⏭️" in status:
+            badge_cls = "badge-gray"
+        else:
+            badge_cls = "badge-blue"
+
+        profile_link = f'<a href="{profile_url}" target="_blank" class="platform-link">🔗 عرض</a>' if profile_url else "—"
+
+        rows_html += f"""
+        <tr>
+          <td><strong>{name_ar}</strong><br/><small style="color:#666">{name_en}</small></td>
+          <td><small>{scope}</small></td>
+          <td><span class="platform-badge {badge_cls}">{status}</span></td>
+          <td>{profile_link}</td>
+          <td><small style="color:#888">{notes}</small></td>
+        </tr>"""
+
+    total = len(platforms)
+    done = sum(1 for p in platforms if "100%" in p.get("profile_status", ""))
+    partial = sum(1 for p in platforms if "87%" in p.get("profile_status", "") or "🟡" in p.get("profile_status", ""))
+    pending = sum(1 for p in platforms if "لم يبدأ" in p.get("profile_status", ""))
+
+    return f"""
+    <!-- ═══════════ قسم المنصات ═══════════ -->
+    <section class="platforms-section" id="platforms">
+      <div class="section-header">
+        <h2 class="section-title">🌐 كتالوج منصات التوظيف</h2>
+        <div class="platform-kpis">
+          <span class="pkpi pkpi-total">📋 {total} منصة</span>
+          <span class="pkpi pkpi-done">✅ {done} مكتملة</span>
+          <span class="pkpi pkpi-partial">🟡 {partial} جزئية</span>
+          <span class="pkpi pkpi-pending">❌ {pending} لم تُبدأ</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="platforms-table">
+          <thead>
+            <tr>
+              <th>المنصة</th>
+              <th>النطاق</th>
+              <th>حالة الملف</th>
+              <th>الرابط</th>
+              <th>ملاحظات</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows_html}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <style>
+      .platforms-section {{ margin: 2.5rem 0; }}
+      .platform-kpis {{ display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }}
+      .pkpi {{ padding: 0.25rem 0.9rem; border-radius: 999px; font-size: 0.82rem; font-weight: 600; }}
+      .pkpi-total {{ background:#f1f5f9; color:#334155; }}
+      .pkpi-done {{ background:#dcfce7; color:#166534; }}
+      .pkpi-partial {{ background:#fef9c3; color:#854d0e; }}
+      .pkpi-pending {{ background:#fee2e2; color:#991b1b; }}
+      .platforms-table {{ width:100%; border-collapse:collapse; font-size:0.9rem; }}
+      .platforms-table th {{ background:#f8fafc; color:#475569; font-weight:600; padding:0.65rem 1rem; text-align:right; border-bottom:2px solid #e2e8f0; }}
+      .platforms-table td {{ padding:0.65rem 1rem; border-bottom:1px solid #f1f5f9; vertical-align:top; }}
+      .platforms-table tr:hover td {{ background:#fafafa; }}
+      .platform-badge {{ display:inline-block; padding:0.2rem 0.65rem; border-radius:999px; font-size:0.78rem; font-weight:600; white-space:nowrap; }}
+      .badge-green {{ background:#dcfce7; color:#15803d; }}
+      .badge-yellow {{ background:#fef9c3; color:#a16207; }}
+      .badge-red {{ background:#fee2e2; color:#b91c1c; }}
+      .badge-gray {{ background:#f1f5f9; color:#64748b; }}
+      .badge-blue {{ background:#dbeafe; color:#1d4ed8; }}
+      .platform-link {{ color:#2563eb; text-decoration:none; font-weight:500; }}
+      .platform-link:hover {{ text-decoration:underline; }}
+    </style>
+    """
 
 
 def build_html(jobs):
@@ -1477,7 +1583,13 @@ def build_html(jobs):
 
 def main():
     jobs = load_jobs()
+    platforms = load_platforms()
     html_content = build_html(jobs)
+
+    # Inject platforms section before </body>
+    if platforms:
+        platforms_html = build_platforms_section_html(platforms)
+        html_content = html_content.replace("</body>", platforms_html + "\n</body>", 1)
 
     # 1. Save to reports/application-dashboard.html
     reports_file = REPO_ROOT / "reports" / "application-dashboard.html"
@@ -1491,7 +1603,7 @@ def main():
     with open(docs_file, "w", encoding="utf-8") as f:
         f.write(html_content)
 
-    print(f"✓ Generated clean executive white-theme dashboard ({len(jobs)} jobs) in reports/ and docs/")
+    print(f"✓ Generated clean executive white-theme dashboard ({len(jobs)} jobs, {len(platforms)} platforms) in reports/ and docs/")
 
 
 if __name__ == "__main__":

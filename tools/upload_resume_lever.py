@@ -52,3 +52,4 @@ end tell
 res = subprocess.run(["osascript", str(as_file)], capture_output=True, text=True)
 print("STDOUT:", res.stdout.strip())
 print("STDERR:", res.stderr.strip())
+
