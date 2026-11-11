@@ -959,6 +959,9 @@ def build_html(jobs):
         <a href="https://hsn96srhan.github.io/hsn/" target="_blank" class="btn btn-secondary">
           🌐 بورتفوليو
         </a>
+        <a href="#platforms" class="btn btn-secondary">
+          🗂️ المنصات
+        </a>
       </div>
     </header>
 
