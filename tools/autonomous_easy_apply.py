@@ -59,6 +59,45 @@ def update_tracker_status(job_id, new_status="تم التقديم", note=None):
             writer.writerows(rows)
         print(f"✓ تم تحديث حالة الشاغر {job_id} في الشيت إلى: {new_status}")
 
+def unfollow_network_companies():
+    """Navigate to LinkedIn followed companies and unfollow to maintain zero-follow rule."""
+    print("🔒 تنفيذ فحص عدم متابعة الشركات (LinkedIn Zero-Follow Rule)...")
+    nav_tab("https://www.linkedin.com/mynetwork/network-manager/company/")
+    time.sleep(3.5)
+    
+    unfollow_js = """
+    (function() {
+        var btns = Array.from(document.querySelectorAll('button'));
+        var followingBtns = btns.filter(b => {
+            var t = b.innerText.trim().toLowerCase();
+            return t === 'following' || t === 'متابع';
+        });
+        if (followingBtns.length > 0) {
+            followingBtns[0].click();
+            return 'CLICKED_UNFOLLOW';
+        }
+        return 'NO_FOLLOWING';
+    })()
+    """
+    res = run_js(unfollow_js).get("result", "")
+    if res == "CLICKED_UNFOLLOW":
+        time.sleep(1.5)
+        confirm_js = """
+        (function() {
+            var modalBtns = Array.from(document.querySelectorAll('.artdeco-modal button, [role="dialog"] button'));
+            var unfollowBtn = modalBtns.find(b => b.innerText.trim().toLowerCase() === 'unfollow' || b.innerText.trim() === 'إلغاء المتابعة');
+            if (unfollowBtn) {
+                unfollowBtn.click();
+                return 'CONFIRMED_UNFOLLOW';
+            }
+            return 'NO_CONFIRM_MODAL';
+        })()
+        """
+        run_js(confirm_js)
+        print("✓ تم إلغاء متابعة الشركة بنجاح للحفاظ على خصوصية الحساب.")
+    else:
+        print("✓ تم التحقق: لا توجد شركات تمت متابعتها.")
+
 def apply_job(job_id, job_url):
     print(f"\n==========================================")
     print(f"🚀 بدء معالجة الوظيفة {job_id}: {job_url}")
@@ -137,19 +176,27 @@ def apply_job(job_id, job_url):
 
                 // Current Salary
                 if (combined.includes('current') && (combined.includes('salary') || combined.includes('compensation') || combined.includes('package') || combined.includes('راتب') || combined.includes('حالي'))) {
-                    if (inp.type === 'number') {
+                    if (combined.includes('usd') || combined.includes('dollar')) {
+                        setReactVal(inp, (inp.type === 'number' || combined.includes('number') || combined.includes('numeric')) ? '2400' : '2,400 USD');
+                    } else if (inp.type === 'number' || combined.includes('number') || combined.includes('أرقام') || combined.includes('digits') || combined.includes('numeric')) {
                         setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '8000' : '10000');
                     } else {
                         setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '8,000 SAR' : '10,000 SAR (8,000 Basic + 2,000 Housing)');
                     }
                 }
                 // Expected Salary
-                else if (combined.includes('expect') || combined.includes('متوقع') || combined.includes('desired salary') || combined.includes('target salary')) {
-                    if (inp.type === 'number') {
-                        setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '9000' : '10000');
+                else if (combined.includes('expect') || combined.includes('متوقع') || combined.includes('desired salary') || combined.includes('target salary') || combined.includes('salary')) {
+                    if (combined.includes('usd') || combined.includes('dollar')) {
+                        setReactVal(inp, (inp.type === 'number' || combined.includes('number') || combined.includes('numeric')) ? '3000' : '2,800 - 3,200 USD');
+                    } else if (inp.type === 'number' || combined.includes('number') || combined.includes('أرقام') || combined.includes('digits') || combined.includes('numeric')) {
+                        setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '9000' : '11000');
                     } else {
                         setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '9,000 - 10,000 SAR' : '10,000 - 12,000 SAR');
                     }
+                }
+                // References
+                else if (combined.includes('reference') || combined.includes('تزكية') || combined.includes('معرفين')) {
+                    setReactVal(inp, 'Available upon formal request / interview stage (Senior Executive References in Riyadh).');
                 }
                 // Benefits / Compensation details
                 else if (combined.includes('benefit') || combined.includes('مزايا') || combined.includes('allowance')) {
@@ -238,19 +285,6 @@ def apply_job(job_id, job_url):
             }
         });
 
-        // STRICT MANDATE: Uncheck ANY "Follow Company" checkbox
-        var allCheckboxes = Array.from(d.querySelectorAll('input[type=\"checkbox\"]'));
-        allCheckboxes.forEach(cb => {
-            var label = (cb.labels && cb.labels[0] ? cb.labels[0].innerText : '');
-            var pText = (cb.parentElement ? cb.parentElement.innerText : '');
-            var desc = (label + ' ' + pText + ' ' + cb.id + ' ' + cb.name).toLowerCase();
-            if (desc.includes('follow') || desc.includes('متابعة') || desc.includes('stay up to date')) {
-                if (cb.checked) {
-                    cb.click();
-                }
-            }
-        });
-
         // Check for Submit application button
         var btns = Array.from(d.querySelectorAll('button'));
         var submitBtn = btns.find(b => {
@@ -258,14 +292,22 @@ def apply_job(job_id, job_url):
             return t.includes('submit application') || t.includes('إرسال الطلب');
         });
         if (submitBtn) {
-            // Final safety verification: make sure NO follow checkbox is checked
-            allCheckboxes.forEach(cb => {
+            // STRICT MANDATE: Uncheck ANY "Follow Company" checkbox exactly ONCE right before submit
+            var liveCheckboxes = Array.from(d.querySelectorAll('input[type="checkbox"]'));
+            liveCheckboxes.forEach(cb => {
                 var label = (cb.labels && cb.labels[0] ? cb.labels[0].innerText : '');
                 var pText = (cb.parentElement ? cb.parentElement.innerText : '');
                 var desc = (label + ' ' + pText + ' ' + cb.id + ' ' + cb.name).toLowerCase();
                 if (desc.includes('follow') || desc.includes('متابعة') || desc.includes('stay up to date')) {
                     if (cb.checked) {
-                        cb.click();
+                        // Click label or wrapper to trigger React synthetic event
+                        if (cb.labels && cb.labels[0]) {
+                            cb.labels[0].click();
+                        } else if (cb.parentElement) {
+                            cb.parentElement.click();
+                        } else {
+                            cb.click();
+                        }
                     }
                 }
             });
@@ -323,6 +365,7 @@ def apply_job(job_id, job_url):
             run_js(dismiss_js)
             time.sleep(2)
             update_tracker_status(job_id, "تم التقديم", "تم التقديم آلياً بنجاح عبر لينكد إن Easy Apply (مع إلغاء متابعة الشركة)")
+            unfollow_network_companies()
             break
         elif res in ["NEXT_CLICKED", "REVIEW_CLICKED"]:
             time.sleep(2)
