@@ -195,6 +195,21 @@ def apply_job(job_id, job_url):
                         setReactVal(inp, combined.includes('basic') || combined.includes('أساسي') ? '9,000 - 10,000 SAR' : '10,000 - 12,000 SAR');
                     }
                 }
+                // Date of Birth / Age (DOB: 22 April 1996)
+                else if (combined.includes('birth') || combined.includes('ميلاد') || combined.includes('dob')) {
+                    if (combined.includes('day') || combined.includes('يوم')) {
+                        setReactVal(inp, '22');
+                    } else if (combined.includes('month') || combined.includes('شهر')) {
+                        setReactVal(inp, '04');
+                    } else if (combined.includes('year') || combined.includes('سنة') || combined.includes('عام')) {
+                        setReactVal(inp, '1996');
+                    } else {
+                        setReactVal(inp, '1996-04-22');
+                    }
+                }
+                else if (combined.includes('age') || combined.includes('عمر') || combined.includes('السن')) {
+                    setReactVal(inp, '30');
+                }
                 // References
                 else if (combined.includes('reference') || combined.includes('تزكية') || combined.includes('معرفين')) {
                     setReactVal(inp, 'Available upon formal request / interview stage (Senior Executive References in Riyadh).');

@@ -12,6 +12,8 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ### Identity
 - **Name:** Hassan Sarhan
+- **Date of Birth (تاريخ الميلاد):** 22 April 1996 (1996-04-22) / 22 أبريل 1996
+- **Profile Photo (الصورة الشخصية):** `profile.jpeg` (Path: `/Users/saifalmutairi/ai-job-search/profile.jpeg`)
 - **Location:** Riyadh, Saudi Arabia (Open to Riyadh on-site/hybrid, GCC, and Remote roles)
 - **Phone:** +966 50 626 7542
 - **Email:** hsn96srhan@gmail.com

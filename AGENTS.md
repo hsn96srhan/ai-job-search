@@ -31,7 +31,7 @@ To prevent duplication and configuration drift across different AI agent framewo
 
 ## Legal Requirements, Sponsorship & Benefits Rule
 
-- **Legal Status:** Candidate resides in Riyadh with a valid Transferable Iqama (رقم الإقامة: 2644162360 - إقامة عمل نظامية سارية قابلة للتحويل الفوري عبر منصة قوى). Currently on current employer's sponsorship (على كفالة الشركة الحالية في الرياض). Holds a valid Saudi Driving License (رخصة قيادة سعودية سارية).
+- **Legal Status:** Candidate resides in Riyadh with a valid Transferable Iqama (رقم الإقامة: 2644162360 - إقامة عمل نظامية سارية قابلة للتحويل الفوري عبر منصة قوى). Date of Birth: 22 April 1996 (1996-04-22 / 22 أبريل 1996). Profile Photo: `profile.jpeg`. Currently on current employer's sponsorship (على كفالة الشركة الحالية في الرياض). Holds a valid Saudi Driving License (رخصة قيادة سعودية سارية).
 - **Education:** Bachelor of Journalism & Media (بكالوريوس إعلام قسم صحافة) - Akhbar El Yom Academy (أكاديمية أخبار اليوم).
 - **Official Accreditation:** Accredited Marketing Manager by HRSD (الاعتماد المهني كمدير تسويق من وزارة الموارد البشرية والتنمية الاجتماعية).
 - **Mandatory Employer Coverage:** Any offer/application must account for:

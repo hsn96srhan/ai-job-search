@@ -6,6 +6,8 @@ framework_version: 1.1.1
 
 ## Identity
 - **Name:** Hassan Sarhan (حسن سرحان)
+- **Date of Birth (تاريخ الميلاد):** 22 April 1996 (1996-04-22) / 22 أبريل 1996
+- **Profile Photo (الصورة الشخصية):** `profile.jpeg` (Path: `/Users/saifalmutairi/ai-job-search/profile.jpeg`)
 - **Nationality:** Egyptian (مصري)
 - **Religion:** Muslim (مسلم)
 - **Marital Status:** Married (متزوج)
