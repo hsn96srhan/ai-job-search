@@ -126,7 +126,8 @@ def apply_job(job_id, job_url):
         var btns = Array.from(document.querySelectorAll('button, a'));
         var target = btns.find(b => {
             var txt = b.innerText.trim().toLowerCase();
-            return txt.includes('easy apply') || txt.includes('التقديم السريع') || txt.includes('التقديم بسهولة');
+            var aria = (b.getAttribute('aria-label') || '').toLowerCase();
+            return txt === 'easy apply' || txt === 'تقديم سهل' || aria.includes('easy apply') || txt.includes('easy apply') || txt.includes('التقديم السريع') || txt.includes('التقديم بسهولة');
         });
         if (target) {
             target.click();
@@ -377,9 +378,25 @@ def apply_job(job_id, job_url):
     return submitted
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and sys.argv[1] != "batch":
         target_id = sys.argv[1]
         target_url = sys.argv[2] if len(sys.argv) > 2 else ""
         apply_job(target_id, target_url)
     else:
-        print("Usage: python3 tools/autonomous_easy_apply.py <JOB_ID> <JOB_URL>")
+        print("🔍 استخراج جميع وظائف Easy Apply الجاهزة للتقديم من الشيت...")
+        with open(TRACKER_CSV, mode="r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            ready_jobs = [r for r in reader if r.get('حالة التقديم (Status)') == 'جاهز للتقديم' and 'ايزي ابلاي' in r.get('طريقة التقديم (Application Method)', '')]
+
+        print(f"📊 عدد الوظائف المستهدفة للتقديم السريع: {len(ready_jobs)}")
+        for idx, job in enumerate(ready_jobs, 1):
+            jid = job['ID']
+            jurl = job['رابط الوظيفة (Job URL)']
+            jcompany = job['اسم الشركة (Company)']
+            jtitle = job['المسمى الوظيفي (Job Title)']
+            print(f"\n[{idx}/{len(ready_jobs)}] معالجة: {jid} | {jcompany} - {jtitle}")
+            try:
+                success = apply_job(jid, jurl)
+                time.sleep(3)
+            except Exception as e:
+                print(f"❌ خطأ أثناء معالجة الشاغر {jid}: {e}")
